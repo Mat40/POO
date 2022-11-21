@@ -1,4 +1,4 @@
-#include "MyForm.h"
+#include "Main.h"
 
 
 using namespace System;
@@ -10,6 +10,6 @@ int __clrcall main(array<String^>^ args)
 {
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
-    MAIN1::MyForm IHM;
+    MAIN1::Main IHM;
     Application::Run(% IHM);
 }
