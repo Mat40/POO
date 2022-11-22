@@ -10,12 +10,12 @@ namespace MAIN1 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de Order
+	/// Description résumée de Customer
 	/// </summary>
-	public ref class Order : public System::Windows::Forms::Form
+	public ref class CustomerForm : public System::Windows::Forms::Form
 	{
 	public:
-		Order(void)
+		CustomerForm(void)
 		{
 			InitializeComponent();
 			//
@@ -27,14 +27,14 @@ namespace MAIN1 {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~Order()
+		~CustomerForm()
 		{
 			if (components)
 			{
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ labelorder;
+	private: System::Windows::Forms::Label^ labelcustomer;
 	protected:
 
 	private:
@@ -50,35 +50,34 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->labelorder = (gcnew System::Windows::Forms::Label());
+			this->labelcustomer = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
-			// labelorder
+			// labelcustomer
 			// 
-			this->labelorder->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->labelorder->AutoSize = true;
-			this->labelorder->Location = System::Drawing::Point(491, 334);
-			this->labelorder->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->labelorder->Name = L"labelorder";
-			this->labelorder->Size = System::Drawing::Size(56, 16);
-			this->labelorder->TabIndex = 1;
-			this->labelorder->Text = L"ORDER";
+			this->labelcustomer->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->labelcustomer->AutoSize = true;
+			this->labelcustomer->Location = System::Drawing::Point(465, 334);
+			this->labelcustomer->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->labelcustomer->Name = L"labelcustomer";
+			this->labelcustomer->Size = System::Drawing::Size(84, 16);
+			this->labelcustomer->TabIndex = 1;
+			this->labelcustomer->Text = L"CUSTOMER";
 			// 
-			// Order
+			// Customer
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1030, 685);
-			this->Controls->Add(this->labelorder);
+			this->Controls->Add(this->labelcustomer);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(4);
-			this->Name = L"Order";
+			this->Name = L"Customer";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"Order";
+			this->Text = L"Customer";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
-#pragma endregion
 	};
 }

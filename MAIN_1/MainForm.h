@@ -1,9 +1,9 @@
 #pragma once
-#include "Customer.h"
-#include "Employee.h"
-#include "Dashboard.h"
-#include "Stock.h"
-#include "Order.h"
+#include "CustomerForm.h"
+#include "EmployeeForm.h"
+#include "DashboardForm.h"
+#include "StockForm.h"
+#include "OrderForm.h"
 
 namespace MAIN1 {
 
@@ -17,10 +17,10 @@ namespace MAIN1 {
 	/// <summary>
 	/// Description résumée de Main
 	/// </summary>
-	public ref class Main : public System::Windows::Forms::Form
+	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
-		Main(void)
+		MainForm(void)
 		{
 			InitializeComponent();
 			//
@@ -55,7 +55,7 @@ namespace MAIN1 {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~Main()
+		~MainForm()
 		{
 			if (components)
 			{
@@ -111,7 +111,7 @@ namespace MAIN1 {
 			this->panelside->Name = L"panelside";
 			this->panelside->Size = System::Drawing::Size(250, 685);
 			this->panelside->TabIndex = 0;
-			this->panelside->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Main::panel1_Paint);
+			this->panelside->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::panel1_Paint);
 			// 
 			// btnstock
 			// 
@@ -129,7 +129,7 @@ namespace MAIN1 {
 			this->btnstock->TabIndex = 4;
 			this->btnstock->Text = L"Stock";
 			this->btnstock->UseVisualStyleBackColor = false;
-			this->btnstock->Click += gcnew System::EventHandler(this, &Main::btnstock_Click);
+			this->btnstock->Click += gcnew System::EventHandler(this, &MainForm::btnstock_Click);
 			// 
 			// btndashboard
 			// 
@@ -147,7 +147,7 @@ namespace MAIN1 {
 			this->btndashboard->TabIndex = 0;
 			this->btndashboard->Text = L"Dashboard";
 			this->btndashboard->UseVisualStyleBackColor = false;
-			this->btndashboard->Click += gcnew System::EventHandler(this, &Main::btndashboard_Click);
+			this->btndashboard->Click += gcnew System::EventHandler(this, &MainForm::btndashboard_Click);
 			// 
 			// btnorder
 			// 
@@ -165,7 +165,7 @@ namespace MAIN1 {
 			this->btnorder->TabIndex = 3;
 			this->btnorder->Text = L"Order";
 			this->btnorder->UseVisualStyleBackColor = false;
-			this->btnorder->Click += gcnew System::EventHandler(this, &Main::btnorder_Click);
+			this->btnorder->Click += gcnew System::EventHandler(this, &MainForm::btnorder_Click);
 			// 
 			// btncustomer
 			// 
@@ -183,7 +183,7 @@ namespace MAIN1 {
 			this->btncustomer->TabIndex = 1;
 			this->btncustomer->Text = L"Customer";
 			this->btncustomer->UseVisualStyleBackColor = false;
-			this->btncustomer->Click += gcnew System::EventHandler(this, &Main::btncustomer_Click);
+			this->btncustomer->Click += gcnew System::EventHandler(this, &MainForm::btncustomer_Click);
 			// 
 			// btnemployee
 			// 
@@ -201,7 +201,7 @@ namespace MAIN1 {
 			this->btnemployee->TabIndex = 2;
 			this->btnemployee->Text = L"Employee";
 			this->btnemployee->UseVisualStyleBackColor = false;
-			this->btnemployee->Click += gcnew System::EventHandler(this, &Main::btnemployee_Click);
+			this->btnemployee->Click += gcnew System::EventHandler(this, &MainForm::btnemployee_Click);
 			// 
 			// panelheader
 			// 
@@ -230,7 +230,7 @@ namespace MAIN1 {
 			this->btnclose->TabIndex = 5;
 			this->btnclose->Text = L"X";
 			this->btnclose->UseVisualStyleBackColor = false;
-			this->btnclose->Click += gcnew System::EventHandler(this, &Main::btnclose_Click);
+			this->btnclose->Click += gcnew System::EventHandler(this, &MainForm::btnclose_Click);
 			// 
 			// mainpanel
 			// 
@@ -254,7 +254,7 @@ namespace MAIN1 {
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"Main";
 			this->Text = L"Main";
-			this->Load += gcnew System::EventHandler(this, &Main::Main_Load);
+			this->Load += gcnew System::EventHandler(this, &MainForm::Main_Load);
 			this->panelside->ResumeLayout(false);
 			this->panelheader->ResumeLayout(false);
 			this->ResumeLayout(false);
@@ -262,7 +262,7 @@ namespace MAIN1 {
 		}
 #pragma endregion
 	private: System::Void Main_Load(System::Object^ sender, System::EventArgs^ e) {
-		loadform(gcnew Dashboard());
+		loadform(gcnew DashboardForm());
 		resetButtons_Click();
 		allButtons_Click(this->btndashboard);
 	}
@@ -273,27 +273,27 @@ namespace MAIN1 {
 	private: System::Void panel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 	}
 	private: System::Void btndashboard_Click(System::Object^ sender, System::EventArgs^ e) {
-		loadform(gcnew Dashboard());
+		loadform(gcnew DashboardForm());
 		resetButtons_Click();
 		allButtons_Click(this->btndashboard);
 	}
 	private: System::Void btncustomer_Click(System::Object^ sender, System::EventArgs^ e) {
-		loadform(gcnew Customer());
+		loadform(gcnew CustomerForm());
 		resetButtons_Click();
 		allButtons_Click(this->btncustomer);
 	}
 	private: System::Void btnemployee_Click(System::Object^ sender, System::EventArgs^ e) {
-		loadform(gcnew Employee());
+		loadform(gcnew EmployeeForm());
 		resetButtons_Click();
 		allButtons_Click(this->btnemployee);
 	}
 	private: System::Void btnorder_Click(System::Object^ sender, System::EventArgs^ e) {
-		loadform(gcnew Order());
+		loadform(gcnew OrderForm());
 		resetButtons_Click();
 		allButtons_Click(this->btnorder);
 	}
 	private: System::Void btnstock_Click(System::Object^ sender, System::EventArgs^ e) {
-		loadform(gcnew Stock());
+		loadform(gcnew StockForm());
 		resetButtons_Click();
 		allButtons_Click(this->btnstock);
 	}

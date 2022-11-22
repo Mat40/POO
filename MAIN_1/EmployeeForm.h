@@ -10,12 +10,12 @@ namespace MAIN1 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de Dashboard
+	/// Description résumée de Employee
 	/// </summary>
-	public ref class Dashboard : public System::Windows::Forms::Form
+	public ref class EmployeeForm : public System::Windows::Forms::Form
 	{
 	public:
-		Dashboard(void)
+		EmployeeForm(void)
 		{
 			InitializeComponent();
 			//
@@ -27,14 +27,18 @@ namespace MAIN1 {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~Dashboard()
+		~EmployeeForm()
 		{
 			if (components)
 			{
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ labeldashboard;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	protected:
+
+	protected:
+
 	protected:
 
 	protected:
@@ -52,35 +56,38 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->labeldashboard = (gcnew System::Windows::Forms::Label());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// labeldashboard
+			// dataGridView1
 			// 
-			this->labeldashboard->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->labeldashboard->AutoSize = true;
-			this->labeldashboard->Location = System::Drawing::Point(457, 310);
-			this->labeldashboard->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->labeldashboard->Name = L"labeldashboard";
-			this->labeldashboard->Size = System::Drawing::Size(93, 16);
-			this->labeldashboard->TabIndex = 0;
-			this->labeldashboard->Text = L"DASHBOARD";
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Location = System::Drawing::Point(373, 33);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->RowHeadersWidth = 51;
+			this->dataGridView1->RowTemplate->Height = 24;
+			this->dataGridView1->Size = System::Drawing::Size(628, 616);
+			this->dataGridView1->TabIndex = 0;
+			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &EmployeeForm::dataGridView1_CellContentClick);
 			// 
-			// Dashboard
+			// Employee
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1030, 685);
-			this->Controls->Add(this->labeldashboard);
+			this->Controls->Add(this->dataGridView1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(4);
-			this->Name = L"Dashboard";
+			this->Name = L"Employee";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"Dashboard";
+			this->Text = L"Employee";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
+	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	}
 	};
 }

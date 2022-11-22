@@ -12,10 +12,10 @@ namespace MAIN1 {
 	/// <summary>
 	/// Description résumée de Stock
 	/// </summary>
-	public ref class Stock : public System::Windows::Forms::Form
+	public ref class StockForm : public System::Windows::Forms::Form
 	{
 	public:
-		Stock(void)
+		StockForm(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace MAIN1 {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~Stock()
+		~StockForm()
 		{
 			if (components)
 			{

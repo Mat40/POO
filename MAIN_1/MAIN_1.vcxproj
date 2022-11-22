@@ -122,53 +122,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Customer.cpp" />
-    <ClCompile Include="Dashboard.cpp" />
-    <ClCompile Include="DataContext.cpp" />
-    <ClCompile Include="Employee.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Order.cpp" />
-    <ClCompile Include="Stock.cpp" />
+    <ClCompile Include="CustomerForm.cpp" />
+    <ClCompile Include="DashboardForm.cpp" />
+    <ClCompile Include="DataContextForm.cpp" />
+    <ClCompile Include="EmployeeForm.cpp" />
+    <ClCompile Include="MainForm.cpp" />
+    <ClCompile Include="OrderForm.cpp" />
+    <ClCompile Include="StockForm.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Customer.h">
+    <ClInclude Include="CustomerForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Dashboard.h">
+    <ClInclude Include="DashboardForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="DataContext.h" />
-    <ClInclude Include="Employee.h">
+    <ClInclude Include="EmployeeForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Main.h">
+    <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Order.h">
+    <ClInclude Include="OrderForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Stock.h">
+    <ClInclude Include="StockForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Customer.resx">
-      <DependentUpon>Customer.h</DependentUpon>
+    <EmbeddedResource Include="CustomerForm.resx">
+      <DependentUpon>CustomerForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dashboard.resx">
-      <DependentUpon>Dashboard.h</DependentUpon>
+    <EmbeddedResource Include="DashboardForm.resx">
+      <DependentUpon>DashboardForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Employee.resx">
-      <DependentUpon>Employee.h</DependentUpon>
+    <EmbeddedResource Include="EmployeeForm.resx">
+      <DependentUpon>EmployeeForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.h</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Order.resx">
-      <DependentUpon>Order.h</DependentUpon>
+    <EmbeddedResource Include="OrderForm.resx">
+      <DependentUpon>OrderForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stock.resx">
-      <DependentUpon>Stock.h</DependentUpon>
+    <EmbeddedResource Include="StockForm.resx">
+      <DependentUpon>StockForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
