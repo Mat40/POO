@@ -57,7 +57,7 @@ namespace MAIN1 {
 			// 
 			this->labelcustomer->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->labelcustomer->AutoSize = true;
-			this->labelcustomer->Location = System::Drawing::Point(469, 271);
+			this->labelcustomer->Location = System::Drawing::Point(465, 334);
 			this->labelcustomer->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->labelcustomer->Name = L"labelcustomer";
 			this->labelcustomer->Size = System::Drawing::Size(84, 16);
@@ -68,7 +68,7 @@ namespace MAIN1 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1039, 558);
+			this->ClientSize = System::Drawing::Size(1030, 685);
 			this->Controls->Add(this->labelcustomer);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(4);

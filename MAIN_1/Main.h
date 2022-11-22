@@ -106,10 +106,10 @@ namespace MAIN1 {
 			this->panelside->Controls->Add(this->btncustomer);
 			this->panelside->Controls->Add(this->btnemployee);
 			this->panelside->Dock = System::Windows::Forms::DockStyle::Left;
-			this->panelside->Location = System::Drawing::Point(0, 37);
-			this->panelside->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panelside->Location = System::Drawing::Point(0, 35);
+			this->panelside->Margin = System::Windows::Forms::Padding(4);
 			this->panelside->Name = L"panelside";
-			this->panelside->Size = System::Drawing::Size(267, 574);
+			this->panelside->Size = System::Drawing::Size(250, 685);
 			this->panelside->TabIndex = 0;
 			this->panelside->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Main::panel1_Paint);
 			// 
@@ -123,9 +123,9 @@ namespace MAIN1 {
 				static_cast<System::Byte>(0)));
 			this->btnstock->ForeColor = System::Drawing::Color::White;
 			this->btnstock->Location = System::Drawing::Point(0, 340);
-			this->btnstock->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnstock->Margin = System::Windows::Forms::Padding(4);
 			this->btnstock->Name = L"btnstock";
-			this->btnstock->Size = System::Drawing::Size(267, 37);
+			this->btnstock->Size = System::Drawing::Size(250, 37);
 			this->btnstock->TabIndex = 4;
 			this->btnstock->Text = L"Stock";
 			this->btnstock->UseVisualStyleBackColor = false;
@@ -141,9 +141,9 @@ namespace MAIN1 {
 				static_cast<System::Byte>(0)));
 			this->btndashboard->ForeColor = System::Drawing::Color::White;
 			this->btndashboard->Location = System::Drawing::Point(0, 162);
-			this->btndashboard->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btndashboard->Margin = System::Windows::Forms::Padding(4);
 			this->btndashboard->Name = L"btndashboard";
-			this->btndashboard->Size = System::Drawing::Size(267, 37);
+			this->btndashboard->Size = System::Drawing::Size(250, 37);
 			this->btndashboard->TabIndex = 0;
 			this->btndashboard->Text = L"Dashboard";
 			this->btndashboard->UseVisualStyleBackColor = false;
@@ -159,9 +159,9 @@ namespace MAIN1 {
 				static_cast<System::Byte>(0)));
 			this->btnorder->ForeColor = System::Drawing::Color::White;
 			this->btnorder->Location = System::Drawing::Point(0, 295);
-			this->btnorder->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnorder->Margin = System::Windows::Forms::Padding(4);
 			this->btnorder->Name = L"btnorder";
-			this->btnorder->Size = System::Drawing::Size(267, 37);
+			this->btnorder->Size = System::Drawing::Size(250, 37);
 			this->btnorder->TabIndex = 3;
 			this->btnorder->Text = L"Order";
 			this->btnorder->UseVisualStyleBackColor = false;
@@ -177,9 +177,9 @@ namespace MAIN1 {
 				static_cast<System::Byte>(0)));
 			this->btncustomer->ForeColor = System::Drawing::Color::White;
 			this->btncustomer->Location = System::Drawing::Point(0, 207);
-			this->btncustomer->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btncustomer->Margin = System::Windows::Forms::Padding(4);
 			this->btncustomer->Name = L"btncustomer";
-			this->btncustomer->Size = System::Drawing::Size(267, 37);
+			this->btncustomer->Size = System::Drawing::Size(250, 37);
 			this->btncustomer->TabIndex = 1;
 			this->btncustomer->Text = L"Customer";
 			this->btncustomer->UseVisualStyleBackColor = false;
@@ -195,9 +195,9 @@ namespace MAIN1 {
 				static_cast<System::Byte>(0)));
 			this->btnemployee->ForeColor = System::Drawing::Color::White;
 			this->btnemployee->Location = System::Drawing::Point(0, 251);
-			this->btnemployee->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnemployee->Margin = System::Windows::Forms::Padding(4);
 			this->btnemployee->Name = L"btnemployee";
-			this->btnemployee->Size = System::Drawing::Size(267, 37);
+			this->btnemployee->Size = System::Drawing::Size(250, 37);
 			this->btnemployee->TabIndex = 2;
 			this->btnemployee->Text = L"Employee";
 			this->btnemployee->UseVisualStyleBackColor = false;
@@ -209,9 +209,9 @@ namespace MAIN1 {
 			this->panelheader->Controls->Add(this->btnclose);
 			this->panelheader->Dock = System::Windows::Forms::DockStyle::Top;
 			this->panelheader->Location = System::Drawing::Point(0, 0);
-			this->panelheader->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panelheader->Margin = System::Windows::Forms::Padding(4);
 			this->panelheader->Name = L"panelheader";
-			this->panelheader->Size = System::Drawing::Size(1131, 37);
+			this->panelheader->Size = System::Drawing::Size(1280, 35);
 			this->panelheader->TabIndex = 1;
 			// 
 			// btnclose
@@ -223,10 +223,10 @@ namespace MAIN1 {
 			this->btnclose->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnclose->ForeColor = System::Drawing::Color::White;
-			this->btnclose->Location = System::Drawing::Point(1091, 0);
-			this->btnclose->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnclose->Location = System::Drawing::Point(1245, 0);
+			this->btnclose->Margin = System::Windows::Forms::Padding(4);
 			this->btnclose->Name = L"btnclose";
-			this->btnclose->Size = System::Drawing::Size(40, 37);
+			this->btnclose->Size = System::Drawing::Size(35, 35);
 			this->btnclose->TabIndex = 5;
 			this->btnclose->Text = L"X";
 			this->btnclose->UseVisualStyleBackColor = false;
@@ -235,10 +235,10 @@ namespace MAIN1 {
 			// mainpanel
 			// 
 			this->mainpanel->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->mainpanel->Location = System::Drawing::Point(267, 37);
-			this->mainpanel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->mainpanel->Location = System::Drawing::Point(250, 35);
+			this->mainpanel->Margin = System::Windows::Forms::Padding(4);
 			this->mainpanel->Name = L"mainpanel";
-			this->mainpanel->Size = System::Drawing::Size(864, 574);
+			this->mainpanel->Size = System::Drawing::Size(1030, 685);
 			this->mainpanel->TabIndex = 2;
 			// 
 			// Main
@@ -246,12 +246,12 @@ namespace MAIN1 {
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
-			this->ClientSize = System::Drawing::Size(1131, 611);
+			this->ClientSize = System::Drawing::Size(1280, 720);
 			this->Controls->Add(this->mainpanel);
 			this->Controls->Add(this->panelside);
 			this->Controls->Add(this->panelheader);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"Main";
 			this->Text = L"Main";
 			this->Load += gcnew System::EventHandler(this, &Main::Main_Load);

@@ -61,7 +61,7 @@ namespace MAIN1 {
 			// 
 			this->labelemployee->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->labelemployee->AutoSize = true;
-			this->labelemployee->Location = System::Drawing::Point(441, 256);
+			this->labelemployee->Location = System::Drawing::Point(436, 321);
 			this->labelemployee->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->labelemployee->Name = L"labelemployee";
 			this->labelemployee->Size = System::Drawing::Size(80, 16);
@@ -72,10 +72,10 @@ namespace MAIN1 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1040, 554);
+			this->ClientSize = System::Drawing::Size(1030, 685);
 			this->Controls->Add(this->labelemployee);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"Employee";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Employee";
