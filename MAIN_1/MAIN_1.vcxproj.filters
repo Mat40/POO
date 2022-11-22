@@ -84,6 +84,27 @@
     <ClInclude Include="ServiceAdress.h">
       <Filter>Fichiers d%27en-tête\Services</Filter>
     </ClInclude>
+    <ClInclude Include="ServiceCustomer.h">
+      <Filter>Fichiers d%27en-tête\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceEmployee.h">
+      <Filter>Fichiers d%27en-tête\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceItem.h">
+      <Filter>Fichiers d%27en-tête\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceOrder.h">
+      <Filter>Fichiers d%27en-tête\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ServicePayment.h">
+      <Filter>Fichiers d%27en-tête\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceStock.h">
+      <Filter>Fichiers d%27en-tête\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceWholesalePrice.h">
+      <Filter>Fichiers d%27en-tête\Services</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainForm.cpp">
@@ -104,7 +125,7 @@
     <ClCompile Include="StockForm.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="DataContextForm.cpp">
+    <ClCompile Include="DataContext.cpp">
       <Filter>Fichiers sources\Data</Filter>
     </ClCompile>
     <ClCompile Include="Adress.cpp">
@@ -135,6 +156,27 @@
       <Filter>Fichiers sources\Services</Filter>
     </ClCompile>
     <ClCompile Include="ServiceAdress.cpp">
+      <Filter>Fichiers sources\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceCustomer.cpp">
+      <Filter>Fichiers sources\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceEmployee.cpp">
+      <Filter>Fichiers sources\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceItem.cpp">
+      <Filter>Fichiers sources\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceOrder.cpp">
+      <Filter>Fichiers sources\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ServicePayment.cpp">
+      <Filter>Fichiers sources\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceStock.cpp">
+      <Filter>Fichiers sources\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceWholesalePrice.cpp">
       <Filter>Fichiers sources\Services</Filter>
     </ClCompile>
   </ItemGroup>
