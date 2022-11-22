@@ -1,7 +1,7 @@
 //#include "pch.h"
 #include "DataContext.h"
 
-namespace AppUserManager_Core_Data {
+namespace BB8Manager_Core_Data {
 	/// <summary>
 	/// 
 	/// </summary>
@@ -72,12 +72,17 @@ namespace AppUserManager_Core_Data {
 	DataTableMapping^ DataContext::Mapper(DataContext::Tables tableName) {
 		switch (tableName)
 		{
-		case DataContext::Tables::Users:
+		case DataContext::Tables::Adress:
 		{
-			DataTableMapping^ map = gcnew DataTableMapping("Table", "Employee");
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Adress");
 			map->ColumnMappings->Add("id", "id");
-			map->ColumnMappings->Add("firstname", "firstname");
-			map->ColumnMappings->Add("lastname", "lastname");
+			map->ColumnMappings->Add("postalcode", "postalcode");
+			map->ColumnMappings->Add("city", "city");
+			map->ColumnMappings->Add("streetname", "streetname");
+			map->ColumnMappings->Add("streetnumber", "streetnumber");
+			map->ColumnMappings->Add("residencename", "residencename");
+			map->ColumnMappings->Add("buildingname", "buildingname");
+			map->ColumnMappings->Add("floornumber", "floornumber");
 			return map;
 		}
 		default:

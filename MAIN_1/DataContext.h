@@ -17,11 +17,11 @@ using namespace System::Data::SqlClient;
 using namespace System::Data::Common;
 using namespace msclr::interop;
 
-namespace AppUserManager_Core_Data {
+namespace BB8Manager_Core_Data {
 	ref class DataContext
 	{
 	public:
-		enum class Tables { Users };
+		enum class Tables { Adress, Customer, Employee, Item, Order, Payment, Stock, WholesalePrice };
 
 		DataContext();
 		DataRowCollection^ Fetch(Tables tableName, std::string queryString);

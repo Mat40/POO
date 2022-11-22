@@ -16,6 +16,21 @@
     <Filter Include="Fichiers d%27en-tête\Data">
       <UniqueIdentifier>{43f095a8-de10-473a-874b-84f083dc2a97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Data">
+      <UniqueIdentifier>{12d596dd-3cf9-42f1-93a9-3c8532b676eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Data\DAO">
+      <UniqueIdentifier>{a8c187ca-6706-4120-a376-c3b8aec84a90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Data\DAO">
+      <UniqueIdentifier>{e78ec1ad-e5bc-4e64-aae5-9d95048c027a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Services">
+      <UniqueIdentifier>{59f8cc95-ab6f-472a-950b-4e3db6791278}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Services">
+      <UniqueIdentifier>{fab2e84a-fc1a-4026-a29c-0888d63a6c22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
@@ -23,9 +38,6 @@
     </ClInclude>
     <ClInclude Include="DashboardForm.h">
       <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="DataContext.h">
-      <Filter>Fichiers d%27en-tête\Data</Filter>
     </ClInclude>
     <ClInclude Include="EmployeeForm.h">
       <Filter>Fichiers d%27en-tête</Filter>
@@ -39,11 +51,41 @@
     <ClInclude Include="StockForm.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Adress.h">
+      <Filter>Fichiers d%27en-tête\Data\DAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Customer.h">
+      <Filter>Fichiers d%27en-tête\Data\DAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Employee.h">
+      <Filter>Fichiers d%27en-tête\Data\DAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Order.h">
+      <Filter>Fichiers d%27en-tête\Data\DAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Fichiers d%27en-tête\Data\DAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Payment.h">
+      <Filter>Fichiers d%27en-tête\Data\DAO</Filter>
+    </ClInclude>
+    <ClInclude Include="DataContext.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Stock.h">
+      <Filter>Fichiers d%27en-tête\Data\DAO</Filter>
+    </ClInclude>
+    <ClInclude Include="WholesalePrice.h">
+      <Filter>Fichiers d%27en-tête\Data\DAO</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractService.h">
+      <Filter>Fichiers d%27en-tête\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceAdress.h">
+      <Filter>Fichiers d%27en-tête\Services</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataContextForm.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="MainForm.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -61,6 +103,39 @@
     </ClCompile>
     <ClCompile Include="StockForm.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DataContextForm.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Adress.cpp">
+      <Filter>Fichiers sources\Data\DAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Customer.cpp">
+      <Filter>Fichiers sources\Data\DAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Employee.cpp">
+      <Filter>Fichiers sources\Data\DAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Fichiers sources\Data\DAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Order.cpp">
+      <Filter>Fichiers sources\Data\DAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Stock.cpp">
+      <Filter>Fichiers sources\Data\DAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Payment.cpp">
+      <Filter>Fichiers sources\Data\DAO</Filter>
+    </ClCompile>
+    <ClCompile Include="WholesalePrice.cpp">
+      <Filter>Fichiers sources\Data\DAO</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractService.cpp">
+      <Filter>Fichiers sources\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceAdress.cpp">
+      <Filter>Fichiers sources\Services</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

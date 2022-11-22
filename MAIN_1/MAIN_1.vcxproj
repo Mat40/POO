@@ -122,15 +122,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractService.cpp" />
+    <ClCompile Include="Adress.cpp" />
+    <ClCompile Include="Customer.cpp" />
     <ClCompile Include="CustomerForm.cpp" />
     <ClCompile Include="DashboardForm.cpp" />
     <ClCompile Include="DataContextForm.cpp" />
+    <ClCompile Include="Employee.cpp" />
     <ClCompile Include="EmployeeForm.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="MainForm.cpp" />
+    <ClCompile Include="Order.cpp" />
     <ClCompile Include="OrderForm.cpp" />
+    <ClCompile Include="Payment.cpp" />
+    <ClCompile Include="ServiceAdress.cpp" />
+    <ClCompile Include="Stock.cpp" />
     <ClCompile Include="StockForm.cpp" />
+    <ClCompile Include="WholesalePrice.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractService.h" />
+    <ClInclude Include="Adress.h" />
+    <ClInclude Include="Customer.h" />
     <ClInclude Include="CustomerForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -138,18 +151,25 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="DataContext.h" />
+    <ClInclude Include="Employee.h" />
     <ClInclude Include="EmployeeForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Item.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Order.h" />
     <ClInclude Include="OrderForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Payment.h" />
+    <ClInclude Include="ServiceAdress.h" />
+    <ClInclude Include="Stock.h" />
     <ClInclude Include="StockForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="WholesalePrice.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CustomerForm.resx">
