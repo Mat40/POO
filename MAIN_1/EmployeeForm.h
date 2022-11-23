@@ -1,4 +1,5 @@
 #pragma once
+#include "ServiceEmployee.h"
 
 namespace MAIN1 {
 
@@ -18,9 +19,6 @@ namespace MAIN1 {
 		EmployeeForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: ajoutez ici le code du constructeur
-			//
 		}
 
 	protected:
@@ -34,16 +32,13 @@ namespace MAIN1 {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	protected:
+	private: System::Windows::Forms::DataGridView^ EmployeeDataGridView;
+	private: System::Windows::Forms::Button^ btnadd;
+	private: System::Windows::Forms::Button^ btnupdate;
+	private: System::Windows::Forms::Button^ btndelete;
 
-	protected:
-
-	protected:
-
-	protected:
-
-	private:
+	private: BB8Manager_Core_Services::ServiceEmployee^ serviceEmployee;
+	private: System::Data::DataSet^ employeeDataSet;
 		/// <summary>
 		/// Variable nécessaire au concepteur.
 		/// </summary>
@@ -56,38 +51,68 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			this->EmployeeDataGridView = (gcnew System::Windows::Forms::DataGridView());
+			this->btnadd = (gcnew System::Windows::Forms::Button());
+			this->btnupdate = (gcnew System::Windows::Forms::Button());
+			this->btndelete = (gcnew System::Windows::Forms::Button());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->EmployeeDataGridView))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// dataGridView1
+			// EmployeeDataGridView
 			// 
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(373, 33);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->RowHeadersWidth = 51;
-			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(628, 616);
-			this->dataGridView1->TabIndex = 0;
-			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &EmployeeForm::dataGridView1_CellContentClick);
+			this->EmployeeDataGridView->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->EmployeeDataGridView->Location = System::Drawing::Point(373, 33);
+			this->EmployeeDataGridView->Name = L"EmployeeDataGridView";
+			this->EmployeeDataGridView->RowHeadersWidth = 51;
+			this->EmployeeDataGridView->RowTemplate->Height = 24;
+			this->EmployeeDataGridView->Size = System::Drawing::Size(628, 616);
+			this->EmployeeDataGridView->TabIndex = 0;
 			// 
-			// Employee
+			// btnadd
+			// 
+			this->btnadd->Location = System::Drawing::Point(93, 179);
+			this->btnadd->Name = L"btnadd";
+			this->btnadd->Size = System::Drawing::Size(179, 57);
+			this->btnadd->TabIndex = 1;
+			this->btnadd->Text = L"Add";
+			this->btnadd->UseVisualStyleBackColor = true;
+			// 
+			// btnupdate
+			// 
+			this->btnupdate->Location = System::Drawing::Point(93, 282);
+			this->btnupdate->Name = L"btnupdate";
+			this->btnupdate->Size = System::Drawing::Size(179, 57);
+			this->btnupdate->TabIndex = 2;
+			this->btnupdate->Text = L"Update";
+			this->btnupdate->UseVisualStyleBackColor = true;
+			// 
+			// btndelete
+			// 
+			this->btndelete->Location = System::Drawing::Point(93, 395);
+			this->btndelete->Name = L"btndelete";
+			this->btndelete->Size = System::Drawing::Size(179, 57);
+			this->btndelete->TabIndex = 3;
+			this->btndelete->Text = L"Delete";
+			this->btndelete->UseVisualStyleBackColor = true;
+			// 
+			// EmployeeForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1030, 685);
-			this->Controls->Add(this->dataGridView1);
+			this->Controls->Add(this->btndelete);
+			this->Controls->Add(this->btnupdate);
+			this->Controls->Add(this->btnadd);
+			this->Controls->Add(this->EmployeeDataGridView);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(4);
-			this->Name = L"Employee";
+			this->Name = L"EmployeeForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Employee";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->EmployeeDataGridView))->EndInit();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-	}
 	};
 }

@@ -11,6 +11,7 @@ namespace BB8Manager_Core_Services {
 	{
 	public:
 		list<Employee> GetAll();
+
 		Employee Get(int id);
 		Employee Add(Employee employee);
 		void Remove(int id);
