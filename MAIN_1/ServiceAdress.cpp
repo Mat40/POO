@@ -19,7 +19,7 @@ namespace BB8Manager_Core_Services {
 			adress.SetStreetnumber(this->dataContext.ToUnmanagedString(result["streetnumber"]->ToString()));
 			adress.SetResidencename(this->dataContext.ToUnmanagedString(result["recidencename"]->ToString()));
 			adress.SetBuildingname(this->dataContext.ToUnmanagedString(result["buildingname"]->ToString()));
-			adress.SetFloornumber(this->dataContext.ToUnmanagedString(result["floornumber"]->ToString()));			
+			adress.SetFloornumber(this->dataContext.ToUnmanagedString(result["floornumber"]->ToString()));
 
 			adressList.push_back(adress);
 		}
@@ -28,7 +28,7 @@ namespace BB8Manager_Core_Services {
 	}
 
 	Adress ServiceAdress::Get(int id) {
-		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Adress, "SELECT * FROM [Adress] WHERE User_id = " + std::to_string(id));
+		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Adress, "SELECT * FROM [Adress] WHERE id = " + std::to_string(id));
 
 		if (results->Count == 0)
 			throw std::runtime_error("adress not found !");
@@ -36,7 +36,7 @@ namespace BB8Manager_Core_Services {
 		DataRow^ row = results[0];
 
 		Adress adress;
-	
+
 		adress.SetId(std::stoi(this->dataContext.ToUnmanagedString(row["id"]->ToString())));
 		adress.SetPostalcode(this->dataContext.ToUnmanagedString(row["postalcode"]->ToString()));
 		adress.SetCity(this->dataContext.ToUnmanagedString(row["city"]->ToString()));
@@ -55,6 +55,6 @@ namespace BB8Manager_Core_Services {
 	}
 
 	void ServiceAdress::Remove(int id) {
-		this->dataContext.Query("DELETE FROM [Adress] WHERE User_id = " + std::to_string(id));
+		this->dataContext.Query("DELETE FROM [Adress] WHERE id = " + std::to_string(id));
 	}
 }

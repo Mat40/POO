@@ -136,6 +136,12 @@
     <ClCompile Include="OrderForm.cpp" />
     <ClCompile Include="Payment.cpp" />
     <ClCompile Include="ServiceAdress.cpp" />
+    <ClCompile Include="ServiceCustomer.cpp" />
+    <ClCompile Include="ServiceEmployee.cpp" />
+    <ClCompile Include="ServiceItem.cpp" />
+    <ClCompile Include="ServiceOrder.cpp" />
+    <ClCompile Include="ServicePayment.cpp" />
+    <ClCompile Include="ServiceStock.cpp" />
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="StockForm.cpp" />
     <ClCompile Include="WholesalePrice.cpp" />
@@ -165,6 +171,12 @@
     </ClInclude>
     <ClInclude Include="Payment.h" />
     <ClInclude Include="ServiceAdress.h" />
+    <ClInclude Include="ServiceCustomer.h" />
+    <ClInclude Include="ServiceEmployee.h" />
+    <ClInclude Include="ServiceItem.h" />
+    <ClInclude Include="ServiceOrder.h" />
+    <ClInclude Include="ServicePayment.h" />
+    <ClInclude Include="ServiceStock.h" />
     <ClInclude Include="Stock.h" />
     <ClInclude Include="StockForm.h">
       <FileType>CppForm</FileType>
