@@ -32,6 +32,21 @@ namespace BB8Manager_Core_Data {
 		return dataSet->Tables[0]->Rows;
 	}
 
+	DataSet^ DataContext::GetDataset(Tables tableName, std::string queryString)
+	{
+		String^ query = gcnew String(queryString.c_str());
+
+		this->connection->Open();
+
+		DataSet^ dataSet = gcnew DataSet();
+		SqlDataAdapter^ dataAdapter = gcnew SqlDataAdapter(query, this->connection);
+		dataAdapter->Fill(dataSet);
+
+		this->connection->Close();
+
+		return dataSet;
+	}
+
 	/// <summary>
 	/// 
 	/// </summary>

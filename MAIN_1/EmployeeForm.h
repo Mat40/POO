@@ -1,3 +1,4 @@
+//#include "ServiceEmployee.h"
 #pragma once
 
 namespace MAIN1 {
@@ -35,6 +36,7 @@ namespace MAIN1 {
 			}
 		}
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::Button^ button1;
 	protected:
 
 	protected:
@@ -57,29 +59,40 @@ namespace MAIN1 {
 		void InitializeComponent(void)
 		{
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(373, 33);
+			this->dataGridView1->Location = System::Drawing::Point(280, 27);
+			this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(628, 616);
+			this->dataGridView1->Size = System::Drawing::Size(471, 500);
 			this->dataGridView1->TabIndex = 0;
-			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &EmployeeForm::dataGridView1_CellContentClick);
 			// 
-			// Employee
+			// button1
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->button1->Location = System::Drawing::Point(37, 126);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(175, 94);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"Load";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &EmployeeForm::button1_Click);
+			// 
+			// EmployeeForm
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1030, 685);
+			this->ClientSize = System::Drawing::Size(772, 557);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dataGridView1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->Margin = System::Windows::Forms::Padding(4);
-			this->Name = L"Employee";
+			this->Name = L"EmployeeForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Employee";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
@@ -87,7 +100,10 @@ namespace MAIN1 {
 
 		}
 #pragma endregion
-	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		//BB8Manager_Core_Services::ServiceEmployee serviceEmployee;
+		this->dataGridView1->Refresh();
+		//this->dataGridView1->DataSource = serviceEmployee.GetDataSet();
 	}
 	};
 }

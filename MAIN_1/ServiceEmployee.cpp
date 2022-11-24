@@ -24,6 +24,12 @@ namespace BB8Manager_Core_Services {
 		return employeeList;
 	}
 
+	DataSet^ ServiceEmployee::GetDataSet()
+	{
+		return this->dataContext.GetDataset(DataContext::Tables::Employee,
+			"SELECT * FROM [Employee]");
+	}
+
 	Employee ServiceEmployee::Get(int id) {
 		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Employee, "SELECT * FROM [Employee] WHERE id = " + std::to_string(id));
 

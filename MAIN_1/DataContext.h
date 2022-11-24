@@ -25,16 +25,17 @@ namespace BB8Manager_Core_Data {
 
 		DataContext();
 		DataRowCollection^ Fetch(Tables tableName, std::string queryString);
+		DataSet^ GetDataset(Tables tableName, std::string queryString);
 		int Insert(std::string queryString);
 		void Query(std::string queryString);
 		std::string ToUnmanagedString(String^ value);
 	private:
 		String^ connectionString =
-			"Data Source=LAPTOP-HUGO\\MSQL_SERVER;" + ///////////////////////////////////// a changer
-			"Initial Catalog = main_db;" +
+			"Data Source=DESKTOP-S57J1OI\\MSSQL_MAT;" +
+			"Initial Catalog = project_poo_db;" +
 			"Persist Security Info = True;" +
 			"User ID = sa;" +
-			"Password = main_db33"; /////////////////////////////////////////////////// a changer
+			"Password = main_db33";
 		SqlConnection^ connection;
 
 		DataTableMapping^ Mapper(Tables tableName);
