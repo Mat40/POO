@@ -25,7 +25,7 @@ namespace BB8Manager_Core_Data {
 
 		DataContext();
 		DataRowCollection^ Fetch(Tables tableName, std::string queryString);
-		DataSet^ GetDataset(Tables tableName, std::string queryString);
+		DataSet^ GetDataSet(Tables tableName, std::string queryString);
 		int Insert(std::string queryString);
 		void Query(std::string queryString);
 		std::string ToUnmanagedString(String^ value);

@@ -1,13 +1,15 @@
 #include "ServiceEmployee.h"
 
 namespace BB8Manager_Core_Services {
+	ServiceEmployee::ServiceEmployee(void) {
+	
+	}
 
-	list<Employee> ServiceEmployee::GetAll()
+	std::list<Employee> ServiceEmployee::GetAll()
 	{
-		list<Employee> employeeList;
+		std::list<Employee> employeeList;
 
-		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Employee,
-			"SELECT * FROM [Employee]");
+		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Employee, "SELECT * FROM [Employee]");
 		for each (DataRow ^ result in results)
 		{
 			Employee employee;
@@ -26,8 +28,8 @@ namespace BB8Manager_Core_Services {
 
 	DataSet^ ServiceEmployee::GetDataSet()
 	{
-		return this->dataContext.GetDataset(DataContext::Tables::Employee,
-			"SELECT * FROM [Employee]");
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::Employee, "SELECT * FROM [Employee]");
+		return result;
 	}
 
 	Employee ServiceEmployee::Get(int id) {

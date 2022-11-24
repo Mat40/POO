@@ -32,7 +32,7 @@ namespace BB8Manager_Core_Data {
 		return dataSet->Tables[0]->Rows;
 	}
 
-	DataSet^ DataContext::GetDataset(Tables tableName, std::string queryString)
+	DataSet^ DataContext::GetDataSet(Tables tableName, std::string queryString)
 	{
 		String^ query = gcnew String(queryString.c_str());
 
@@ -40,6 +40,8 @@ namespace BB8Manager_Core_Data {
 
 		DataSet^ dataSet = gcnew DataSet();
 		SqlDataAdapter^ dataAdapter = gcnew SqlDataAdapter(query, this->connection);
+		DataTableMapping^ mapper = Mapper(tableName);
+		dataAdapter->TableMappings->Add(mapper);
 		dataAdapter->Fill(dataSet);
 
 		this->connection->Close();
@@ -98,6 +100,77 @@ namespace BB8Manager_Core_Data {
 			map->ColumnMappings->Add("residencename", "residencename");
 			map->ColumnMappings->Add("buildingname", "buildingname");
 			map->ColumnMappings->Add("floornumber", "floornumber");
+			return map;
+		}
+		case DataContext::Tables::Customer:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Customer");
+			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("firstname", "firstname");
+			map->ColumnMappings->Add("lastname", "lastname");
+			map->ColumnMappings->Add("birthdate", "birthdate");
+			return map;
+		}
+		case DataContext::Tables::Employee:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Employee");
+			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("firstname", "firstname");
+			map->ColumnMappings->Add("lastname", "lastname");
+			map->ColumnMappings->Add("hiringdate", "hiringdate");
+			map->ColumnMappings->Add("id_superior", "id_superior");
+			map->ColumnMappings->Add("id_adress", "id_adress");
+			return map;
+		}
+		case DataContext::Tables::Item:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Item");
+			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("reference", "reference");
+			map->ColumnMappings->Add("name", "name");
+			map->ColumnMappings->Add("amount", "amount");
+			map->ColumnMappings->Add("price_excl_taxes", "price_excl_taxes");
+			map->ColumnMappings->Add("vat", "vat");
+			map->ColumnMappings->Add("reduction", "reduction");
+			return map;
+		}
+		case DataContext::Tables::Order:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Order");
+			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("reference", "reference");
+			map->ColumnMappings->Add("datedelivery", "datedelivery");
+			map->ColumnMappings->Add("dateinssuance", "dateinssuance");
+			map->ColumnMappings->Add("datesettlement", "datesettlement");
+			map->ColumnMappings->Add("settlementbalance", "settlementbalance");
+			map->ColumnMappings->Add("id_customer", "id_customer");
+			return map;
+		}
+		case DataContext::Tables::Payment:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Payment");
+			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("datepayment", "datepayment");
+			map->ColumnMappings->Add("meanpayment", "meanpayment");
+			map->ColumnMappings->Add("amountpayment", "amountpayment");
+			map->ColumnMappings->Add("id_order", "id_order");
+			return map;
+		}
+		case DataContext::Tables::Stock:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Stock");
+			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("amount", "amount");
+			map->ColumnMappings->Add("reorderthreshold", "reorderthreshold");
+			map->ColumnMappings->Add("id_item", "id_item");
+			return map;
+		}
+		case DataContext::Tables::WholesalePrice:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "WholesalePrice");
+			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("itemamount", "itemamount");
+			map->ColumnMappings->Add("price_excl_taxes", "price_excl_taxes");
 			return map;
 		}
 		default:

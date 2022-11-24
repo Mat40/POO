@@ -174,4 +174,8 @@
       <Filter>Fichiers sources\Services</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="licenses.licx" />
+  </ItemGroup>
 </Project>
