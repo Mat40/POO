@@ -27,6 +27,16 @@ namespace MAIN1 {
 			//TODO: ajoutez ici le code du constructeur
 			//
 		}
+	private: System::Windows::Forms::Timer^ timerpanelside;
+	private: System::Windows::Forms::Panel^ panellogo;
+
+	private: System::Windows::Forms::Panel^ panelbutton;
+
+	private: System::Windows::Forms::Panel^ panelmenubtn;
+
+	private: System::Windows::Forms::Button^ btnmenu;
+	private: System::Windows::Forms::Button^ btnsettings;
+	public:
 
 		//void loadform(System::Object^ Form) {
 		//	if (this->mainpanel->Controls->Count > 0) {
@@ -39,6 +49,8 @@ namespace MAIN1 {
 		//	this->mainpanel->Tag = f;
 		//	f->Show();
 		//}
+
+		bool sidebarExpend;
 
 		void loadform(System::Windows::Forms::Form^ form) {
 			if (this->mainpanel->Controls->Count > 0) {
@@ -62,7 +74,7 @@ namespace MAIN1 {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Panel^ panelside;
+	private: System::Windows::Forms::FlowLayoutPanel^ panelside;
 	private: System::Windows::Forms::Panel^ panelheader;
 	private: System::Windows::Forms::Panel^ mainpanel;
 	private: System::Windows::Forms::Button^ btnstock;
@@ -71,11 +83,14 @@ namespace MAIN1 {
 	private: System::Windows::Forms::Button^ btncustomer;
 	private: System::Windows::Forms::Button^ btndashboard;
 	private: System::Windows::Forms::Button^ btnclose;
+	private: System::Windows::Forms::PictureBox^ pictureBoxLogo;
+	private: System::ComponentModel::IContainer^ components;
+
 	private:
 		/// <summary>
 		/// Variable nécessaire au concepteur.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -84,34 +99,86 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->panelside = (gcnew System::Windows::Forms::Panel());
+			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
+			this->panelside = (gcnew System::Windows::Forms::FlowLayoutPanel());
+			this->panelmenubtn = (gcnew System::Windows::Forms::Panel());
+			this->btnmenu = (gcnew System::Windows::Forms::Button());
+			this->panelbutton = (gcnew System::Windows::Forms::Panel());
 			this->btnstock = (gcnew System::Windows::Forms::Button());
-			this->btndashboard = (gcnew System::Windows::Forms::Button());
-			this->btnorder = (gcnew System::Windows::Forms::Button());
-			this->btncustomer = (gcnew System::Windows::Forms::Button());
 			this->btnemployee = (gcnew System::Windows::Forms::Button());
+			this->btndashboard = (gcnew System::Windows::Forms::Button());
+			this->btncustomer = (gcnew System::Windows::Forms::Button());
+			this->btnorder = (gcnew System::Windows::Forms::Button());
+			this->panellogo = (gcnew System::Windows::Forms::Panel());
+			this->pictureBoxLogo = (gcnew System::Windows::Forms::PictureBox());
 			this->panelheader = (gcnew System::Windows::Forms::Panel());
 			this->btnclose = (gcnew System::Windows::Forms::Button());
 			this->mainpanel = (gcnew System::Windows::Forms::Panel());
+			this->timerpanelside = (gcnew System::Windows::Forms::Timer(this->components));
+			this->btnsettings = (gcnew System::Windows::Forms::Button());
 			this->panelside->SuspendLayout();
+			this->panelmenubtn->SuspendLayout();
+			this->panelbutton->SuspendLayout();
+			this->panellogo->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxLogo))->BeginInit();
 			this->panelheader->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// panelside
 			// 
 			this->panelside->BackColor = System::Drawing::Color::DimGray;
-			this->panelside->Controls->Add(this->btnstock);
-			this->panelside->Controls->Add(this->btndashboard);
-			this->panelside->Controls->Add(this->btnorder);
-			this->panelside->Controls->Add(this->btncustomer);
-			this->panelside->Controls->Add(this->btnemployee);
+			this->panelside->Controls->Add(this->panelmenubtn);
+			this->panelside->Controls->Add(this->panelbutton);
+			this->panelside->Controls->Add(this->panellogo);
 			this->panelside->Dock = System::Windows::Forms::DockStyle::Left;
 			this->panelside->Location = System::Drawing::Point(0, 35);
 			this->panelside->Margin = System::Windows::Forms::Padding(4);
+			this->panelside->MaximumSize = System::Drawing::Size(250, 685);
+			this->panelside->MinimumSize = System::Drawing::Size(60, 685);
 			this->panelside->Name = L"panelside";
-			this->panelside->Size = System::Drawing::Size(250, 685);
+			this->panelside->RightToLeft = System::Windows::Forms::RightToLeft::No;
+			this->panelside->Size = System::Drawing::Size(60, 685);
 			this->panelside->TabIndex = 0;
 			this->panelside->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::panel1_Paint);
+			// 
+			// panelmenubtn
+			// 
+			this->panelmenubtn->Controls->Add(this->btnmenu);
+			this->panelmenubtn->Location = System::Drawing::Point(3, 3);
+			this->panelmenubtn->Name = L"panelmenubtn";
+			this->panelmenubtn->Size = System::Drawing::Size(247, 103);
+			this->panelmenubtn->TabIndex = 0;
+			// 
+			// btnmenu
+			// 
+			this->btnmenu->BackColor = System::Drawing::Color::DimGray;
+			this->btnmenu->FlatAppearance->BorderSize = 0;
+			this->btnmenu->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnmenu->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F));
+			this->btnmenu->ForeColor = System::Drawing::Color::White;
+			this->btnmenu->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnmenu.Image")));
+			this->btnmenu->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btnmenu->Location = System::Drawing::Point(-3, 34);
+			this->btnmenu->Name = L"btnmenu";
+			this->btnmenu->Size = System::Drawing::Size(250, 37);
+			this->btnmenu->TabIndex = 0;
+			this->btnmenu->Text = L"MENU";
+			this->btnmenu->UseVisualStyleBackColor = false;
+			this->btnmenu->Click += gcnew System::EventHandler(this, &MainForm::btnmenu_Click);
+			// 
+			// panelbutton
+			// 
+			this->panelbutton->Controls->Add(this->btnsettings);
+			this->panelbutton->Controls->Add(this->btnstock);
+			this->panelbutton->Controls->Add(this->btnemployee);
+			this->panelbutton->Controls->Add(this->btndashboard);
+			this->panelbutton->Controls->Add(this->btncustomer);
+			this->panelbutton->Controls->Add(this->btnorder);
+			this->panelbutton->Location = System::Drawing::Point(3, 112);
+			this->panelbutton->Name = L"panelbutton";
+			this->panelbutton->Size = System::Drawing::Size(247, 443);
+			this->panelbutton->TabIndex = 1;
 			// 
 			// btnstock
 			// 
@@ -122,68 +189,16 @@ namespace MAIN1 {
 			this->btnstock->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnstock->ForeColor = System::Drawing::Color::White;
-			this->btnstock->Location = System::Drawing::Point(0, 340);
+			this->btnstock->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnstock.Image")));
+			this->btnstock->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btnstock->Location = System::Drawing::Point(-3, 274);
 			this->btnstock->Margin = System::Windows::Forms::Padding(4);
 			this->btnstock->Name = L"btnstock";
-			this->btnstock->Size = System::Drawing::Size(250, 37);
+			this->btnstock->Size = System::Drawing::Size(253, 37);
 			this->btnstock->TabIndex = 4;
-			this->btnstock->Text = L"Stock";
+			this->btnstock->Text = L"STOCK";
 			this->btnstock->UseVisualStyleBackColor = false;
 			this->btnstock->Click += gcnew System::EventHandler(this, &MainForm::btnstock_Click);
-			// 
-			// btndashboard
-			// 
-			this->btndashboard->BackColor = System::Drawing::Color::DimGray;
-			this->btndashboard->FlatAppearance->BorderSize = 0;
-			this->btndashboard->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Gray;
-			this->btndashboard->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btndashboard->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btndashboard->ForeColor = System::Drawing::Color::White;
-			this->btndashboard->Location = System::Drawing::Point(0, 162);
-			this->btndashboard->Margin = System::Windows::Forms::Padding(4);
-			this->btndashboard->Name = L"btndashboard";
-			this->btndashboard->Size = System::Drawing::Size(250, 37);
-			this->btndashboard->TabIndex = 0;
-			this->btndashboard->Text = L"Dashboard";
-			this->btndashboard->UseVisualStyleBackColor = false;
-			this->btndashboard->Click += gcnew System::EventHandler(this, &MainForm::btndashboard_Click);
-			// 
-			// btnorder
-			// 
-			this->btnorder->BackColor = System::Drawing::Color::DimGray;
-			this->btnorder->FlatAppearance->BorderSize = 0;
-			this->btnorder->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Gray;
-			this->btnorder->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnorder->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnorder->ForeColor = System::Drawing::Color::White;
-			this->btnorder->Location = System::Drawing::Point(0, 295);
-			this->btnorder->Margin = System::Windows::Forms::Padding(4);
-			this->btnorder->Name = L"btnorder";
-			this->btnorder->Size = System::Drawing::Size(250, 37);
-			this->btnorder->TabIndex = 3;
-			this->btnorder->Text = L"Order";
-			this->btnorder->UseVisualStyleBackColor = false;
-			this->btnorder->Click += gcnew System::EventHandler(this, &MainForm::btnorder_Click);
-			// 
-			// btncustomer
-			// 
-			this->btncustomer->BackColor = System::Drawing::Color::DimGray;
-			this->btncustomer->FlatAppearance->BorderSize = 0;
-			this->btncustomer->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Gray;
-			this->btncustomer->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btncustomer->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btncustomer->ForeColor = System::Drawing::Color::White;
-			this->btncustomer->Location = System::Drawing::Point(0, 207);
-			this->btncustomer->Margin = System::Windows::Forms::Padding(4);
-			this->btncustomer->Name = L"btncustomer";
-			this->btncustomer->Size = System::Drawing::Size(250, 37);
-			this->btncustomer->TabIndex = 1;
-			this->btncustomer->Text = L"Customer";
-			this->btncustomer->UseVisualStyleBackColor = false;
-			this->btncustomer->Click += gcnew System::EventHandler(this, &MainForm::btncustomer_Click);
 			// 
 			// btnemployee
 			// 
@@ -194,14 +209,95 @@ namespace MAIN1 {
 			this->btnemployee->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnemployee->ForeColor = System::Drawing::Color::White;
-			this->btnemployee->Location = System::Drawing::Point(0, 251);
+			this->btnemployee->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnemployee.Image")));
+			this->btnemployee->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btnemployee->Location = System::Drawing::Point(-3, 184);
 			this->btnemployee->Margin = System::Windows::Forms::Padding(4);
 			this->btnemployee->Name = L"btnemployee";
-			this->btnemployee->Size = System::Drawing::Size(250, 37);
+			this->btnemployee->Size = System::Drawing::Size(253, 37);
 			this->btnemployee->TabIndex = 2;
-			this->btnemployee->Text = L"Employee";
+			this->btnemployee->Text = L"EMPLOYEE";
 			this->btnemployee->UseVisualStyleBackColor = false;
 			this->btnemployee->Click += gcnew System::EventHandler(this, &MainForm::btnemployee_Click);
+			// 
+			// btndashboard
+			// 
+			this->btndashboard->BackColor = System::Drawing::Color::DimGray;
+			this->btndashboard->FlatAppearance->BorderSize = 0;
+			this->btndashboard->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Gray;
+			this->btndashboard->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btndashboard->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btndashboard->ForeColor = System::Drawing::Color::White;
+			this->btndashboard->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btndashboard.Image")));
+			this->btndashboard->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btndashboard->Location = System::Drawing::Point(-3, 94);
+			this->btndashboard->Margin = System::Windows::Forms::Padding(4);
+			this->btndashboard->Name = L"btndashboard";
+			this->btndashboard->Size = System::Drawing::Size(253, 37);
+			this->btndashboard->TabIndex = 0;
+			this->btndashboard->Text = L"DASHBOARD";
+			this->btndashboard->UseVisualStyleBackColor = false;
+			this->btndashboard->Click += gcnew System::EventHandler(this, &MainForm::btndashboard_Click);
+			// 
+			// btncustomer
+			// 
+			this->btncustomer->BackColor = System::Drawing::Color::DimGray;
+			this->btncustomer->FlatAppearance->BorderSize = 0;
+			this->btncustomer->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Gray;
+			this->btncustomer->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btncustomer->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btncustomer->ForeColor = System::Drawing::Color::White;
+			this->btncustomer->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btncustomer.Image")));
+			this->btncustomer->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btncustomer->Location = System::Drawing::Point(-3, 139);
+			this->btncustomer->Margin = System::Windows::Forms::Padding(4);
+			this->btncustomer->Name = L"btncustomer";
+			this->btncustomer->Size = System::Drawing::Size(253, 37);
+			this->btncustomer->TabIndex = 1;
+			this->btncustomer->Text = L"CUSTOMER";
+			this->btncustomer->UseVisualStyleBackColor = false;
+			this->btncustomer->Click += gcnew System::EventHandler(this, &MainForm::btncustomer_Click);
+			// 
+			// btnorder
+			// 
+			this->btnorder->BackColor = System::Drawing::Color::DimGray;
+			this->btnorder->FlatAppearance->BorderSize = 0;
+			this->btnorder->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Gray;
+			this->btnorder->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnorder->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnorder->ForeColor = System::Drawing::Color::White;
+			this->btnorder->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnorder.Image")));
+			this->btnorder->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btnorder->Location = System::Drawing::Point(-3, 229);
+			this->btnorder->Margin = System::Windows::Forms::Padding(4);
+			this->btnorder->Name = L"btnorder";
+			this->btnorder->Size = System::Drawing::Size(253, 37);
+			this->btnorder->TabIndex = 3;
+			this->btnorder->Text = L"ORDER";
+			this->btnorder->UseVisualStyleBackColor = false;
+			this->btnorder->Click += gcnew System::EventHandler(this, &MainForm::btnorder_Click);
+			// 
+			// panellogo
+			// 
+			this->panellogo->Controls->Add(this->pictureBoxLogo);
+			this->panellogo->Location = System::Drawing::Point(3, 561);
+			this->panellogo->Name = L"panellogo";
+			this->panellogo->Size = System::Drawing::Size(247, 121);
+			this->panellogo->TabIndex = 0;
+			// 
+			// pictureBoxLogo
+			// 
+			this->pictureBoxLogo->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBoxLogo.Image")));
+			this->pictureBoxLogo->InitialImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBoxLogo.InitialImage")));
+			this->pictureBoxLogo->Location = System::Drawing::Point(49, 0);
+			this->pictureBoxLogo->Name = L"pictureBoxLogo";
+			this->pictureBoxLogo->Size = System::Drawing::Size(144, 121);
+			this->pictureBoxLogo->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pictureBoxLogo->TabIndex = 5;
+			this->pictureBoxLogo->TabStop = false;
 			// 
 			// panelheader
 			// 
@@ -234,14 +330,39 @@ namespace MAIN1 {
 			// 
 			// mainpanel
 			// 
+			this->mainpanel->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->mainpanel->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->mainpanel->Location = System::Drawing::Point(250, 35);
+			this->mainpanel->Location = System::Drawing::Point(60, 35);
 			this->mainpanel->Margin = System::Windows::Forms::Padding(4);
 			this->mainpanel->Name = L"mainpanel";
-			this->mainpanel->Size = System::Drawing::Size(1030, 685);
+			this->mainpanel->Size = System::Drawing::Size(1220, 685);
 			this->mainpanel->TabIndex = 2;
 			// 
-			// Main
+			// timerpanelside
+			// 
+			this->timerpanelside->Interval = 10;
+			this->timerpanelside->Tick += gcnew System::EventHandler(this, &MainForm::timerpanelside_Tick);
+			// 
+			// btnsettings
+			// 
+			this->btnsettings->BackColor = System::Drawing::Color::DimGray;
+			this->btnsettings->FlatAppearance->BorderSize = 0;
+			this->btnsettings->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Gray;
+			this->btnsettings->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnsettings->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnsettings->ForeColor = System::Drawing::Color::White;
+			this->btnsettings->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnsettings.Image")));
+			this->btnsettings->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btnsettings->Location = System::Drawing::Point(-3, 357);
+			this->btnsettings->Margin = System::Windows::Forms::Padding(4);
+			this->btnsettings->Name = L"btnsettings";
+			this->btnsettings->Size = System::Drawing::Size(253, 37);
+			this->btnsettings->TabIndex = 5;
+			this->btnsettings->Text = L"SETTINGS";
+			this->btnsettings->UseVisualStyleBackColor = false;
+			// 
+			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -252,10 +373,14 @@ namespace MAIN1 {
 			this->Controls->Add(this->panelheader);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(4);
-			this->Name = L"Main";
+			this->Name = L"MainForm";
 			this->Text = L"Main";
 			this->Load += gcnew System::EventHandler(this, &MainForm::Main_Load);
 			this->panelside->ResumeLayout(false);
+			this->panelmenubtn->ResumeLayout(false);
+			this->panelbutton->ResumeLayout(false);
+			this->panellogo->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxLogo))->EndInit();
 			this->panelheader->ResumeLayout(false);
 			this->ResumeLayout(false);
 
@@ -265,6 +390,7 @@ namespace MAIN1 {
 		loadform(gcnew DashboardForm());
 		resetButtons_Click();
 		allButtons_Click(this->btndashboard);
+		this->pictureBoxLogo->ImageLocation = "C:/Users/matth/OneDrive/Bureau/CESI/2ème année/POO/Livrable 1/VH4.png"; //path to image
 	}
 	private: System::Void customerToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -312,5 +438,25 @@ namespace MAIN1 {
 	{
 		senderBtn->BackColor = Color::Gray;
 	}
-};
+
+	private: System::Void timerpanelside_Tick(System::Object^ sender, System::EventArgs^ e) {
+		if (sidebarExpend) {
+			this->panelside->Width -= 10;
+			if (this->panelside->Width == this->panelside->MinimumSize.Width) {
+				sidebarExpend = false;
+				this->timerpanelside->Stop();
+			}
+		}
+		else {
+			this->panelside->Width += 10;
+			if (this->panelside->Width == this->panelside->MaximumSize.Width) {
+				sidebarExpend = true;
+				this->timerpanelside->Stop();
+			}
+		}
+	}
+	private: System::Void btnmenu_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->timerpanelside->Start();
+	}
+	};
 }
