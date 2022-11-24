@@ -28,7 +28,7 @@ namespace BB8Manager_Core_Services {
 	}
 
 	Adress ServiceAdress::Get(int id) {
-		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Adress, "SELECT * FROM [Adress] WHERE id = " + std::to_string(id));
+		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Adress, "SELECT * FROM [Adress] WHERE User_id = " + std::to_string(id));
 
 		if (results->Count == 0)
 			throw std::runtime_error("adress not found !");
@@ -55,6 +55,6 @@ namespace BB8Manager_Core_Services {
 	}
 
 	void ServiceAdress::Remove(int id) {
-		this->dataContext.Query("DELETE FROM [Adress] WHERE id = " + std::to_string(id));
+		this->dataContext.Query("DELETE FROM [Adress] WHERE User_id = " + std::to_string(id));
 	}
 }
