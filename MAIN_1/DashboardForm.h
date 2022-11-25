@@ -59,22 +59,22 @@ namespace MAIN1 {
 			// 
 			this->labeldashboard->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->labeldashboard->AutoSize = true;
-			this->labeldashboard->Location = System::Drawing::Point(457, 310);
+			this->labeldashboard->Location = System::Drawing::Point(555, 311);
 			this->labeldashboard->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->labeldashboard->Name = L"labeldashboard";
 			this->labeldashboard->Size = System::Drawing::Size(93, 16);
 			this->labeldashboard->TabIndex = 0;
 			this->labeldashboard->Text = L"DASHBOARD";
 			// 
-			// Dashboard
+			// DashboardForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1030, 685);
+			this->ClientSize = System::Drawing::Size(1227, 686);
 			this->Controls->Add(this->labeldashboard);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(4);
-			this->Name = L"Dashboard";
+			this->Name = L"DashboardForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Dashboard";
 			this->ResumeLayout(false);

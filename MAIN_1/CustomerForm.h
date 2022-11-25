@@ -57,22 +57,22 @@ namespace MAIN1 {
 			// 
 			this->labelcustomer->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->labelcustomer->AutoSize = true;
-			this->labelcustomer->Location = System::Drawing::Point(465, 334);
+			this->labelcustomer->Location = System::Drawing::Point(563, 335);
 			this->labelcustomer->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->labelcustomer->Name = L"labelcustomer";
 			this->labelcustomer->Size = System::Drawing::Size(84, 16);
 			this->labelcustomer->TabIndex = 1;
 			this->labelcustomer->Text = L"CUSTOMER";
 			// 
-			// Customer
+			// CustomerForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1030, 685);
+			this->ClientSize = System::Drawing::Size(1227, 686);
 			this->Controls->Add(this->labelcustomer);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(4);
-			this->Name = L"Customer";
+			this->Name = L"CustomerForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Customer";
 			this->ResumeLayout(false);

@@ -57,22 +57,22 @@ namespace MAIN1 {
 			// 
 			this->labelorder->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->labelorder->AutoSize = true;
-			this->labelorder->Location = System::Drawing::Point(491, 334);
+			this->labelorder->Location = System::Drawing::Point(589, 335);
 			this->labelorder->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->labelorder->Name = L"labelorder";
 			this->labelorder->Size = System::Drawing::Size(56, 16);
 			this->labelorder->TabIndex = 1;
 			this->labelorder->Text = L"ORDER";
 			// 
-			// Order
+			// OrderForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1030, 685);
+			this->ClientSize = System::Drawing::Size(1227, 686);
 			this->Controls->Add(this->labelorder);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(4);
-			this->Name = L"Order";
+			this->Name = L"OrderForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Order";
 			this->ResumeLayout(false);
