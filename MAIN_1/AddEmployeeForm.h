@@ -16,12 +16,27 @@ namespace MAIN1 {
 	/// </summary>
 	public ref class AddEmployeeForm : public System::Windows::Forms::Form
 	{
+
 	public:
+		ref class Listener
+		{
+		public:
+			virtual void onApplyClicked() = 0;
+		};
+
+		Listener^ listener;
+
+		AddEmployeeForm(Listener^ listener)
+		{
+			InitializeComponent();
+			this->listener = listener;
+		}
+	/*public:
 
 		AddEmployeeForm(void)
 		{
 			InitializeComponent();
-		}
+		}*/
 
 		/*MAIN1::EmployeeForm^ frm;
 
@@ -74,7 +89,6 @@ namespace MAIN1 {
 	private: System::Windows::Forms::Button^ btncancel;
 	private: System::Windows::Forms::Button^ btnapply;
 	private: System::Windows::Forms::Label^ label1;
-
 
 	private:
 		/// <summary>
@@ -559,6 +573,7 @@ private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ 
 		employee = ServiceEmployee().Add(employee);
 
 		//this->MdiParent->refresh_dataGridView();
+		this->listener->onApplyClicked();
 
 		this->Close();
 	}

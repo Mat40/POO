@@ -17,11 +17,16 @@ namespace MAIN1 {
 	/// </summary>
 	public ref class EmployeeForm : public System::Windows::Forms::Form
 	{
+
 	public:
+
+		AddEmployeeForm^ addEmployeeForm;
+
 		EmployeeForm(void)
 		{
 			InitializeComponent();
 			refresh_dataGridView();
+			this->addEmployeeForm = gcnew AddEmployeeForm(gcnew AddEmployeeListenerImpl(this));
 		}
 
 	protected:
@@ -35,6 +40,28 @@ namespace MAIN1 {
 				delete components;
 			}
 		}
+
+	private:
+		ref class AddEmployeeListenerImpl : public AddEmployeeForm::Listener
+		{
+		public:
+			AddEmployeeListenerImpl(EmployeeForm^ parent) : m_parent(parent) {}
+
+			void onApplyClicked() override
+			{
+				m_parent->refresh_dataGridView();
+			}
+		private:
+			EmployeeForm^ m_parent;
+		};
+	/*public:
+		EmployeeForm(void)
+		{
+			InitializeComponent();
+			refresh_dataGridView();
+		}*/
+
+	
 	private: System::Windows::Forms::FlowLayoutPanel^ employeeLayoutPanel;
 	protected:
 	private: System::Windows::Forms::Panel^ panelDataGridView;
@@ -43,14 +70,6 @@ namespace MAIN1 {
 	private: System::Windows::Forms::Button^ btnupdate;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Panel^ panel2;
-
-
-
-
-
-
-
-
 
 	private:
 		/// <summary>
@@ -244,13 +263,7 @@ namespace MAIN1 {
 		this->dataGridView->ReadOnly = true;
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-
-		//Form^ addform = gcnew AddEmployeeForm(this);
-		AddEmployeeForm^ addform = gcnew AddEmployeeForm();
-		//addform->FormClosed += gcnew FormClosedEventHandler(this, &EmployeeForm::Form1_FormClosed);
-		//addform->MdiParent = this;
-		addform->Show();
-		//addform->FormClosed += gcnew FormClosedEventHandler(this, &EmployeeForm::Form1_FormClosed);
+		this->addEmployeeForm->Show();
 	}
 	public: System::Void Form1_FormClosed(System::Object^ sender, System::EventArgs^ e)
 	{
