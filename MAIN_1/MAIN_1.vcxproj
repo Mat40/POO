@@ -117,18 +117,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="Bunifu.Licensing">
+      <HintPath>Bunifu.Licensing</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuButton">
+      <HintPath>..\packages\Bunifu.UI.WinForms.5.3.0\lib\net40\Bunifu.UI.WinForms.BunifuButton.dll</HintPath>
+    </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuDataGridView">
       <HintPath>..\packages\Bunifu.UI.WinForms.5.3.0\lib\net40\Bunifu.UI.WinForms.BunifuDataGridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuSlider">
+      <HintPath>..\packages\Bunifu.UI.WinForms.5.3.0\lib\net40\Bunifu.UI.WinForms.BunifuSlider.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuTextBox">
+      <HintPath>..\packages\Bunifu.UI.WinForms.5.3.0\lib\net40\Bunifu.UI.WinForms.BunifuTextBox.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractService.cpp" />
+    <ClCompile Include="AddEmployeeForm.cpp" />
     <ClCompile Include="Adress.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="CustomerForm.cpp" />
@@ -154,6 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractService.h" />
+    <ClInclude Include="AddEmployeeForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Adress.h" />
     <ClInclude Include="Customer.h" />
     <ClInclude Include="CustomerForm.h">
@@ -190,6 +207,9 @@
     <ClInclude Include="WholesalePrice.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddEmployeeForm.resx">
+      <DependentUpon>AddEmployeeForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomerForm.resx">
       <DependentUpon>CustomerForm.h</DependentUpon>
     </EmbeddedResource>

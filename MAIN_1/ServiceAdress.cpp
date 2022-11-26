@@ -3,9 +3,9 @@
 
 namespace BB8Manager_Core_Services {
 
-	list<Adress> ServiceAdress::GetAll()
+	std::list<Adress> ServiceAdress::GetAll()
 	{
-		list<Adress> adressList;
+		std::list<Adress> adressList;
 
 		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Adress,
 			"SELECT * FROM [Adress]");
@@ -17,7 +17,7 @@ namespace BB8Manager_Core_Services {
 			adress.SetCity(this->dataContext.ToUnmanagedString(result["city"]->ToString()));
 			adress.SetStreetname(this->dataContext.ToUnmanagedString(result["streetname"]->ToString()));
 			adress.SetStreetnumber(this->dataContext.ToUnmanagedString(result["streetnumber"]->ToString()));
-			adress.SetResidencename(this->dataContext.ToUnmanagedString(result["recidencename"]->ToString()));
+			adress.SetResidencename(this->dataContext.ToUnmanagedString(result["residencename"]->ToString()));
 			adress.SetBuildingname(this->dataContext.ToUnmanagedString(result["buildingname"]->ToString()));
 			adress.SetFloornumber(this->dataContext.ToUnmanagedString(result["floornumber"]->ToString()));
 
@@ -42,7 +42,7 @@ namespace BB8Manager_Core_Services {
 		adress.SetCity(this->dataContext.ToUnmanagedString(row["city"]->ToString()));
 		adress.SetStreetname(this->dataContext.ToUnmanagedString(row["streetname"]->ToString()));
 		adress.SetStreetnumber(this->dataContext.ToUnmanagedString(row["streetnumber"]->ToString()));
-		adress.SetResidencename(this->dataContext.ToUnmanagedString(row["recidencename"]->ToString()));
+		adress.SetResidencename(this->dataContext.ToUnmanagedString(row["residencename"]->ToString()));
 		adress.SetBuildingname(this->dataContext.ToUnmanagedString(row["buildingname"]->ToString()));
 		adress.SetFloornumber(this->dataContext.ToUnmanagedString(row["floornumber"]->ToString()));
 
@@ -50,7 +50,7 @@ namespace BB8Manager_Core_Services {
 	}
 
 	Adress ServiceAdress::Add(Adress adress) {
-		this->dataContext.Insert("INSERT INTO [Adress] (postalcode, city, streetname, streetnumber, recidencename, buildingname, floornumber) VALUES ('" + adress.GetPostalcode() + "', '" + adress.GetCity() + "', '" + adress.GetStreetname() + "', '" + adress.GetStreetnumber() + "', '" + adress.GetResidencename() + "', '" + adress.GetBuildingname() + "', '" + adress.GetFloornumber() + "')");
+		adress.SetId(this->dataContext.Insert("INSERT INTO [Adress] (postalcode, city, streetname, streetnumber, residencename, buildingname, floornumber) VALUES ('" + adress.GetPostalcode() + "', '" + adress.GetCity() + "', '" + adress.GetStreetname() + "', '" + adress.GetStreetnumber() + "', '" + adress.GetResidencename() + "', '" + adress.GetBuildingname() + "', '" + adress.GetFloornumber() + "')"));
 		return adress;
 	}
 

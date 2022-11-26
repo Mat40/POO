@@ -44,6 +44,13 @@ namespace BB8Manager_Core_Data {
 		dataAdapter->TableMappings->Add(mapper);
 		dataAdapter->Fill(dataSet);
 
+		if (tableName == DataContext::Tables::DataSetSuperior) {
+			DataRow^ defaultRow = dataSet->Tables[0]->NewRow();
+			defaultRow["ID"] = NULL;
+			defaultRow["Name"] = "No Superior";
+			dataSet->Tables[0]->Rows->InsertAt(defaultRow, 0);
+		}
+
 		this->connection->Close();
 
 		return dataSet;
@@ -92,20 +99,20 @@ namespace BB8Manager_Core_Data {
 		case DataContext::Tables::Adress:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Adress");
-			map->ColumnMappings->Add("id", "id");
-			map->ColumnMappings->Add("postalcode", "postalcode");
-			map->ColumnMappings->Add("city", "city");
-			map->ColumnMappings->Add("streetname", "streetname");
-			map->ColumnMappings->Add("streetnumber", "streetnumber");
-			map->ColumnMappings->Add("residencename", "residencename");
-			map->ColumnMappings->Add("buildingname", "buildingname");
-			map->ColumnMappings->Add("floornumber", "floornumber");
+			map->ColumnMappings->Add("id_adress", "ID");
+			map->ColumnMappings->Add("postalcode", "ZIP");
+			map->ColumnMappings->Add("city", "City");
+			map->ColumnMappings->Add("streetname", "Street Name");
+			map->ColumnMappings->Add("streetnumber", "Street Number");
+			map->ColumnMappings->Add("residencename", "Residence Name");
+			map->ColumnMappings->Add("buildingname", "Building Name");
+			map->ColumnMappings->Add("floornumber", "Floor Number");
 			return map;
 		}
 		case DataContext::Tables::Customer:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Customer");
-			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("id_customer", "id");
 			map->ColumnMappings->Add("firstname", "firstname");
 			map->ColumnMappings->Add("lastname", "lastname");
 			map->ColumnMappings->Add("birthdate", "birthdate");
@@ -114,18 +121,35 @@ namespace BB8Manager_Core_Data {
 		case DataContext::Tables::Employee:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Employee");
-			map->ColumnMappings->Add("id", "id");
-			map->ColumnMappings->Add("firstname", "firstname");
-			map->ColumnMappings->Add("lastname", "lastname");
-			map->ColumnMappings->Add("hiringdate", "hiringdate");
-			map->ColumnMappings->Add("id_superior", "id_superior");
+			map->ColumnMappings->Add("id_employee", "ID");
+			map->ColumnMappings->Add("firstname", "Firstname");
+			map->ColumnMappings->Add("lastname", "Lastname");
+			map->ColumnMappings->Add("hiringdate", "Hiring Date");
+			map->ColumnMappings->Add("id_superior", "Superior");
 			map->ColumnMappings->Add("id_adress", "id_adress");
+			return map;
+		}
+		case DataContext::Tables::DataSetEmployee:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Employee");
+			map->ColumnMappings->Add("id_employee", "ID");
+			map->ColumnMappings->Add("name", "Name");
+			map->ColumnMappings->Add("hiringdate", "Hiring Date");
+			map->ColumnMappings->Add("superior", "Superior");
+			map->ColumnMappings->Add("adress", "Adress");
+			return map;
+		}
+		case DataContext::Tables::DataSetSuperior:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Employee");
+			map->ColumnMappings->Add("id_employee", "ID");
+			map->ColumnMappings->Add("name", "Name");
 			return map;
 		}
 		case DataContext::Tables::Item:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Item");
-			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("id_item", "id");
 			map->ColumnMappings->Add("reference", "reference");
 			map->ColumnMappings->Add("name", "name");
 			map->ColumnMappings->Add("amount", "amount");
@@ -137,7 +161,7 @@ namespace BB8Manager_Core_Data {
 		case DataContext::Tables::Order:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Order");
-			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("id_order", "id");
 			map->ColumnMappings->Add("reference", "reference");
 			map->ColumnMappings->Add("datedelivery", "datedelivery");
 			map->ColumnMappings->Add("dateinssuance", "dateinssuance");
@@ -149,7 +173,7 @@ namespace BB8Manager_Core_Data {
 		case DataContext::Tables::Payment:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Payment");
-			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("id_payment", "id");
 			map->ColumnMappings->Add("datepayment", "datepayment");
 			map->ColumnMappings->Add("meanpayment", "meanpayment");
 			map->ColumnMappings->Add("amountpayment", "amountpayment");

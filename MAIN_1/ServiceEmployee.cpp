@@ -28,7 +28,17 @@ namespace BB8Manager_Core_Services {
 
 	DataSet^ ServiceEmployee::GetDataSet()
 	{
-		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::Employee, "SELECT * FROM [Employee]");
+		//DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::Employee, "SELECT * FROM [Employee]");
+
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetEmployee, "SELECT Employee.id_employee, Employee.firstname + ' ' + Employee.lastname as name, Employee.hiringdate, Superior.firstname + ' ' + Superior.lastname as superior, streetnumber + ' ' + streetname + ' ' + city + ' ' + postalcode as adress FROM [Employee] INNER JOIN [Adress] ON Employee.id_adress = Adress.id_adress LEFT JOIN [Employee] as Superior ON Employee.id_superior = Superior.id_employee; ");
+		return result;
+	}
+
+	DataSet^ ServiceEmployee::GetDataSetSuperior()
+	{
+		//DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::Employee, "SELECT * FROM [Employee]");
+
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetSuperior, "SELECT Employee.id_employee, Employee.firstname + ' ' + Employee.lastname as name FROM [Employee];");
 		return result;
 	}
 

@@ -35,6 +35,7 @@ namespace MAIN1 {
 			}
 		}
 	private: System::Windows::Forms::Label^ labelstock;
+
 	protected:
 
 	private:
@@ -57,21 +58,19 @@ namespace MAIN1 {
 			// 
 			this->labelstock->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->labelstock->AutoSize = true;
-			this->labelstock->Location = System::Drawing::Point(563, 335);
-			this->labelstock->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->labelstock->Location = System::Drawing::Point(422, 272);
 			this->labelstock->Name = L"labelstock";
-			this->labelstock->Size = System::Drawing::Size(52, 16);
+			this->labelstock->Size = System::Drawing::Size(43, 13);
 			this->labelstock->TabIndex = 1;
 			this->labelstock->Text = L"STOCK";
 			// 
 			// StockForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1227, 686);
+			this->ClientSize = System::Drawing::Size(920, 557);
 			this->Controls->Add(this->labelstock);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"StockForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Stock";
