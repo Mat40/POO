@@ -1,0 +1,101 @@
+--CREATE DATABASE main_db;
+
+USE main_db;
+
+CREATE TABLE Customer(
+        id_customer Int  IDENTITY   NOT NULL ,--
+        firstname   Varchar (50) NOT NULL ,
+        lastname    Varchar (50) NOT NULL ,
+        birthdate   Date NOT NULL
+	,CONSTRAINT Customer_PK PRIMARY KEY (id_customer)
+);
+
+CREATE TABLE Adress(
+        id_adress      Int  IDENTITY  NOT NULL ,--
+        postalcode    Varchar (5) NOT NULL ,
+        city           Varchar (50) NOT NULL ,
+        streetname    Varchar (50) NOT NULL ,
+        streetnumber  Varchar (5) NOT NULL ,
+        residencename Varchar (50) ,
+        buildingname  Varchar (10) ,
+        floornumber   Varchar (5)
+	,CONSTRAINT Adress_PK PRIMARY KEY (id_adress)
+);
+
+CREATE TABLE Employee(
+        id_employee Int  IDENTITY  NOT NULL ,
+        firstname   Varchar (50) NOT NULL ,
+        lastname    Varchar (50) NOT NULL ,
+        hiringdate Date NOT NULL ,
+        id_superior Int , --
+        id_adress   Int NOT NULL--
+	,CONSTRAINT Employee_PK PRIMARY KEY (id_employee)
+);
+
+CREATE TABLE Ordered(
+        id_order           Int  IDENTITY  NOT NULL ,
+        reference          Varchar (50) NOT NULL ,
+        datedelivery      Date NOT NULL ,
+        dateinssuance     Date NOT NULL ,
+        datesettlement    Date NOT NULL ,
+        settlementbalance Float NOT NULL ,
+	fullprice  	  Float NOT NULL ,
+        id_customer        Int NOT NULL
+	,CONSTRAINT Order_PK PRIMARY KEY (id_order)
+);
+
+CREATE TABLE Payment(
+        id_payment     Int  IDENTITY  NOT NULL ,
+        datepayment   Date NOT NULL ,
+        meanpayment   Varchar (50) NOT NULL ,
+        amountpayment Float NOT NULL ,
+        id_order       Int NOT NULL
+	,CONSTRAINT Payment_PK PRIMARY KEY (id_payment)
+);
+
+CREATE TABLE Wholesale_price(
+        id               Int  IDENTITY  NOT NULL ,
+        itemamount      Int NOT NULL ,
+        price_excl_taxes Float NOT NULL
+	,CONSTRAINT Wholesale_price_PK PRIMARY KEY (id)
+);
+
+CREATE TABLE Has(
+        id_adress   Int NOT NULL ,
+        id_customer Int NOT NULL ,
+        delivery    BIT NOT NULL ,
+        billing     BIT NOT NULL
+	,CONSTRAINT Has_PK PRIMARY KEY (id_adress,id_customer)
+);
+
+CREATE TABLE Item(
+        id_item          Int  IDENTITY  NOT NULL ,
+        reference        Varchar (50) NOT NULL ,
+        nameproduct     Varchar (50) NOT NULL ,
+        amount           Int NOT NULL ,
+        price_excl_taxes Float NOT NULL ,--
+        vat              Float NOT NULL ,
+        reduction        Float ,
+        id_stock         Int NOT NULL
+	,CONSTRAINT Item_PK PRIMARY KEY (id_item)
+);
+
+CREATE TABLE Stock(
+        id_stock          Int  IDENTITY  NOT NULL ,
+        amount            Int NOT NULL ,
+        reorderthreshold Int NOT NULL ,
+        id_item           Int NOT NULL
+	,CONSTRAINT Stock_PK PRIMARY KEY (id_stock)
+);
+
+CREATE TABLE Hold(
+        id_item  Int NOT NULL ,
+        id_order Int NOT NULL
+	,CONSTRAINT Hold_PK PRIMARY KEY (id_item,id_order)
+);
+
+CREATE TABLE Applied_of(
+        id      Int NOT NULL ,
+        id_item Int NOT NULL
+	,CONSTRAINT Applied_of_PK PRIMARY KEY (id,id_item)
+);

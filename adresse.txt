@@ -1,0 +1,33 @@
+USE main_db;
+
+INSERT INTO Adress (postalcode, city, streetname, streetnumber, residencename, buildingname, floornumber)
+
+VALUES 
+
+(33290, 'Parempuyre', 'general de gaulle', 42 , '', '','' ),
+(92330,	'Sceaux', 'Jean-Racine', 46, '', '','' 	),			
+(92190, 'Meudon ', 'Porto Riche', 15, '', '','' 	),			
+(78380,	'Bougival', 'Ivan-Tourgueniev', 5, '', '',''  ),		
+(91480, 'Varennes-Jarcy', 'La Libération', 1, '', '','' ),				
+(95430,	'Auvers-sur-Oise ', 'Alphonse Callè ', 44	, '', '','' ),		
+(95160,	'Montmorency', 'Charles de Gaulle', 74, '', '', ''	),			
+(78550,	'Maulette ', 'Champagne', 8, '', '', '' ),		
+(93330,	'Neuilly-sur-Marne', 'Jean Jaurès', 7,  '','' , '' ),		
+(93100,	'Montreuil', 'Gobetue', 8 , '', '', ''),
+(92100,	'Bouloigne-Billancourt', 'Ancienne Mairie', 62, '','' , '' ),	
+(78000,	'Versailles', 'Maréchal Foch', 40, '', '' , '' ),		
+(93500,	'Pantin	Jean ', 'Lolive', 99, '', '','' ),
+(78720,	'Dampierre-en-Yvelines', 'Pierreuse', 12,  '','' , '' ),		
+(77169,	'Boissy-le-Châtel', 'Papeteries', 48, '','' , '' ),		
+(78130,	'Les Mureaux', 'Albert Glandaz', 30,  '','' , ''	),		
+(92310,	'Sèvres', 'Auguste-Rodin', 1, '', '' , ''),				
+(78400,	'Chatou', 'Bac', 3, '', '',''  ),
+(91800,	'Brunoy', 'Réveillon', 16 , '', '' , ''),
+(93300,	'Aubervilliers', 'Heurtault', 70,  '','' , '' ),
+(94410,	'Saint-Maurice', 'Val d Osne', 14,  '','' , '' ),
+(93120,	'La Courneuve', 'Abreuvoir', 11,  '','' , '' ),		
+(77760,	'Guercheville', 'Grande', 58,  '','' , '' ),		
+(92190,	'Meudon', 'Rushmoor', 14 , '', '' , ''),
+(95000,	'Cergy', 'Bac de Gency', 2 , '', '' , ''),	
+(91660,	'Le Mérévillois', 'Pont de Boigny', 1 ,  '','' , ''),	
+(91240,	'Saint-Michel-sur-Orge', 'Mare des Bordes', 2,  '','' , '' );

@@ -1,0 +1,10 @@
+USE main_db;
+
+INSERT INTO Customer(firstname, lastname, birthdate)
+VALUES
+('Bompuré','Jean','2003-05-05'),
+('Plaza','Stéphane','1971-08-19'),
+('Dalmau','Laurie','1981-06-17'),
+('Cottereau','Laure','1943-09-16'),
+('Perrot','Claire','1970-04-12'),
+('Guegan','Arnaud','1992-07-25');

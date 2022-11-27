@@ -1,0 +1,15 @@
+USE main_db;
+
+INSERT INTO HOLD (id_item, id_order)
+VALUES
+(1, 1), /* 25E */
+(7, 1); /* 5E */
+
+INSERT INTO Ordered(reference, datedelivery, dateinssuance, datesettlement, settlementbalance, fullprice, id_customer)
+VALUES
+('JEBO2022PAR1', '2022-09-11', '2022-09-01','2022-09-01',0, 30 ,1); /*30 E */
+
+INSERT INTO Payment(datepayment, meanpayment, amountpayment, id_order)
+VALUES
+('2022-09-01', 'Credit card', 30.0, 1);
+

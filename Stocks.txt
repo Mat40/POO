@@ -1,0 +1,19 @@
+INSERT INTO Item (reference, nameproduct, amount, price_excl_taxes, vat, reduction, id_stock)
+VALUES 
+('PR_A1', 'Arduino UNO', 1, 25, 5, 0, 1),
+('PR_A2', 'Arduino mega', 1, 30, 6, 0, 2),
+('PR_A3', 'Arduin nano', 1, 10, 2, 0, 3),
+('PR_A4', 'Arduin micro', 1, 15, 3, 0, 4),
+('PR_A5', 'Boutons poussoirs', 5, 5, 1, 0, 5),
+('PR_A6', 'Leds rouge', 10, 5, 1, 0, 6),
+('PR_A7', 'Leds vertes', 10, 5, 1, 0, 7);
+
+INSERT INTO Stock (amount, reorderthreshold, id_item)
+VALUES  
+(20, 15, 1),
+(15, 10, 2),
+(20, 10, 3),
+(8, 10, 4), 
+(30, 20, 5),
+(25, 20, 6),
+(30, 20, 7);
