@@ -99,14 +99,14 @@ namespace BB8Manager_Core_Data {
 		case DataContext::Tables::Adress:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Adress");
-			map->ColumnMappings->Add("id_adress", "ID");
-			map->ColumnMappings->Add("postalcode", "ZIP");
-			map->ColumnMappings->Add("city", "City");
-			map->ColumnMappings->Add("streetname", "Street Name");
-			map->ColumnMappings->Add("streetnumber", "Street Number");
-			map->ColumnMappings->Add("residencename", "Residence Name");
-			map->ColumnMappings->Add("buildingname", "Building Name");
-			map->ColumnMappings->Add("floornumber", "Floor Number");
+			map->ColumnMappings->Add("id_adress", "id_adress");
+			map->ColumnMappings->Add("postalcode", "postalcode");
+			map->ColumnMappings->Add("city", "city");
+			map->ColumnMappings->Add("streetname", "streetname");
+			map->ColumnMappings->Add("streetnumber", "streetnumber");
+			map->ColumnMappings->Add("residencename", "residencename");
+			map->ColumnMappings->Add("buildingname", "buildingname");
+			map->ColumnMappings->Add("floornumber", "floornumber");
 			return map;
 		}
 		case DataContext::Tables::Customer:
@@ -121,11 +121,11 @@ namespace BB8Manager_Core_Data {
 		case DataContext::Tables::Employee:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Employee");
-			map->ColumnMappings->Add("id_employee", "ID");
-			map->ColumnMappings->Add("firstname", "Firstname");
-			map->ColumnMappings->Add("lastname", "Lastname");
-			map->ColumnMappings->Add("hiringdate", "Hiring Date");
-			map->ColumnMappings->Add("id_superior", "Superior");
+			map->ColumnMappings->Add("id_employee", "id_employee");
+			map->ColumnMappings->Add("firstname", "firstname");
+			map->ColumnMappings->Add("lastname", "lastname");
+			map->ColumnMappings->Add("hiringdate", "hiringdate");
+			map->ColumnMappings->Add("id_superior", "id_superior");
 			map->ColumnMappings->Add("id_adress", "id_adress");
 			return map;
 		}

@@ -164,6 +164,7 @@
     <ClCompile Include="ServiceStock.cpp" />
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="StockForm.cpp" />
+    <ClCompile Include="UpdateEmployeeForm.cpp" />
     <ClCompile Include="WholesalePrice.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +203,9 @@
     <ClInclude Include="ServiceStock.h" />
     <ClInclude Include="Stock.h" />
     <ClInclude Include="StockForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="UpdateEmployeeForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="WholesalePrice.h" />

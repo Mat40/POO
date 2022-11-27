@@ -42,3 +42,12 @@ namespace BB8Manager_Core_Data {
 	};
 }
 
+/*
+String^ connectionString =
+	"Data Source=LAPTOP-HUGO\\MSQL_SERVER;" +
+	"Initial Catalog = main_db;" +
+	"Persist Security Info = True;" +
+	"User ID = sa;" +
+	"Password = main_db33";
+*/
+

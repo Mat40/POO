@@ -1,3 +1,4 @@
+#pragma once
 #include <list>
 #include "Employee.h"
 #include "AbstractService.h"
@@ -12,9 +13,11 @@ namespace BB8Manager_Core_Services {
 		ServiceEmployee(void);
 		std::list<Employee> GetAll();
 		DataSet^ GetDataSet();
+		DataSet^ GetSearchDataSet(std::string value);
 		DataSet^ GetDataSetSuperior();
 		Employee Get(int id);
 		Employee Add(Employee employee);
 		void Remove(int id);
+		void Update(Employee employee);
 	};
 }

@@ -1,6 +1,6 @@
 #pragma once
-#include "ServiceAdress.h"
 #include "ServiceEmployee.h"
+#include "ServiceAdress.h"
 
 namespace MAIN1 {
 
@@ -12,9 +12,9 @@ namespace MAIN1 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de AddEmployeeForm
+	/// Description résumée de UpdateEmployeeForm
 	/// </summary>
-	public ref class AddEmployeeForm : public System::Windows::Forms::Form
+	public ref class UpdateEmployeeForm : public System::Windows::Forms::Form
 	{
 
 	public:
@@ -25,32 +25,59 @@ namespace MAIN1 {
 		};
 
 		Listener^ listener;
+		int employeeID;
+		int adressID;
 
-		AddEmployeeForm(Listener^ listener)
+		UpdateEmployeeForm(Listener^ listener, Employee employee, Adress adress)
 		{
 			InitializeComponent();
 			this->listener = listener;
+			adressID = adress.GetId();
+			this->textboxpostalcode->Text = gcnew String(adress.GetPostalcode().c_str());
+			this->textboxcity->Text = gcnew String(adress.GetCity().c_str());
+			this->textBoxstreetname->Text = gcnew String(adress.GetStreetname().c_str());
+			this->textBoxstreetnumber->Text = gcnew String(adress.GetStreetnumber().c_str());
+			this->textBoxresidence->Text = gcnew String(adress.GetResidencename().c_str());
+			this->textBoxbuilding->Text = gcnew String(adress.GetBuildingname().c_str());
+			this->textBoxfloor->Text = gcnew String(adress.GetFloornumber().c_str());
+
+			employeeID = employee.GetId();
+			this->textBoxfirstname->Text = gcnew String(employee.GetFirstname().c_str());
+			this->textBoxlastname->Text = gcnew String(employee.GetLastname().c_str());
+
+			std::string day = employee.GetHiringdate().substr(0, 2);
+			std::string month = employee.GetHiringdate().substr(3, 2);
+			std::string year = employee.GetHiringdate().substr(6, 4);
+
+			this->dateTimePickerhiringdate->Value = System::DateTime(std::stoi(year), std::stoi(month), std::stoi(day), 0, 0, 0, 0);
+
+			this->comboBoxsuperior->Refresh();
+			this->comboBoxsuperior->DataSource = ServiceEmployee().GetDataSetSuperior()->Tables[0];
+			this->comboBoxsuperior->DisplayMember = "Name";
+			this->comboBoxsuperior->ValueMember = "ID";
+
+			this->comboBoxsuperior->SelectedValue = employee.GetIdSuperior();
 		}
-	/*public:
+		/*public:
 
-		AddEmployeeForm(void)
-		{
-			InitializeComponent();
-		}*/
+			UpdateEmployeeForm(void)
+			{
+				InitializeComponent();
+			}*/
 
-		/*MAIN1::EmployeeForm^ frm;
+			/*MAIN1::EmployeeForm^ frm;
 
-		AddEmployeeForm(MAIN1::EmployeeForm^ frm)
-		{
-			InitializeComponent();
-			this->frm = frm;
-		}*/
+			UpdateEmployeeForm(MAIN1::EmployeeForm^ frm)
+			{
+				InitializeComponent();
+				this->frm = frm;
+			}*/
 
 	protected:
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~AddEmployeeForm()
+		~UpdateEmployeeForm()
 		{
 			if (components)
 			{
@@ -94,7 +121,7 @@ namespace MAIN1 {
 		/// <summary>
 		/// Variable nécessaire au concepteur.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -134,9 +161,9 @@ namespace MAIN1 {
 			this->panelheader->Name = L"panelheader";
 			this->panelheader->Size = System::Drawing::Size(600, 28);
 			this->panelheader->TabIndex = 2;
-			this->panelheader->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &AddEmployeeForm::AddEmployeeForm_MouseDown);
-			this->panelheader->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &AddEmployeeForm::AddEmployeeForm_MouseMove);
-			this->panelheader->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &AddEmployeeForm::AddEmployeeForm_MouseUp);
+			this->panelheader->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &UpdateEmployeeForm::UpdateEmployeeForm_MouseDown);
+			this->panelheader->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &UpdateEmployeeForm::UpdateEmployeeForm_MouseMove);
+			this->panelheader->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &UpdateEmployeeForm::UpdateEmployeeForm_MouseUp);
 			// 
 			// btnclose
 			// 
@@ -153,7 +180,7 @@ namespace MAIN1 {
 			this->btnclose->TabIndex = 5;
 			this->btnclose->Text = L"X";
 			this->btnclose->UseVisualStyleBackColor = false;
-			this->btnclose->Click += gcnew System::EventHandler(this, &AddEmployeeForm::btnclose_Click);
+			this->btnclose->Click += gcnew System::EventHandler(this, &UpdateEmployeeForm::btnclose_Click);
 			// 
 			// textboxpostalcode
 			// 
@@ -163,8 +190,6 @@ namespace MAIN1 {
 			this->textboxpostalcode->Size = System::Drawing::Size(151, 20);
 			this->textboxpostalcode->TabIndex = 4;
 			this->textboxpostalcode->Text = L"Postal Code";
-			this->textboxpostalcode->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textboxpostalcode_RemoveText);
-			this->textboxpostalcode->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textboxpostalcode_AddText);
 			// 
 			// textboxcity
 			// 
@@ -174,9 +199,7 @@ namespace MAIN1 {
 			this->textboxcity->Size = System::Drawing::Size(151, 20);
 			this->textboxcity->TabIndex = 5;
 			this->textboxcity->Text = L"City";
-			this->textboxcity->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textboxcity_RemoveText);
-			this->textboxcity->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textboxcity_AddText);
-
+			
 			// 
 			// textBoxstreetname
 			// 
@@ -186,9 +209,7 @@ namespace MAIN1 {
 			this->textBoxstreetname->Size = System::Drawing::Size(151, 20);
 			this->textBoxstreetname->TabIndex = 6;
 			this->textBoxstreetname->Text = L"Street Name";
-			this->textBoxstreetname->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxstreetname_RemoveText);
-			this->textBoxstreetname->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxstreetname_AddText);
-
+			
 			// 
 			// textBoxresidence
 			// 
@@ -198,9 +219,6 @@ namespace MAIN1 {
 			this->textBoxresidence->Size = System::Drawing::Size(151, 20);
 			this->textBoxresidence->TabIndex = 7;
 			this->textBoxresidence->Text = L"Residence Name";
-			this->textBoxresidence->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxresidence_RemoveText);
-			this->textBoxresidence->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxresidence_AddText);
-
 			// 
 			// textBoxbuilding
 			// 
@@ -210,9 +228,7 @@ namespace MAIN1 {
 			this->textBoxbuilding->Size = System::Drawing::Size(151, 20);
 			this->textBoxbuilding->TabIndex = 8;
 			this->textBoxbuilding->Text = L"Building Name";
-			this->textBoxbuilding->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxbuilding_RemoveText);
-			this->textBoxbuilding->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxbuilding_AddText);
-
+			
 			// 
 			// textBoxstreetnumber
 			// 
@@ -222,9 +238,7 @@ namespace MAIN1 {
 			this->textBoxstreetnumber->Size = System::Drawing::Size(151, 20);
 			this->textBoxstreetnumber->TabIndex = 9;
 			this->textBoxstreetnumber->Text = L"Street Number";
-			this->textBoxstreetnumber->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxstreetnumber_RemoveText);
-			this->textBoxstreetnumber->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxstreetnumber_AddText);
-
+			
 			// 
 			// textBoxfloor
 			// 
@@ -234,9 +248,7 @@ namespace MAIN1 {
 			this->textBoxfloor->Size = System::Drawing::Size(151, 20);
 			this->textBoxfloor->TabIndex = 10;
 			this->textBoxfloor->Text = L"Floor Number";
-			this->textBoxfloor->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxfloor_RemoveText);
-			this->textBoxfloor->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxfloor_AddText);
-
+			
 			// 
 			// labelAdress
 			// 
@@ -284,7 +296,7 @@ namespace MAIN1 {
 			this->btncancel->TabIndex = 18;
 			this->btncancel->Text = L"CANCEL";
 			this->btncancel->UseVisualStyleBackColor = true;
-			this->btncancel->Click += gcnew System::EventHandler(this, &AddEmployeeForm::btncancel_Click);
+			this->btncancel->Click += gcnew System::EventHandler(this, &UpdateEmployeeForm::btncancel_Click);
 			// 
 			// btnapply
 			// 
@@ -295,7 +307,7 @@ namespace MAIN1 {
 			this->btnapply->TabIndex = 17;
 			this->btnapply->Text = L"APPLY";
 			this->btnapply->UseVisualStyleBackColor = true;
-			this->btnapply->Click += gcnew System::EventHandler(this, &AddEmployeeForm::btnapply_Click);
+			this->btnapply->Click += gcnew System::EventHandler(this, &UpdateEmployeeForm::btnapply_Click);
 			// 
 			// comboBoxsuperior
 			// 
@@ -325,9 +337,7 @@ namespace MAIN1 {
 			this->textBoxlastname->Size = System::Drawing::Size(151, 20);
 			this->textBoxlastname->TabIndex = 14;
 			this->textBoxlastname->Text = L"Lastname";
-			this->textBoxlastname->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxlastname_RemoveText);
-			this->textBoxlastname->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxlastname_AddText);
-
+			
 			// 
 			// textBoxfirstname
 			// 
@@ -337,9 +347,7 @@ namespace MAIN1 {
 			this->textBoxfirstname->Size = System::Drawing::Size(151, 20);
 			this->textBoxfirstname->TabIndex = 13;
 			this->textBoxfirstname->Text = L"Firstname";
-			this->textBoxfirstname->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxfirstname_RemoveText);
-			this->textBoxfirstname->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxfirstname_AddText);
-
+			
 			// 
 			// label1
 			// 
@@ -355,7 +363,7 @@ namespace MAIN1 {
 			this->label1->TabIndex = 11;
 			this->label1->Text = L"EMPLOYEE";
 			// 
-			// AddEmployeeForm
+			// UpdateEmployeeForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -364,219 +372,98 @@ namespace MAIN1 {
 			this->Controls->Add(this->panelheader);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(2);
-			this->Name = L"AddEmployeeForm";
-			this->Text = L"AddEmployeeForm";
-			this->Load += gcnew System::EventHandler(this, &AddEmployeeForm::AddEmployeeForm_Load);
-			this->Load += gcnew System::EventHandler(this, &AddEmployeeForm::comboBoxsuperior_Load);
+			this->Name = L"UpdateEmployeeForm";
+			this->Text = L"UpdateEmployeeForm";
+			this->Load += gcnew System::EventHandler(this, &UpdateEmployeeForm::UpdateEmployeeForm_Load);
 			this->panelheader->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			this->ResumeLayout(false);
-
 		}
 #pragma endregion
 
 
-private: System::Void btnclose_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close();
-}
-
-/// <summary>
-/// Movable Window
-/// </summary>
-
-private: System::Void AddEmployeeForm_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	this->dragging = true;
-	this->offset = Point(e->X, e->Y);
-}
-
-private: System::Void AddEmployeeForm_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	if (this->dragging) {
-		Point currentScreenPos = PointToScreen(e->Location);
-		Location = Point(currentScreenPos.X - this->offset.X, currentScreenPos.Y - this->offset.Y);
+	private: System::Void btnclose_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
 	}
-}
 
-private: System::Void AddEmployeeForm_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	this->dragging = false;
-}
+		   /// <summary>
+		   /// Movable Window
+		   /// </summary>
 
-/// <summary>
-/// Placeholder Textbox
-/// </summary>
+	private: System::Void UpdateEmployeeForm_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		this->dragging = true;
+		this->offset = Point(e->X, e->Y);
+	}
 
-private: System::Void textboxpostalcode_RemoveText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textboxpostalcode->Text == "Postal Code")
-		this->textboxpostalcode->Text = "";
-}
+	private: System::Void UpdateEmployeeForm_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		if (this->dragging) {
+			Point currentScreenPos = PointToScreen(e->Location);
+			Location = Point(currentScreenPos.X - this->offset.X, currentScreenPos.Y - this->offset.Y);
+		}
+	}
 
-private: System::Void textboxpostalcode_AddText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textboxpostalcode->Text == "")
-		this->textboxpostalcode->Text = "Postal Code";
-}
+	private: System::Void UpdateEmployeeForm_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		this->dragging = false;
+	}
 
-private: System::Void textboxcity_RemoveText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textboxcity->Text == "City")
-		this->textboxcity->Text = "";
-}
+		   /// <summary>
+		   /// Form Load
+		   /// </summary>
 
-private: System::Void textboxcity_AddText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textboxcity->Text == "")
-		this->textboxcity->Text = "City";
-}
+	private: System::Void UpdateEmployeeForm_Load(System::Object^ sender, System::EventArgs^ e) {
+		this->dragging = false;
+	}
 
-private: System::Void textBoxstreetname_RemoveText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxstreetname->Text == "Street Name")
-		this->textBoxstreetname->Text = "";
-}
+	private: System::Void btncancel_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
 
-private: System::Void textBoxstreetname_AddText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxstreetname->Text == "")
-		this->textBoxstreetname->Text = "Street Name";
-}
+		Employee employee;
 
-private: System::Void textBoxstreetnumber_RemoveText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxstreetnumber->Text == "Street Number")
-		this->textBoxstreetnumber->Text = "";
-}
+		employee.SetId(employeeID);
+		employee.SetFirstname(marshal_as<std::string>(this->textBoxfirstname->Text));
+		employee.SetLastname(marshal_as<std::string>(this->textBoxlastname->Text));
+		employee.SetHiringdate(marshal_as<std::string>(this->dateTimePickerhiringdate->Text));
+		employee.SetIdSuperior(std::stoi(marshal_as<std::string>(this->comboBoxsuperior->SelectedValue->ToString())));
 
-private: System::Void textBoxstreetnumber_AddText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxstreetnumber->Text == "")
-		this->textBoxstreetnumber->Text = "Street Number";
-}
-
-private: System::Void textBoxresidence_RemoveText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxresidence->Text == "Residence Name")
-		this->textBoxresidence->Text = "";
-}
-
-private: System::Void textBoxresidence_AddText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxresidence->Text == "")
-		this->textBoxresidence->Text = "Residence Name";
-}
-
-private: System::Void textBoxbuilding_RemoveText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxbuilding->Text == "Building Name")
-		this->textBoxbuilding->Text = "";
-}
-
-private: System::Void textBoxbuilding_AddText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxbuilding->Text == "")
-		this->textBoxbuilding->Text = "Building Name";
-}
-
-private: System::Void textBoxfloor_RemoveText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxfloor->Text == "Floor Number")
-		this->textBoxfloor->Text = "";
-}
-
-private: System::Void textBoxfloor_AddText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxfloor->Text == "")
-		this->textBoxfloor->Text = "Floor Number";
-}
-
-private: System::Void textBoxfirstname_RemoveText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxfirstname->Text == "Firstname")
-		this->textBoxfirstname->Text = "";
-}
-
-private: System::Void textBoxfirstname_AddText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxfirstname->Text == "")
-		this->textBoxfirstname->Text = "Firstname";
-}
-
-private: System::Void textBoxlastname_RemoveText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxlastname->Text == "Lastname")
-		this->textBoxlastname->Text = "";
-}
-
-private: System::Void textBoxlastname_AddText(System::Object^ sender, System::EventArgs^ e)
-{
-	if (this->textBoxlastname->Text == "")
-		this->textBoxlastname->Text = "Lastname";
-}
-
-/// <summary>
-/// Form Load
-/// </summary>
-
-private: System::Void AddEmployeeForm_Load(System::Object^ sender, System::EventArgs^ e) {
-	this->dragging = false;
-}
-
-private: System::Void comboBoxsuperior_Load(System::Object^ sender, System::EventArgs^ e) {
-	this->comboBoxsuperior->Refresh();
-	this->comboBoxsuperior->DataSource = BB8Manager_Core_Services::ServiceEmployee().GetDataSetSuperior()->Tables[0];
-	this->comboBoxsuperior->DisplayMember = "Name";
-	this->comboBoxsuperior->ValueMember = "ID";
-}
-private: System::Void btncancel_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close();
-}
-private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (this->textBoxresidence->Text != "Postal Code" && this->textBoxresidence->Text != "City" && this->textBoxresidence->Text != "Street Name" && this->textBoxresidence->Text != "Street Number" && this->textBoxfirstname->Text != "Firstname" && this->textBoxlastname->Text != "Lastname") {
-
+		ServiceEmployee().Update(employee);
+		
 		Adress adress;
+		adress.SetId(adressID);
 		adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
 		adress.SetCity(marshal_as<std::string>(this->textboxcity->Text));
 		adress.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
 		adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
 
-		if (this->textBoxresidence->Text != "Residence Name") {
+		if (this->textBoxresidence->Text != "") {
 			adress.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
 		}
 		else {
 			adress.SetResidencename("");
 		}
 
-		if (this->textBoxbuilding->Text != "Building Name") {
+		if (this->textBoxbuilding->Text != "") {
 			adress.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
 		}
 		else {
 			adress.SetBuildingname("");
 		}
 
-		if (this->textBoxfloor->Text != "Floor Number") {
+		if (this->textBoxfloor->Text != "") {
 			adress.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
 		}
 		else {
 			adress.SetFloornumber("");
 		}
 
-		adress = ServiceAdress().Add(adress);
-
-		Employee employee;
-
-		employee.SetFirstname(marshal_as<std::string>(this->textBoxfirstname->Text));
-		employee.SetLastname(marshal_as<std::string>(this->textBoxlastname->Text));
-		employee.SetHiringdate(marshal_as<std::string>(this->dateTimePickerhiringdate->Text));
-		employee.SetIdSuperior(std::stoi(marshal_as<std::string>(this->comboBoxsuperior->SelectedValue->ToString())));
-		employee.SetIdAdress(adress.GetId());
-
-		employee = ServiceEmployee().Add(employee);
+		ServiceAdress().Update(adress);
 
 		//this->MdiParent->refresh_dataGridView();
 		this->listener->onApplyClicked();
 
 		this->Close();
 	}
-}
-};
+	};
 }

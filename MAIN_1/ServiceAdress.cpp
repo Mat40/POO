@@ -12,7 +12,7 @@ namespace BB8Manager_Core_Services {
 		for each (DataRow ^ result in results)
 		{
 			Adress adress;
-			adress.SetId(std::stoi(this->dataContext.ToUnmanagedString(result["id"]->ToString())));
+			adress.SetId(std::stoi(this->dataContext.ToUnmanagedString(result["id_adress"]->ToString())));
 			adress.SetPostalcode(this->dataContext.ToUnmanagedString(result["postalcode"]->ToString()));
 			adress.SetCity(this->dataContext.ToUnmanagedString(result["city"]->ToString()));
 			adress.SetStreetname(this->dataContext.ToUnmanagedString(result["streetname"]->ToString()));
@@ -28,7 +28,7 @@ namespace BB8Manager_Core_Services {
 	}
 
 	Adress ServiceAdress::Get(int id) {
-		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Adress, "SELECT * FROM [Adress] WHERE id = " + std::to_string(id));
+		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Adress, "SELECT * FROM [Adress] WHERE id_adress = " + std::to_string(id));
 
 		if (results->Count == 0)
 			throw std::runtime_error("adress not found !");
@@ -37,7 +37,7 @@ namespace BB8Manager_Core_Services {
 
 		Adress adress;
 
-		adress.SetId(std::stoi(this->dataContext.ToUnmanagedString(row["id"]->ToString())));
+		adress.SetId(std::stoi(this->dataContext.ToUnmanagedString(row["id_adress"]->ToString())));
 		adress.SetPostalcode(this->dataContext.ToUnmanagedString(row["postalcode"]->ToString()));
 		adress.SetCity(this->dataContext.ToUnmanagedString(row["city"]->ToString()));
 		adress.SetStreetname(this->dataContext.ToUnmanagedString(row["streetname"]->ToString()));
@@ -55,6 +55,10 @@ namespace BB8Manager_Core_Services {
 	}
 
 	void ServiceAdress::Remove(int id) {
-		this->dataContext.Query("DELETE FROM [Adress] WHERE id = " + std::to_string(id));
+		this->dataContext.Query("DELETE FROM [Adress] WHERE id_adress = " + std::to_string(id));
+	}
+
+	void ServiceAdress::Update(Adress adress) {
+		this->dataContext.Query("UPDATE [Adress] SET postalcode = '" + adress.GetPostalcode() + "', city = '" + adress.GetCity() + "', streetname = '" + adress.GetStreetname() + "', streetnumber = '" + adress.GetStreetnumber() + "', residencename = '" + adress.GetResidencename() + "', buildingname = '" + adress.GetBuildingname() + "', floornumber = '" + adress.GetFloornumber() + "' WHERE id_adress = '" + std::to_string(adress.GetId()) + "'");
 	}
 }

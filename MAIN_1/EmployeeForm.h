@@ -1,7 +1,6 @@
 #pragma once
-
-//#include "ServiceEmployee.h"
 #include "AddEmployeeForm.h"
+#include "UpdateEmployeeForm.h"
 
 namespace MAIN1 {
 
@@ -21,12 +20,12 @@ namespace MAIN1 {
 	public:
 
 		AddEmployeeForm^ addEmployeeForm;
+		UpdateEmployeeForm^ updateEmployeeForm;
 
 		EmployeeForm(void)
 		{
 			InitializeComponent();
 			refresh_dataGridView();
-			this->addEmployeeForm = gcnew AddEmployeeForm(gcnew AddEmployeeListenerImpl(this));
 		}
 
 	protected:
@@ -54,6 +53,19 @@ namespace MAIN1 {
 		private:
 			EmployeeForm^ m_parent;
 		};
+
+		ref class UpdateEmployeeListenerImpl : public UpdateEmployeeForm::Listener
+		{
+		public:
+			UpdateEmployeeListenerImpl(EmployeeForm^ parent) : m_parent(parent) {}
+
+			void onApplyClicked() override
+			{
+				m_parent->refresh_dataGridView();
+			}
+		private:
+			EmployeeForm^ m_parent;
+		};
 	/*public:
 		EmployeeForm(void)
 		{
@@ -63,13 +75,16 @@ namespace MAIN1 {
 
 	
 	private: System::Windows::Forms::FlowLayoutPanel^ employeeLayoutPanel;
-	protected:
 	private: System::Windows::Forms::Panel^ panelDataGridView;
 	private: Bunifu::UI::WinForms::BunifuDataGridView^ dataGridView;
-	private: System::Windows::Forms::Panel^ panel1;
+
 	private: System::Windows::Forms::Button^ btnupdate;
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ btnadd;
+
 	private: System::Windows::Forms::Panel^ panel2;
+	private: System::Windows::Forms::Button^ btndelete;
+	private: System::Windows::Forms::Button^ btnsearch;
+	private: System::Windows::Forms::TextBox^ textBoxsearch;
 
 	private:
 		/// <summary>
@@ -84,48 +99,122 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(EmployeeForm::typeid));
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->employeeLayoutPanel = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
+			this->btnsearch = (gcnew System::Windows::Forms::Button());
+			this->textBoxsearch = (gcnew System::Windows::Forms::TextBox());
+			this->btndelete = (gcnew System::Windows::Forms::Button());
+			this->btnadd = (gcnew System::Windows::Forms::Button());
+			this->btnupdate = (gcnew System::Windows::Forms::Button());
 			this->panelDataGridView = (gcnew System::Windows::Forms::Panel());
 			this->dataGridView = (gcnew Bunifu::UI::WinForms::BunifuDataGridView());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->btnupdate = (gcnew System::Windows::Forms::Button());
 			this->employeeLayoutPanel->SuspendLayout();
+			this->panel2->SuspendLayout();
 			this->panelDataGridView->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->BeginInit();
-			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// employeeLayoutPanel
 			// 
 			this->employeeLayoutPanel->Controls->Add(this->panel2);
 			this->employeeLayoutPanel->Controls->Add(this->panelDataGridView);
-			this->employeeLayoutPanel->Controls->Add(this->panel1);
 			this->employeeLayoutPanel->Location = System::Drawing::Point(9, 10);
-			this->employeeLayoutPanel->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->employeeLayoutPanel->Margin = System::Windows::Forms::Padding(2);
 			this->employeeLayoutPanel->Name = L"employeeLayoutPanel";
 			this->employeeLayoutPanel->Size = System::Drawing::Size(902, 538);
 			this->employeeLayoutPanel->TabIndex = 0;
 			// 
 			// panel2
 			// 
+			this->panel2->Controls->Add(this->btnsearch);
+			this->panel2->Controls->Add(this->textBoxsearch);
+			this->panel2->Controls->Add(this->btndelete);
+			this->panel2->Controls->Add(this->btnadd);
+			this->panel2->Controls->Add(this->btnupdate);
 			this->panel2->Location = System::Drawing::Point(2, 2);
-			this->panel2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->panel2->Margin = System::Windows::Forms::Padding(2);
 			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(898, 45);
 			this->panel2->TabIndex = 0;
+			// 
+			// btnsearch
+			// 
+			this->btnsearch->FlatAppearance->BorderSize = 0;
+			this->btnsearch->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnsearch->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F));
+			this->btnsearch->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnsearch.Image")));
+			this->btnsearch->Location = System::Drawing::Point(275, 5);
+			this->btnsearch->Margin = System::Windows::Forms::Padding(2);
+			this->btnsearch->Name = L"btnsearch";
+			this->btnsearch->Size = System::Drawing::Size(35, 35);
+			this->btnsearch->TabIndex = 4;
+			this->btnsearch->UseVisualStyleBackColor = true;
+			this->btnsearch->Click += gcnew System::EventHandler(this, &EmployeeForm::btnsearch_Click);
+			// 
+			// textBoxsearch
+			// 
+			this->textBoxsearch->Location = System::Drawing::Point(12, 13);
+			this->textBoxsearch->Name = L"textBoxsearch";
+			this->textBoxsearch->Size = System::Drawing::Size(258, 20);
+			this->textBoxsearch->TabIndex = 3;
+			this->textBoxsearch->TextChanged += gcnew System::EventHandler(this, &EmployeeForm::textBoxsearch_TextChanged);
+			this->textBoxsearch->Enter += gcnew System::EventHandler(this, &EmployeeForm::textBoxsearch_Enter);
+			this->textBoxsearch->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &EmployeeForm::textBoxsearch_KeyDown);
+			// 
+			// btndelete
+			// 
+			this->btndelete->FlatAppearance->BorderColor = System::Drawing::SystemColors::Control;
+			this->btndelete->FlatAppearance->BorderSize = 0;
+			this->btndelete->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btndelete->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F));
+			this->btndelete->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btndelete.Image")));
+			this->btndelete->Location = System::Drawing::Point(840, 5);
+			this->btndelete->Margin = System::Windows::Forms::Padding(2);
+			this->btndelete->Name = L"btndelete";
+			this->btndelete->Size = System::Drawing::Size(35, 35);
+			this->btndelete->TabIndex = 2;
+			this->btndelete->UseVisualStyleBackColor = true;
+			this->btndelete->Click += gcnew System::EventHandler(this, &EmployeeForm::btndelete_Click);
+			// 
+			// btnadd
+			// 
+			this->btnadd->FlatAppearance->BorderSize = 0;
+			this->btnadd->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnadd->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F));
+			this->btnadd->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnadd.Image")));
+			this->btnadd->Location = System::Drawing::Point(762, 5);
+			this->btnadd->Margin = System::Windows::Forms::Padding(2);
+			this->btnadd->Name = L"btnadd";
+			this->btnadd->Size = System::Drawing::Size(35, 35);
+			this->btnadd->TabIndex = 1;
+			this->btnadd->UseVisualStyleBackColor = true;
+			this->btnadd->Click += gcnew System::EventHandler(this, &EmployeeForm::button1_Click);
+			// 
+			// btnupdate
+			// 
+			this->btnupdate->FlatAppearance->BorderSize = 0;
+			this->btnupdate->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnupdate->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F));
+			this->btnupdate->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnupdate.Image")));
+			this->btnupdate->Location = System::Drawing::Point(801, 5);
+			this->btnupdate->Margin = System::Windows::Forms::Padding(2);
+			this->btnupdate->Name = L"btnupdate";
+			this->btnupdate->Size = System::Drawing::Size(35, 35);
+			this->btnupdate->TabIndex = 0;
+			this->btnupdate->UseVisualStyleBackColor = true;
+			this->btnupdate->Click += gcnew System::EventHandler(this, &EmployeeForm::btnupdate_Click);
 			// 
 			// panelDataGridView
 			// 
 			this->panelDataGridView->Controls->Add(this->dataGridView);
 			this->panelDataGridView->Location = System::Drawing::Point(2, 51);
-			this->panelDataGridView->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->panelDataGridView->Margin = System::Windows::Forms::Padding(2);
 			this->panelDataGridView->Name = L"panelDataGridView";
-			this->panelDataGridView->Size = System::Drawing::Size(900, 387);
+			this->panelDataGridView->Size = System::Drawing::Size(900, 485);
 			this->panelDataGridView->TabIndex = 0;
 			// 
 			// dataGridView
@@ -194,47 +283,16 @@ namespace MAIN1 {
 			this->dataGridView->HeaderBgColor = System::Drawing::Color::Empty;
 			this->dataGridView->HeaderForeColor = System::Drawing::Color::White;
 			this->dataGridView->Location = System::Drawing::Point(2, 2);
-			this->dataGridView->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->dataGridView->Margin = System::Windows::Forms::Padding(2);
 			this->dataGridView->MultiSelect = false;
 			this->dataGridView->Name = L"dataGridView";
 			this->dataGridView->RowHeadersVisible = false;
 			this->dataGridView->RowTemplate->Height = 40;
 			this->dataGridView->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			this->dataGridView->Size = System::Drawing::Size(896, 383);
+			this->dataGridView->Size = System::Drawing::Size(896, 481);
 			this->dataGridView->TabIndex = 1;
 			this->dataGridView->Theme = Bunifu::UI::WinForms::BunifuDataGridView::PresetThemes::Light;
 			this->dataGridView->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &EmployeeForm::dataGridView_CellContentClick);
-			// 
-			// panel1
-			// 
-			this->panel1->Controls->Add(this->button1);
-			this->panel1->Controls->Add(this->btnupdate);
-			this->panel1->Location = System::Drawing::Point(2, 442);
-			this->panel1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(898, 98);
-			this->panel1->TabIndex = 1;
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(286, 32);
-			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(150, 57);
-			this->button1->TabIndex = 1;
-			this->button1->Text = L"ADD";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &EmployeeForm::button1_Click);
-			// 
-			// btnupdate
-			// 
-			this->btnupdate->Location = System::Drawing::Point(466, 32);
-			this->btnupdate->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->btnupdate->Name = L"btnupdate";
-			this->btnupdate->Size = System::Drawing::Size(150, 57);
-			this->btnupdate->TabIndex = 0;
-			this->btnupdate->Text = L"UPDATE";
-			this->btnupdate->UseVisualStyleBackColor = true;
 			// 
 			// EmployeeForm
 			// 
@@ -247,9 +305,10 @@ namespace MAIN1 {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Employee";
 			this->employeeLayoutPanel->ResumeLayout(false);
+			this->panel2->ResumeLayout(false);
+			this->panel2->PerformLayout();
 			this->panelDataGridView->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->EndInit();
-			this->panel1->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
@@ -263,6 +322,7 @@ namespace MAIN1 {
 		this->dataGridView->ReadOnly = true;
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->addEmployeeForm = gcnew AddEmployeeForm(gcnew AddEmployeeListenerImpl(this));
 		this->addEmployeeForm->Show();
 	}
 	public: System::Void Form1_FormClosed(System::Object^ sender, System::EventArgs^ e)
@@ -270,5 +330,66 @@ namespace MAIN1 {
 		refresh_dataGridView();
 	}
 
+	private: System::Void btndelete_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->dataGridView->SelectedRows->Count > 0)
+		{
+			int selectedrowindex = this->dataGridView->SelectedCells[0]->RowIndex;
+			DataGridViewRow^ selectedRow = this->dataGridView->Rows[selectedrowindex];
+			int cellValue = std::stoi(marshal_as<std::string>(selectedRow->Cells["ID"]->Value->ToString()));
+			Employee employee;
+			employee = ServiceEmployee().Get(cellValue);
+			ServiceAdress().Remove(employee.GetIdAdress());
+			ServiceEmployee().Remove(cellValue);
+			refresh_dataGridView();
+		}
+	}
+	private: System::Void btnupdate_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->dataGridView->SelectedRows->Count > 0)
+		{
+			int selectedrowindex = this->dataGridView->SelectedCells[0]->RowIndex;
+			DataGridViewRow^ selectedRow = this->dataGridView->Rows[selectedrowindex];
+			int IDcellValue = std::stoi(marshal_as<std::string>(selectedRow->Cells["ID"]->Value->ToString()));
+
+			Employee employee;
+			employee = ServiceEmployee().Get(IDcellValue);
+
+			Adress adress;
+			adress = ServiceAdress().Get(employee.GetIdAdress());
+
+			this->updateEmployeeForm = gcnew UpdateEmployeeForm(gcnew UpdateEmployeeListenerImpl(this), employee, adress);
+			this->updateEmployeeForm->Show();
+		}
+	}
+	private: System::Void btnsearch_Click(System::Object^ sender, System::EventArgs^ e) {
+		
+		if (this->textBoxsearch->Text->ToString() != "") {
+			this->dataGridView->Refresh();
+			this->dataGridView->DataSource = BB8Manager_Core_Services::ServiceEmployee().GetSearchDataSet(marshal_as<std::string>(this->textBoxsearch->Text->ToString()));
+			this->dataGridView->DataMember = "Employee";
+		}
+		else {
+			refresh_dataGridView();
+		}
+		
+	}
+	private: System::Void textBoxsearch_Enter(System::Object^ sender, System::EventArgs^ e) {
+		this->textBoxsearch->Text = "";
+	}
+private: System::Void textBoxsearch_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+	if (e->KeyCode == Keys::Enter)
+	{
+		btnsearch_Click(this, gcnew EventArgs());
+	}
+}
+private: System::Void textBoxsearch_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (this->textBoxsearch->Text->ToString() != "") {
+		this->dataGridView->Refresh();
+		this->dataGridView->DataSource = BB8Manager_Core_Services::ServiceEmployee().GetSearchDataSet(marshal_as<std::string>(this->textBoxsearch->Text->ToString()));
+		this->dataGridView->DataMember = "Employee";
+	}
+	else {
+		refresh_dataGridView();
+	}
+}
 };
 }

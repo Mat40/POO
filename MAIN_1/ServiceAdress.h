@@ -1,3 +1,4 @@
+#pragma once
 #include <list>
 #include "Adress.h"
 #include "AbstractService.h"
@@ -13,5 +14,6 @@ namespace BB8Manager_Core_Services {
 		Adress Get(int id);
 		Adress Add(Adress adress);
 		void Remove(int id);
+		void Update(Adress adress);
 	};
 }
