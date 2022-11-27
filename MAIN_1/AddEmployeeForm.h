@@ -176,7 +176,6 @@ namespace MAIN1 {
 			this->textboxcity->Text = L"City";
 			this->textboxcity->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textboxcity_RemoveText);
 			this->textboxcity->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textboxcity_AddText);
-
 			// 
 			// textBoxstreetname
 			// 
@@ -188,7 +187,6 @@ namespace MAIN1 {
 			this->textBoxstreetname->Text = L"Street Name";
 			this->textBoxstreetname->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxstreetname_RemoveText);
 			this->textBoxstreetname->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxstreetname_AddText);
-
 			// 
 			// textBoxresidence
 			// 
@@ -200,7 +198,6 @@ namespace MAIN1 {
 			this->textBoxresidence->Text = L"Residence Name";
 			this->textBoxresidence->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxresidence_RemoveText);
 			this->textBoxresidence->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxresidence_AddText);
-
 			// 
 			// textBoxbuilding
 			// 
@@ -212,7 +209,6 @@ namespace MAIN1 {
 			this->textBoxbuilding->Text = L"Building Name";
 			this->textBoxbuilding->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxbuilding_RemoveText);
 			this->textBoxbuilding->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxbuilding_AddText);
-
 			// 
 			// textBoxstreetnumber
 			// 
@@ -224,7 +220,6 @@ namespace MAIN1 {
 			this->textBoxstreetnumber->Text = L"Street Number";
 			this->textBoxstreetnumber->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxstreetnumber_RemoveText);
 			this->textBoxstreetnumber->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxstreetnumber_AddText);
-
 			// 
 			// textBoxfloor
 			// 
@@ -236,7 +231,6 @@ namespace MAIN1 {
 			this->textBoxfloor->Text = L"Floor Number";
 			this->textBoxfloor->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxfloor_RemoveText);
 			this->textBoxfloor->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxfloor_AddText);
-
 			// 
 			// labelAdress
 			// 
@@ -277,6 +271,11 @@ namespace MAIN1 {
 			// 
 			// btncancel
 			// 
+			this->btncancel->FlatAppearance->BorderSize = 0;
+			this->btncancel->FlatAppearance->MouseOverBackColor = System::Drawing::SystemColors::Control;
+			this->btncancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btncancel->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
+			this->btncancel->ForeColor = System::Drawing::Color::DimGray;
 			this->btncancel->Location = System::Drawing::Point(10, 384);
 			this->btncancel->Margin = System::Windows::Forms::Padding(2);
 			this->btncancel->Name = L"btncancel";
@@ -285,9 +284,16 @@ namespace MAIN1 {
 			this->btncancel->Text = L"CANCEL";
 			this->btncancel->UseVisualStyleBackColor = true;
 			this->btncancel->Click += gcnew System::EventHandler(this, &AddEmployeeForm::btncancel_Click);
+			this->btncancel->MouseEnter += gcnew System::EventHandler(this, &AddEmployeeForm::btncancel_OnMouseEnter);
+			this->btncancel->MouseLeave += gcnew System::EventHandler(this, &AddEmployeeForm::btncancel_OnMouseLeave);
 			// 
 			// btnapply
 			// 
+			this->btnapply->FlatAppearance->BorderSize = 0;
+			this->btnapply->FlatAppearance->MouseOverBackColor = System::Drawing::SystemColors::Control;
+			this->btnapply->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnapply->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
+			this->btnapply->ForeColor = System::Drawing::Color::DimGray;
 			this->btnapply->Location = System::Drawing::Point(506, 384);
 			this->btnapply->Margin = System::Windows::Forms::Padding(2);
 			this->btnapply->Name = L"btnapply";
@@ -296,6 +302,8 @@ namespace MAIN1 {
 			this->btnapply->Text = L"APPLY";
 			this->btnapply->UseVisualStyleBackColor = true;
 			this->btnapply->Click += gcnew System::EventHandler(this, &AddEmployeeForm::btnapply_Click);
+			this->btnapply->MouseEnter += gcnew System::EventHandler(this, &AddEmployeeForm::btnapply_OnMouseEnter);
+			this->btnapply->MouseLeave += gcnew System::EventHandler(this, &AddEmployeeForm::btnapply_OnMouseLeave);
 			// 
 			// comboBoxsuperior
 			// 
@@ -305,7 +313,6 @@ namespace MAIN1 {
 			this->comboBoxsuperior->Name = L"comboBoxsuperior";
 			this->comboBoxsuperior->Size = System::Drawing::Size(151, 21);
 			this->comboBoxsuperior->TabIndex = 16;
-			this->comboBoxsuperior->Text = L"";
 			// 
 			// dateTimePickerhiringdate
 			// 
@@ -327,7 +334,6 @@ namespace MAIN1 {
 			this->textBoxlastname->Text = L"Lastname";
 			this->textBoxlastname->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxlastname_RemoveText);
 			this->textBoxlastname->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxlastname_AddText);
-
 			// 
 			// textBoxfirstname
 			// 
@@ -339,7 +345,6 @@ namespace MAIN1 {
 			this->textBoxfirstname->Text = L"Firstname";
 			this->textBoxfirstname->GotFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxfirstname_RemoveText);
 			this->textBoxfirstname->LostFocus += gcnew System::EventHandler(this, &AddEmployeeForm::textBoxfirstname_AddText);
-
 			// 
 			// label1
 			// 
@@ -366,7 +371,6 @@ namespace MAIN1 {
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"AddEmployeeForm";
 			this->Text = L"AddEmployeeForm";
-			this->Load += gcnew System::EventHandler(this, &AddEmployeeForm::AddEmployeeForm_Load);
 			this->Load += gcnew System::EventHandler(this, &AddEmployeeForm::comboBoxsuperior_Load);
 			this->panelheader->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
@@ -379,6 +383,22 @@ namespace MAIN1 {
 
 private: System::Void btnclose_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Close();
+}
+
+private: System::Void btnapply_OnMouseEnter(System::Object^ sender, System::EventArgs^ e) {
+	this->btnapply->ForeColor = ColorTranslator::FromHtml("#fac755");
+}
+
+private: System::Void btnapply_OnMouseLeave(System::Object^ sender, System::EventArgs^ e) {
+	this->btnapply->ForeColor = System::Drawing::Color::DimGray;
+}
+
+private: System::Void btncancel_OnMouseEnter(System::Object^ sender, System::EventArgs^ e) {
+	this->btncancel->ForeColor = ColorTranslator::FromHtml("#fac755");
+}
+
+private: System::Void btncancel_OnMouseLeave(System::Object^ sender, System::EventArgs^ e) {
+	this->btncancel->ForeColor = System::Drawing::Color::DimGray;
 }
 
 /// <summary>

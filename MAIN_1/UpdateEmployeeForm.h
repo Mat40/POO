@@ -289,6 +289,11 @@ namespace MAIN1 {
 			// 
 			// btncancel
 			// 
+			this->btncancel->FlatAppearance->BorderSize = 0;
+			this->btncancel->FlatAppearance->MouseOverBackColor = System::Drawing::SystemColors::Control;
+			this->btncancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btncancel->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
+			this->btncancel->ForeColor = System::Drawing::Color::DimGray;
 			this->btncancel->Location = System::Drawing::Point(10, 384);
 			this->btncancel->Margin = System::Windows::Forms::Padding(2);
 			this->btncancel->Name = L"btncancel";
@@ -297,9 +302,16 @@ namespace MAIN1 {
 			this->btncancel->Text = L"CANCEL";
 			this->btncancel->UseVisualStyleBackColor = true;
 			this->btncancel->Click += gcnew System::EventHandler(this, &UpdateEmployeeForm::btncancel_Click);
+			this->btncancel->MouseEnter += gcnew System::EventHandler(this, &UpdateEmployeeForm::btncancel_OnMouseEnter);
+			this->btncancel->MouseLeave += gcnew System::EventHandler(this, &UpdateEmployeeForm::btncancel_OnMouseLeave);
 			// 
 			// btnapply
 			// 
+			this->btnapply->FlatAppearance->BorderSize = 0;
+			this->btnapply->FlatAppearance->MouseOverBackColor = System::Drawing::SystemColors::Control;
+			this->btnapply->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnapply->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
+			this->btnapply->ForeColor = System::Drawing::Color::DimGray;
 			this->btnapply->Location = System::Drawing::Point(506, 384);
 			this->btnapply->Margin = System::Windows::Forms::Padding(2);
 			this->btnapply->Name = L"btnapply";
@@ -308,6 +320,8 @@ namespace MAIN1 {
 			this->btnapply->Text = L"APPLY";
 			this->btnapply->UseVisualStyleBackColor = true;
 			this->btnapply->Click += gcnew System::EventHandler(this, &UpdateEmployeeForm::btnapply_Click);
+			this->btnapply->MouseEnter += gcnew System::EventHandler(this, &UpdateEmployeeForm::btnapply_OnMouseEnter);
+			this->btnapply->MouseLeave += gcnew System::EventHandler(this, &UpdateEmployeeForm::btnapply_OnMouseLeave);
 			// 
 			// comboBoxsuperior
 			// 
@@ -385,6 +399,22 @@ namespace MAIN1 {
 
 	private: System::Void btnclose_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
+	}
+
+	private: System::Void btnapply_OnMouseEnter(System::Object^ sender, System::EventArgs^ e) {
+		this->btnapply->ForeColor = ColorTranslator::FromHtml("#fac755");
+	}
+
+	private: System::Void btnapply_OnMouseLeave(System::Object^ sender, System::EventArgs^ e) {
+		this->btnapply->ForeColor = System::Drawing::Color::DimGray;
+	}
+
+	private: System::Void btncancel_OnMouseEnter(System::Object^ sender, System::EventArgs^ e) {
+		this->btncancel->ForeColor = ColorTranslator::FromHtml("#fac755");
+	}
+
+	private: System::Void btncancel_OnMouseLeave(System::Object^ sender, System::EventArgs^ e) {
+		this->btncancel->ForeColor = System::Drawing::Color::DimGray;
 	}
 
 		   /// <summary>

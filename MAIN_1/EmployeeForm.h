@@ -292,7 +292,7 @@ namespace MAIN1 {
 			this->dataGridView->Size = System::Drawing::Size(896, 481);
 			this->dataGridView->TabIndex = 1;
 			this->dataGridView->Theme = Bunifu::UI::WinForms::BunifuDataGridView::PresetThemes::Light;
-			this->dataGridView->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &EmployeeForm::dataGridView_CellContentClick);
+			this->dataGridView->ReadOnly = true;
 			// 
 			// EmployeeForm
 			// 
@@ -317,9 +317,6 @@ namespace MAIN1 {
 		this->dataGridView->Refresh();
 		this->dataGridView->DataSource = BB8Manager_Core_Services::ServiceEmployee().GetDataSet();
 		this->dataGridView->DataMember = "Employee";
-	}
-	private: System::Void dataGridView_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-		this->dataGridView->ReadOnly = true;
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->addEmployeeForm = gcnew AddEmployeeForm(gcnew AddEmployeeListenerImpl(this));
