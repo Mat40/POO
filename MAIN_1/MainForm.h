@@ -86,9 +86,6 @@ namespace MAIN1 {
 	private: System::Windows::Forms::PictureBox^ pictureBoxLogo;
 	private: System::ComponentModel::IContainer^ components;
 
-	private: bool dragging;
-	private: Point offset;
-
 	private:
 		/// <summary>
 		/// Variable nécessaire au concepteur.
@@ -327,9 +324,6 @@ namespace MAIN1 {
 			this->panelheader->Name = L"panelheader";
 			this->panelheader->Size = System::Drawing::Size(960, 28);
 			this->panelheader->TabIndex = 1;
-			this->panelheader->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::MainForm_MouseDown);
-			this->panelheader->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::MainForm_MouseMove);
-			this->panelheader->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::MainForm_MouseUp);
 			// 
 			// btnclose
 			// 
@@ -385,33 +379,11 @@ namespace MAIN1 {
 
 		}
 #pragma endregion
-
-		/// <summary>
-	/// Movable Window
-	/// </summary>
-
-	private: System::Void MainForm_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-		this->dragging = true;
-		this->offset = Point(e->X, e->Y);
-	}
-
-	private: System::Void MainForm_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-		if (this->dragging) {
-			Point currentScreenPos = PointToScreen(e->Location);
-			Location = Point(currentScreenPos.X - this->offset.X, currentScreenPos.Y - this->offset.Y);
-		}
-	}
-
-	private: System::Void MainForm_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-		this->dragging = false;
-	}
-
 	private: System::Void Main_Load(System::Object^ sender, System::EventArgs^ e) {
 		loadform(gcnew DashboardForm());
 		resetButtons_Click();
 		allButtons_Click(this->btndashboard);
 		this->pictureBoxLogo->ImageLocation = "C:/Users/matth/OneDrive/Bureau/CESI/2ème année/POO/Livrable 1/VH4.png"; //path to image
-		this->dragging = false;
 	}
 	private: System::Void customerToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
