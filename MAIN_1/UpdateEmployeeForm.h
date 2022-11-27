@@ -130,6 +130,7 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(UpdateEmployeeForm::typeid));
 			this->panelheader = (gcnew System::Windows::Forms::Panel());
 			this->btnclose = (gcnew System::Windows::Forms::Button());
 			this->textboxpostalcode = (gcnew System::Windows::Forms::TextBox());
@@ -199,7 +200,6 @@ namespace MAIN1 {
 			this->textboxcity->Size = System::Drawing::Size(151, 20);
 			this->textboxcity->TabIndex = 5;
 			this->textboxcity->Text = L"City";
-			
 			// 
 			// textBoxstreetname
 			// 
@@ -209,7 +209,6 @@ namespace MAIN1 {
 			this->textBoxstreetname->Size = System::Drawing::Size(151, 20);
 			this->textBoxstreetname->TabIndex = 6;
 			this->textBoxstreetname->Text = L"Street Name";
-			
 			// 
 			// textBoxresidence
 			// 
@@ -228,7 +227,6 @@ namespace MAIN1 {
 			this->textBoxbuilding->Size = System::Drawing::Size(151, 20);
 			this->textBoxbuilding->TabIndex = 8;
 			this->textBoxbuilding->Text = L"Building Name";
-			
 			// 
 			// textBoxstreetnumber
 			// 
@@ -238,7 +236,6 @@ namespace MAIN1 {
 			this->textBoxstreetnumber->Size = System::Drawing::Size(151, 20);
 			this->textBoxstreetnumber->TabIndex = 9;
 			this->textBoxstreetnumber->Text = L"Street Number";
-			
 			// 
 			// textBoxfloor
 			// 
@@ -248,7 +245,6 @@ namespace MAIN1 {
 			this->textBoxfloor->Size = System::Drawing::Size(151, 20);
 			this->textBoxfloor->TabIndex = 10;
 			this->textBoxfloor->Text = L"Floor Number";
-			
 			// 
 			// labelAdress
 			// 
@@ -331,7 +327,6 @@ namespace MAIN1 {
 			this->comboBoxsuperior->Name = L"comboBoxsuperior";
 			this->comboBoxsuperior->Size = System::Drawing::Size(151, 21);
 			this->comboBoxsuperior->TabIndex = 16;
-			this->comboBoxsuperior->Text = L"";
 			// 
 			// dateTimePickerhiringdate
 			// 
@@ -351,7 +346,6 @@ namespace MAIN1 {
 			this->textBoxlastname->Size = System::Drawing::Size(151, 20);
 			this->textBoxlastname->TabIndex = 14;
 			this->textBoxlastname->Text = L"Lastname";
-			
 			// 
 			// textBoxfirstname
 			// 
@@ -361,7 +355,6 @@ namespace MAIN1 {
 			this->textBoxfirstname->Size = System::Drawing::Size(151, 20);
 			this->textBoxfirstname->TabIndex = 13;
 			this->textBoxfirstname->Text = L"Firstname";
-			
 			// 
 			// label1
 			// 
@@ -385,6 +378,7 @@ namespace MAIN1 {
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->panelheader);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"UpdateEmployeeForm";
 			this->Text = L"UpdateEmployeeForm";
@@ -393,6 +387,7 @@ namespace MAIN1 {
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			this->ResumeLayout(false);
+
 		}
 #pragma endregion
 

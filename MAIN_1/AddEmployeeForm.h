@@ -103,6 +103,7 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AddEmployeeForm::typeid));
 			this->panelheader = (gcnew System::Windows::Forms::Panel());
 			this->btnclose = (gcnew System::Windows::Forms::Button());
 			this->textboxpostalcode = (gcnew System::Windows::Forms::TextBox());
@@ -368,6 +369,7 @@ namespace MAIN1 {
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->panelheader);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"AddEmployeeForm";
 			this->Text = L"AddEmployeeForm";

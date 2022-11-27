@@ -36,6 +36,10 @@ namespace MAIN1 {
 
 	private: System::Windows::Forms::Button^ btnmenu;
 	private: System::Windows::Forms::Button^ btnsettings;
+	private: System::Windows::Forms::Button^ btnminimized;
+
+	private: System::Windows::Forms::Button^ btnmaximized;
+
 	public:
 
 		//void loadform(System::Object^ Form) {
@@ -117,6 +121,8 @@ namespace MAIN1 {
 			this->panellogo = (gcnew System::Windows::Forms::Panel());
 			this->pictureBoxLogo = (gcnew System::Windows::Forms::PictureBox());
 			this->panelheader = (gcnew System::Windows::Forms::Panel());
+			this->btnminimized = (gcnew System::Windows::Forms::Button());
+			this->btnmaximized = (gcnew System::Windows::Forms::Button());
 			this->btnclose = (gcnew System::Windows::Forms::Button());
 			this->mainpanel = (gcnew System::Windows::Forms::Panel());
 			this->timerpanelside = (gcnew System::Windows::Forms::Timer(this->components));
@@ -321,6 +327,8 @@ namespace MAIN1 {
 			// panelheader
 			// 
 			this->panelheader->BackColor = System::Drawing::Color::DimGray;
+			this->panelheader->Controls->Add(this->btnminimized);
+			this->panelheader->Controls->Add(this->btnmaximized);
 			this->panelheader->Controls->Add(this->btnclose);
 			this->panelheader->Dock = System::Windows::Forms::DockStyle::Top;
 			this->panelheader->Location = System::Drawing::Point(0, 0);
@@ -331,6 +339,38 @@ namespace MAIN1 {
 			this->panelheader->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::MainForm_MouseMove);
 			this->panelheader->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::MainForm_MouseUp);
 			// 
+			// btnminimized
+			// 
+			this->btnminimized->BackColor = System::Drawing::Color::DimGray;
+			this->btnminimized->FlatAppearance->BorderSize = 0;
+			this->btnminimized->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Gray;
+			this->btnminimized->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnminimized->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnminimized->ForeColor = System::Drawing::Color::White;
+			this->btnminimized->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnminimized.Image")));
+			this->btnminimized->Location = System::Drawing::Point(876, 0);
+			this->btnminimized->Name = L"btnminimized";
+			this->btnminimized->Size = System::Drawing::Size(28, 28);
+			this->btnminimized->TabIndex = 7;
+			this->btnminimized->UseVisualStyleBackColor = false;
+			this->btnminimized->Click += gcnew System::EventHandler(this, &MainForm::btnminimized_Click);
+			// 
+			// btnmaximized
+			// 
+			this->btnmaximized->BackColor = System::Drawing::Color::DimGray;
+			this->btnmaximized->FlatAppearance->BorderSize = 0;
+			this->btnmaximized->FlatAppearance->MouseOverBackColor = System::Drawing::Color::DimGray;
+			this->btnmaximized->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnmaximized->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnmaximized->ForeColor = System::Drawing::Color::White;
+			this->btnmaximized->Location = System::Drawing::Point(904, 0);
+			this->btnmaximized->Name = L"btnmaximized";
+			this->btnmaximized->Size = System::Drawing::Size(28, 28);
+			this->btnmaximized->TabIndex = 6;
+			this->btnmaximized->UseVisualStyleBackColor = false;
+			// 
 			// btnclose
 			// 
 			this->btnclose->BackColor = System::Drawing::Color::DimGray;
@@ -340,11 +380,11 @@ namespace MAIN1 {
 			this->btnclose->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnclose->ForeColor = System::Drawing::Color::White;
-			this->btnclose->Location = System::Drawing::Point(934, 0);
+			this->btnclose->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnclose.Image")));
+			this->btnclose->Location = System::Drawing::Point(932, 0);
 			this->btnclose->Name = L"btnclose";
-			this->btnclose->Size = System::Drawing::Size(26, 28);
+			this->btnclose->Size = System::Drawing::Size(28, 28);
 			this->btnclose->TabIndex = 5;
-			this->btnclose->Text = L"X";
 			this->btnclose->UseVisualStyleBackColor = false;
 			this->btnclose->Click += gcnew System::EventHandler(this, &MainForm::btnclose_Click);
 			// 
@@ -372,6 +412,7 @@ namespace MAIN1 {
 			this->Controls->Add(this->panelside);
 			this->Controls->Add(this->panelheader);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"MainForm";
 			this->Text = L"Main";
 			this->Load += gcnew System::EventHandler(this, &MainForm::Main_Load);
@@ -479,5 +520,8 @@ namespace MAIN1 {
 	private: System::Void btnmenu_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->timerpanelside->Start();
 	}
-	};
+	private: System::Void btnminimized_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->WindowState = FormWindowState::Minimized;
+	}
+};
 }
