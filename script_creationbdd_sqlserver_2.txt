@@ -91,7 +91,6 @@ CREATE TABLE Stock(
 CREATE TABLE Hold(
         id_item  Int NOT NULL ,
         id_order Int NOT NULL
-	,CONSTRAINT Hold_PK PRIMARY KEY (id_item,id_order)
 );
 
 CREATE TABLE Applied_of(
