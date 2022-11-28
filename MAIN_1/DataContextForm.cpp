@@ -116,6 +116,18 @@ namespace BB8Manager_Core_Data {
 			map->ColumnMappings->Add("firstname", "firstname");
 			map->ColumnMappings->Add("lastname", "lastname");
 			map->ColumnMappings->Add("birthdate", "birthdate");
+			map->ColumnMappings->Add("id_deliveryadress", "id_deliveryadress");
+			map->ColumnMappings->Add("id_billingadress", "id_billingadress");
+			return map;
+		}
+		case DataContext::Tables::DataSetCustomer:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Customer");
+			map->ColumnMappings->Add("id_customer", "ID");
+			map->ColumnMappings->Add("customername", "Name");
+			map->ColumnMappings->Add("birthdate", "Birth Date");
+			map->ColumnMappings->Add("billingadress", "Billing Adress");
+			map->ColumnMappings->Add("deliveryadress", "Delivery Adress");
 			return map;
 		}
 		case DataContext::Tables::Employee:

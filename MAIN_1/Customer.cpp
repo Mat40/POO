@@ -22,7 +22,16 @@ namespace BB8Manager_Core_Data_DAO {
 	};
 	void Customer::SetBirthdate(std::string birthdate) {
 		this->birthdate = birthdate;
-	};
+	}
+	void Customer::SetIdBillingAdress(int id_billingadress)
+	{
+		this->id_billingadress = id_billingadress;
+	}
+	void Customer::SetIdDeliveryAdress(int id_deliveryadress)
+	{
+		this->id_deliveryadress = id_deliveryadress;
+	}
+	;
 
 	int Customer::GetId() {
 		return this->id;
@@ -35,6 +44,15 @@ namespace BB8Manager_Core_Data_DAO {
 	};
 	std::string Customer::GetBirthdate() {
 		return this->birthdate;
-	};
+	}
+	int Customer::GetIdBillingAdress()
+	{
+		return this->id_billingadress;
+	}
+	int Customer::GetIdDeliveryAdress()
+	{
+		return this->id_deliveryadress;
+	}
+	;
 
 }

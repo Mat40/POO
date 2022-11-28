@@ -444,51 +444,56 @@ namespace MAIN1 {
 		this->Close();
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
-
-		Employee employee;
-
-		employee.SetId(employeeID);
-		employee.SetFirstname(marshal_as<std::string>(this->textBoxfirstname->Text));
-		employee.SetLastname(marshal_as<std::string>(this->textBoxlastname->Text));
-		employee.SetHiringdate(marshal_as<std::string>(this->dateTimePickerhiringdate->Text));
-		employee.SetIdSuperior(std::stoi(marshal_as<std::string>(this->comboBoxsuperior->SelectedValue->ToString())));
-
-		ServiceEmployee().Update(employee);
-		
-		Adress adress;
-		adress.SetId(adressID);
-		adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
-		adress.SetCity(marshal_as<std::string>(this->textboxcity->Text));
-		adress.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-		adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
-
-		if (this->textBoxresidence->Text != "") {
-			adress.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
+		if (String::IsNullOrWhiteSpace(this->textBoxfirstname->Text) || String::IsNullOrWhiteSpace(this->textBoxlastname->Text) || String::IsNullOrWhiteSpace(this->textboxpostalcode->Text) || String::IsNullOrWhiteSpace(this->textboxcity->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetname->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetnumber->Text)){
+			Employee employee;
 		}
 		else {
-			adress.SetResidencename("");
+			Employee employee;
+
+			employee.SetId(employeeID);
+			employee.SetFirstname(marshal_as<std::string>(this->textBoxfirstname->Text));
+			employee.SetLastname(marshal_as<std::string>(this->textBoxlastname->Text));
+			employee.SetHiringdate(marshal_as<std::string>(this->dateTimePickerhiringdate->Text));
+			employee.SetIdSuperior(std::stoi(marshal_as<std::string>(this->comboBoxsuperior->SelectedValue->ToString())));
+
+			ServiceEmployee().Update(employee);
+
+			Adress adress;
+			adress.SetId(adressID);
+			adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
+			adress.SetCity(marshal_as<std::string>(this->textboxcity->Text));
+			adress.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
+			adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
+
+			if (this->textBoxresidence->Text != "") {
+				adress.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
+			}
+			else {
+				adress.SetResidencename("");
+			}
+
+			if (this->textBoxbuilding->Text != "") {
+				adress.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
+			}
+			else {
+				adress.SetBuildingname("");
+			}
+
+			if (this->textBoxfloor->Text != "") {
+				adress.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
+			}
+			else {
+				adress.SetFloornumber("");
+			}
+
+			ServiceAdress().Update(adress);
+
+			//this->MdiParent->refresh_dataGridView();
+			this->listener->onApplyClicked();
+
+			this->Close();
 		}
 
-		if (this->textBoxbuilding->Text != "") {
-			adress.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
-		}
-		else {
-			adress.SetBuildingname("");
-		}
-
-		if (this->textBoxfloor->Text != "") {
-			adress.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
-		}
-		else {
-			adress.SetFloornumber("");
-		}
-
-		ServiceAdress().Update(adress);
-
-		//this->MdiParent->refresh_dataGridView();
-		this->listener->onApplyClicked();
-
-		this->Close();
 	}
 	};
 }

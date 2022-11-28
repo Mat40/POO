@@ -553,8 +553,7 @@ private: System::Void btncancel_Click(System::Object^ sender, System::EventArgs^
 	this->Close();
 }
 private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (this->textBoxresidence->Text != "Postal Code" && this->textBoxresidence->Text != "City" && this->textBoxresidence->Text != "Street Name" && this->textBoxresidence->Text != "Street Number" && this->textBoxfirstname->Text != "Firstname" && this->textBoxlastname->Text != "Lastname") {
-
+	if (this->textboxpostalcode->Text != "Postal Code" && this->textboxcity->Text != "City" && this->textBoxstreetname->Text != "Street Name" && this->textBoxstreetnumber->Text != "Street Number" && this->textBoxfirstname->Text != "Firstname" && this->textBoxlastname->Text != "Lastname") {
 		Adress adress;
 		adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
 		adress.SetCity(marshal_as<std::string>(this->textboxcity->Text));

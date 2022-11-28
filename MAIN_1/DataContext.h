@@ -21,7 +21,7 @@ namespace BB8Manager_Core_Data {
 	ref class DataContext
 	{
 	public:
-		enum class Tables { Adress, Customer, Employee, DataSetEmployee, DataSetSuperior, Item, Order, Payment, Stock, WholesalePrice };
+		enum class Tables { Adress, Customer, DataSetCustomer, Employee, DataSetEmployee, DataSetSuperior, Item, Order, Payment, Stock, WholesalePrice };
 
 		DataContext();
 		DataRowCollection^ Fetch(Tables tableName, std::string queryString);
