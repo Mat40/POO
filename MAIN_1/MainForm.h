@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "CustomerForm.h"
 #include "EmployeeForm.h"
 #include "DashboardForm.h"
@@ -15,7 +15,7 @@ namespace MAIN1 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de Main
+	/// Description rï¿½sumï¿½e de Main
 	/// </summary>
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
@@ -69,7 +69,7 @@ namespace MAIN1 {
 		}
 
 		/// <summary>
-		/// Nettoyage des ressources utilisées.
+		/// Nettoyage des ressources utilisï¿½es.
 		/// </summary>
 		~MainForm()
 		{
@@ -95,14 +95,14 @@ namespace MAIN1 {
 
 	private:
 		/// <summary>
-		/// Variable nécessaire au concepteur.
+		/// Variable nï¿½cessaire au concepteur.
 		/// </summary>
 
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
-		/// le contenu de cette méthode avec l'éditeur de code.
+		/// Mï¿½thode requise pour la prise en charge du concepteur - ne modifiez pas
+		/// le contenu de cette mï¿½thode avec l'ï¿½diteur de code.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -451,7 +451,7 @@ namespace MAIN1 {
 		loadform(gcnew DashboardForm());
 		resetButtons_Click();
 		allButtons_Click(this->btndashboard);
-		this->pictureBoxLogo->ImageLocation = "C:/Users/matth/OneDrive/Bureau/CESI/2ème année/POO/Livrable 1/VH4.png"; //path to image
+		this->pictureBoxLogo->ImageLocation = "C:/Users/matth/OneDrive/Bureau/CESI/2Ã¨me annÃ©e/POO/Livrable 1/VH4.png"; //path to image
 		this->dragging = false;
 	}
 	private: System::Void customerToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -523,5 +523,5 @@ namespace MAIN1 {
 	private: System::Void btnminimized_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->WindowState = FormWindowState::Minimized;
 	}
-};
+	};
 }

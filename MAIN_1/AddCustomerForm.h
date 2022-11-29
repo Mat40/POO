@@ -132,12 +132,7 @@ namespace MAIN1 {
 			this->textBoxfloor = (gcnew System::Windows::Forms::TextBox());
 			this->labelAdress = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->btncancel = (gcnew System::Windows::Forms::Button());
-			this->btnapply = (gcnew System::Windows::Forms::Button());
-			this->dateTimePickerhiringdate = (gcnew System::Windows::Forms::DateTimePicker());
-			this->textBoxlastname = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxfirstname = (gcnew System::Windows::Forms::TextBox());
-			this->labelcustomer = (gcnew System::Windows::Forms::Label());
+			this->checkBoxadress = (gcnew System::Windows::Forms::CheckBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBoxfloor2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxstreetnumber2 = (gcnew System::Windows::Forms::TextBox());
@@ -146,7 +141,12 @@ namespace MAIN1 {
 			this->textBoxstreetname2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxcity2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxpostalcode2 = (gcnew System::Windows::Forms::TextBox());
-			this->checkBoxadress = (gcnew System::Windows::Forms::CheckBox());
+			this->btncancel = (gcnew System::Windows::Forms::Button());
+			this->btnapply = (gcnew System::Windows::Forms::Button());
+			this->dateTimePickerhiringdate = (gcnew System::Windows::Forms::DateTimePicker());
+			this->textBoxlastname = (gcnew System::Windows::Forms::TextBox());
+			this->textBoxfirstname = (gcnew System::Windows::Forms::TextBox());
+			this->labelcustomer = (gcnew System::Windows::Forms::Label());
 			this->panelheader->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
@@ -157,7 +157,7 @@ namespace MAIN1 {
 			this->panelheader->Controls->Add(this->btnclose);
 			this->panelheader->Dock = System::Windows::Forms::DockStyle::Top;
 			this->panelheader->Location = System::Drawing::Point(0, 0);
-			this->panelheader->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panelheader->Margin = System::Windows::Forms::Padding(4);
 			this->panelheader->Name = L"panelheader";
 			this->panelheader->Size = System::Drawing::Size(800, 43);
 			this->panelheader->TabIndex = 2;
@@ -175,7 +175,7 @@ namespace MAIN1 {
 				static_cast<System::Byte>(0)));
 			this->btnclose->ForeColor = System::Drawing::Color::White;
 			this->btnclose->Location = System::Drawing::Point(763, 0);
-			this->btnclose->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnclose->Margin = System::Windows::Forms::Padding(4);
 			this->btnclose->Name = L"btnclose";
 			this->btnclose->Size = System::Drawing::Size(37, 34);
 			this->btnclose->TabIndex = 5;
@@ -299,11 +299,111 @@ namespace MAIN1 {
 			this->panel1->Controls->Add(this->textboxcity);
 			this->panel1->Controls->Add(this->textboxpostalcode);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel1->Location = System::Drawing::Point(0, 54);
+			this->panel1->Location = System::Drawing::Point(0, 43);
 			this->panel1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(1000, 859);
+			this->panel1->Size = System::Drawing::Size(800, 687);
 			this->panel1->TabIndex = 12;
+			// 
+			// checkBoxadress
+			// 
+			this->checkBoxadress->AutoSize = true;
+			this->checkBoxadress->Location = System::Drawing::Point(541, 174);
+			this->checkBoxadress->Name = L"checkBoxadress";
+			this->checkBoxadress->Size = System::Drawing::Size(186, 20);
+			this->checkBoxadress->TabIndex = 27;
+			this->checkBoxadress->Text = L"Use Same Adress for both";
+			this->checkBoxadress->UseVisualStyleBackColor = true;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+				static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->label1->Location = System::Drawing::Point(293, 250);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(229, 49);
+			this->label1->TabIndex = 26;
+			this->label1->Text = L"DELIVERY";
+			// 
+			// textBoxfloor2
+			// 
+			this->textBoxfloor2->Location = System::Drawing::Point(300, 410);
+			this->textBoxfloor2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBoxfloor2->Name = L"textBoxfloor2";
+			this->textBoxfloor2->Size = System::Drawing::Size(200, 22);
+			this->textBoxfloor2->TabIndex = 25;
+			this->textBoxfloor2->Text = L"Floor Number";
+			this->textBoxfloor2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxfloor2_RemoveText);
+			this->textBoxfloor2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxfloor2_AddText);
+			// 
+			// textBoxstreetnumber2
+			// 
+			this->textBoxstreetnumber2->Location = System::Drawing::Point(69, 361);
+			this->textBoxstreetnumber2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBoxstreetnumber2->Name = L"textBoxstreetnumber2";
+			this->textBoxstreetnumber2->Size = System::Drawing::Size(200, 22);
+			this->textBoxstreetnumber2->TabIndex = 24;
+			this->textBoxstreetnumber2->Text = L"Street Number";
+			this->textBoxstreetnumber2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetnumber2_RemoveText);
+			this->textBoxstreetnumber2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetnumber2_AddText);
+			// 
+			// textBoxbuilding2
+			// 
+			this->textBoxbuilding2->Location = System::Drawing::Point(539, 361);
+			this->textBoxbuilding2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBoxbuilding2->Name = L"textBoxbuilding2";
+			this->textBoxbuilding2->Size = System::Drawing::Size(200, 22);
+			this->textBoxbuilding2->TabIndex = 23;
+			this->textBoxbuilding2->Text = L"Building Name";
+			this->textBoxbuilding2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxbuilding2_RemoveText);
+			this->textBoxbuilding2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxbuilding2_AddText);
+			// 
+			// textBoxresidence2
+			// 
+			this->textBoxresidence2->Location = System::Drawing::Point(300, 361);
+			this->textBoxresidence2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBoxresidence2->Name = L"textBoxresidence2";
+			this->textBoxresidence2->Size = System::Drawing::Size(200, 22);
+			this->textBoxresidence2->TabIndex = 22;
+			this->textBoxresidence2->Text = L"Residence Name";
+			this->textBoxresidence2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxresidence2_RemoveText);
+			this->textBoxresidence2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxresidence2_AddText);
+			// 
+			// textBoxstreetname2
+			// 
+			this->textBoxstreetname2->Location = System::Drawing::Point(539, 312);
+			this->textBoxstreetname2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBoxstreetname2->Name = L"textBoxstreetname2";
+			this->textBoxstreetname2->Size = System::Drawing::Size(200, 22);
+			this->textBoxstreetname2->TabIndex = 21;
+			this->textBoxstreetname2->Text = L"Street Name";
+			this->textBoxstreetname2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetname2_RemoveText);
+			this->textBoxstreetname2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetname2_AddText);
+			// 
+			// textBoxcity2
+			// 
+			this->textBoxcity2->Location = System::Drawing::Point(300, 312);
+			this->textBoxcity2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBoxcity2->Name = L"textBoxcity2";
+			this->textBoxcity2->Size = System::Drawing::Size(200, 22);
+			this->textBoxcity2->TabIndex = 20;
+			this->textBoxcity2->Text = L"City";
+			this->textBoxcity2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxcity2_RemoveText);
+			this->textBoxcity2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxcity2_AddText);
+			// 
+			// textBoxpostalcode2
+			// 
+			this->textBoxpostalcode2->Location = System::Drawing::Point(69, 312);
+			this->textBoxpostalcode2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBoxpostalcode2->Name = L"textBoxpostalcode2";
+			this->textBoxpostalcode2->Size = System::Drawing::Size(200, 22);
+			this->textBoxpostalcode2->TabIndex = 19;
+			this->textBoxpostalcode2->Text = L"Postal Code";
+			this->textBoxpostalcode2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxpostalcode2_RemoveText);
+			this->textBoxpostalcode2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxpostalcode2_AddText);
 			// 
 			// btncancel
 			// 
@@ -385,107 +485,6 @@ namespace MAIN1 {
 			this->labelcustomer->Size = System::Drawing::Size(257, 49);
 			this->labelcustomer->TabIndex = 11;
 			this->labelcustomer->Text = L"CUSTOMER";
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
-				static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			this->label1->Location = System::Drawing::Point(293, 250);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(229, 49);
-			this->label1->TabIndex = 26;
-			this->label1->Text = L"DELIVERY";
-			// 
-			// textBoxfloor2
-			// 
-			this->textBoxfloor2->Location = System::Drawing::Point(300, 410);
-			this->textBoxfloor2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxfloor2->Name = L"textBoxfloor2";
-			this->textBoxfloor2->Size = System::Drawing::Size(200, 22);
-			this->textBoxfloor2->TabIndex = 25;
-			this->textBoxfloor2->Text = L"Floor Number";
-			this->textBoxfloor2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxfloor2_RemoveText);
-			this->textBoxfloor2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxfloor2_AddText);
-
-			// 
-			// textBoxstreetnumber2
-			// 
-			this->textBoxstreetnumber2->Location = System::Drawing::Point(69, 361);
-			this->textBoxstreetnumber2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxstreetnumber2->Name = L"textBoxstreetnumber2";
-			this->textBoxstreetnumber2->Size = System::Drawing::Size(200, 22);
-			this->textBoxstreetnumber2->TabIndex = 24;
-			this->textBoxstreetnumber2->Text = L"Street Number";
-			this->textBoxstreetnumber2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetnumber2_RemoveText);
-			this->textBoxstreetnumber2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetnumber2_AddText);
-			// 
-			// textBoxbuilding2
-			// 
-			this->textBoxbuilding2->Location = System::Drawing::Point(539, 361);
-			this->textBoxbuilding2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxbuilding2->Name = L"textBoxbuilding2";
-			this->textBoxbuilding2->Size = System::Drawing::Size(200, 22);
-			this->textBoxbuilding2->TabIndex = 23;
-			this->textBoxbuilding2->Text = L"Building Name";
-			this->textBoxbuilding2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxbuilding2_RemoveText);
-			this->textBoxbuilding2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxbuilding2_AddText);
-			// 
-			// textBoxresidence2
-			// 
-			this->textBoxresidence2->Location = System::Drawing::Point(300, 361);
-			this->textBoxresidence2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxresidence2->Name = L"textBoxresidence2";
-			this->textBoxresidence2->Size = System::Drawing::Size(200, 22);
-			this->textBoxresidence2->TabIndex = 22;
-			this->textBoxresidence2->Text = L"Residence Name";
-			this->textBoxresidence2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxresidence2_RemoveText);
-			this->textBoxresidence2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxresidence2_AddText);
-			// 
-			// textBoxstreetname2
-			// 
-			this->textBoxstreetname2->Location = System::Drawing::Point(539, 312);
-			this->textBoxstreetname2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxstreetname2->Name = L"textBoxstreetname2";
-			this->textBoxstreetname2->Size = System::Drawing::Size(200, 22);
-			this->textBoxstreetname2->TabIndex = 21;
-			this->textBoxstreetname2->Text = L"Street Name";
-			this->textBoxstreetname2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetname2_RemoveText);
-			this->textBoxstreetname2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetname2_AddText);
-			// 
-			// textBoxcity2
-			// 
-			this->textBoxcity2->Location = System::Drawing::Point(300, 312);
-			this->textBoxcity2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxcity2->Name = L"textBoxcity2";
-			this->textBoxcity2->Size = System::Drawing::Size(200, 22);
-			this->textBoxcity2->TabIndex = 20;
-			this->textBoxcity2->Text = L"City";
-			this->textBoxcity2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxcity2_RemoveText);
-			this->textBoxcity2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxcity2_AddText);
-			// 
-			// textBoxpostalcode2
-			// 
-			this->textBoxpostalcode2->Location = System::Drawing::Point(69, 312);
-			this->textBoxpostalcode2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxpostalcode2->Name = L"textBoxpostalcode2";
-			this->textBoxpostalcode2->Size = System::Drawing::Size(200, 22);
-			this->textBoxpostalcode2->TabIndex = 19;
-			this->textBoxpostalcode2->Text = L"Postal Code";
-			this->textBoxpostalcode2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxpostalcode2_RemoveText);
-			this->textBoxpostalcode2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxpostalcode2_AddText);
-			// 
-			// checkBoxadress
-			// 
-			this->checkBoxadress->AutoSize = true;
-			this->checkBoxadress->Location = System::Drawing::Point(541, 174);
-			this->checkBoxadress->Name = L"checkBoxadress";
-			this->checkBoxadress->Size = System::Drawing::Size(186, 20);
-			this->checkBoxadress->TabIndex = 27;
-			this->checkBoxadress->Text = L"Use Same Adress for both";
-			this->checkBoxadress->UseVisualStyleBackColor = true;
 			// 
 			// AddCustomerForm
 			// 

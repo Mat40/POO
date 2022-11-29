@@ -151,6 +151,7 @@
     <ClCompile Include="DataContextForm.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="EmployeeForm.cpp" />
+    <ClCompile Include="ErrorForm.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="Order.cpp" />
@@ -188,6 +189,9 @@
     <ClInclude Include="DataContext.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="EmployeeForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ErrorForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Item.h" />
@@ -233,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeeForm.resx">
       <DependentUpon>EmployeeForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ErrorForm.resx">
+      <DependentUpon>ErrorForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>

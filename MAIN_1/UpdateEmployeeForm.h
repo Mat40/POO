@@ -25,6 +25,7 @@ namespace MAIN1 {
 		};
 
 		Listener^ listener;
+		ErrorForm^ errorForm;
 		int employeeID;
 		int adressID;
 
@@ -445,7 +446,8 @@ namespace MAIN1 {
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (String::IsNullOrWhiteSpace(this->textBoxfirstname->Text) || String::IsNullOrWhiteSpace(this->textBoxlastname->Text) || String::IsNullOrWhiteSpace(this->textboxpostalcode->Text) || String::IsNullOrWhiteSpace(this->textboxcity->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetname->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetnumber->Text)){
-			Employee employee;
+			this->errorForm = gcnew ErrorForm("You forgot to specify some mandatory data");
+			this->errorForm->Show();
 		}
 		else {
 			Employee employee;
