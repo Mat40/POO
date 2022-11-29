@@ -1,6 +1,7 @@
 #pragma once
 #include "ServiceEmployee.h"
 #include "ServiceAdress.h"
+#include "ErrorForm.h"
 
 namespace MAIN1 {
 
