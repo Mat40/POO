@@ -435,7 +435,7 @@ private: System::Void textboxpostalcode_RemoveText(System::Object^ sender, Syste
 
 private: System::Void textboxpostalcode_AddText(System::Object^ sender, System::EventArgs^ e)
 {
-	if (this->textboxpostalcode->Text == "")
+	if (String::IsNullOrWhiteSpace(this->textboxpostalcode->Text))
 		this->textboxpostalcode->Text = "Postal Code";
 }
 
@@ -447,7 +447,7 @@ private: System::Void textboxcity_RemoveText(System::Object^ sender, System::Eve
 
 private: System::Void textboxcity_AddText(System::Object^ sender, System::EventArgs^ e)
 {
-	if (this->textboxcity->Text == "")
+	if (String::IsNullOrWhiteSpace(this->textboxcity->Text))
 		this->textboxcity->Text = "City";
 }
 
@@ -459,7 +459,7 @@ private: System::Void textBoxstreetname_RemoveText(System::Object^ sender, Syste
 
 private: System::Void textBoxstreetname_AddText(System::Object^ sender, System::EventArgs^ e)
 {
-	if (this->textBoxstreetname->Text == "")
+	if (String::IsNullOrWhiteSpace(this->textBoxstreetname->Text))
 		this->textBoxstreetname->Text = "Street Name";
 }
 
@@ -471,7 +471,7 @@ private: System::Void textBoxstreetnumber_RemoveText(System::Object^ sender, Sys
 
 private: System::Void textBoxstreetnumber_AddText(System::Object^ sender, System::EventArgs^ e)
 {
-	if (this->textBoxstreetnumber->Text == "")
+	if (String::IsNullOrWhiteSpace(this->textBoxstreetnumber->Text))
 		this->textBoxstreetnumber->Text = "Street Number";
 }
 
@@ -483,7 +483,7 @@ private: System::Void textBoxresidence_RemoveText(System::Object^ sender, System
 
 private: System::Void textBoxresidence_AddText(System::Object^ sender, System::EventArgs^ e)
 {
-	if (this->textBoxresidence->Text == "")
+	if (String::IsNullOrWhiteSpace(this->textBoxresidence->Text))
 		this->textBoxresidence->Text = "Residence Name";
 }
 
@@ -495,7 +495,7 @@ private: System::Void textBoxbuilding_RemoveText(System::Object^ sender, System:
 
 private: System::Void textBoxbuilding_AddText(System::Object^ sender, System::EventArgs^ e)
 {
-	if (this->textBoxbuilding->Text == "")
+	if (String::IsNullOrWhiteSpace(this->textBoxbuilding->Text))
 		this->textBoxbuilding->Text = "Building Name";
 }
 
@@ -507,7 +507,7 @@ private: System::Void textBoxfloor_RemoveText(System::Object^ sender, System::Ev
 
 private: System::Void textBoxfloor_AddText(System::Object^ sender, System::EventArgs^ e)
 {
-	if (this->textBoxfloor->Text == "")
+	if (String::IsNullOrWhiteSpace(this->textBoxfloor->Text))
 		this->textBoxfloor->Text = "Floor Number";
 }
 
@@ -519,7 +519,7 @@ private: System::Void textBoxfirstname_RemoveText(System::Object^ sender, System
 
 private: System::Void textBoxfirstname_AddText(System::Object^ sender, System::EventArgs^ e)
 {
-	if (this->textBoxfirstname->Text == "")
+	if (String::IsNullOrWhiteSpace(this->textBoxfirstname->Text))
 		this->textBoxfirstname->Text = "Firstname";
 }
 
@@ -531,7 +531,7 @@ private: System::Void textBoxlastname_RemoveText(System::Object^ sender, System:
 
 private: System::Void textBoxlastname_AddText(System::Object^ sender, System::EventArgs^ e)
 {
-	if (this->textBoxlastname->Text == "")
+	if (String::IsNullOrWhiteSpace(this->textBoxlastname->Text))
 		this->textBoxlastname->Text = "Lastname";
 }
 

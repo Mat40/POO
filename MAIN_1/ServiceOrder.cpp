@@ -1,12 +1,13 @@
+#pragma once
 #include "ServiceOrder.h"
 
 namespace BB8Manager_Core_Services {
 
-	list<Order> ServiceOrder::GetAll()
+	std::list<Order> ServiceOrder::GetAll()
 	{
-		list<Order> orderList;
+		std::list<Order> orderList;
 
-		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Order,
+		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Ordered,
 			"SELECT * FROM [Order]");
 		for each (DataRow ^ result in results)
 		{
@@ -26,7 +27,7 @@ namespace BB8Manager_Core_Services {
 	}
 
 	Order ServiceOrder::Get(int id) {
-		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Item, "SELECT * FROM [Order] WHERE id = " + std::to_string(id));
+		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Ordered, "SELECT * FROM [Order] WHERE id = " + std::to_string(id));
 
 		if (results->Count == 0)
 			throw std::runtime_error("adress not found !");
@@ -44,6 +45,22 @@ namespace BB8Manager_Core_Services {
 		order.SetIdCustomer(std::stoi(this->dataContext.ToUnmanagedString(row["id_customer"]->ToString())));
 
 		return order;
+	}
+
+	DataSet^ ServiceOrder::GetDataSet()
+	{
+		//DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::Employee, "SELECT * FROM [Employee]");
+
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetOrdered, "SELECT reference, Customer.firstname + ' ' + Customer.lastname as name, datedelivery, dateinssuance, datesettlement, settlementbalance, fullprice FROM [Ordered] INNER JOIN [Customer] ON Ordered.id_customer = Customer.id_customer; ");
+		return result;
+	}
+
+	DataSet^ ServiceOrder::GetSearchDataSet(std::string value)
+	{
+		//DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::Employee, "SELECT * FROM [Employee]");
+
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetOrdered, "SELECT reference, Customer.firstname + ' ' + Customer.lastname as name, reference, datedelivery, dateinssuance, datesettlement, settlementbalance, fullprice FROM [Ordered] INNER JOIN [Customer] ON Ordered.id_customer = Customer.id_customer WHERE Customer.firstname LIKE '" + value + "%' OR Customer.lastname LIKE '" + value + "%';");
+		return result;
 	}
 
 	Order ServiceOrder::Add(Order order) {

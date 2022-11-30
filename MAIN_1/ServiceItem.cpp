@@ -1,10 +1,11 @@
+#pragma once
 #include "ServiceItem.h"
 
 namespace BB8Manager_Core_Services {
 
-	list<Item> ServiceItem::GetAll()
+	std::list<Item> ServiceItem::GetAll()
 	{
-		list<Item> itemList;
+		std::list<Item> itemList;
 
 		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Item,
 			"SELECT * FROM [Item]");
@@ -25,8 +26,8 @@ namespace BB8Manager_Core_Services {
 		return itemList;
 	}
 
-	Item ServiceItem::Get(int id) {
-		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Item, "SELECT * FROM [Item] WHERE id = " + std::to_string(id));
+	Item ServiceItem::Get(std::string ref) {
+		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Item, "SELECT * FROM [Item] WHERE reference = '" + ref + "'; ");
 
 		if (results->Count == 0)
 			throw std::runtime_error("adress not found !");
@@ -46,12 +47,33 @@ namespace BB8Manager_Core_Services {
 		return item;
 	}
 
+	int ServiceItem::GetMaxId()
+	{
+		int result = this->dataContext.QueryInt("SELECT CASE WHEN(SELECT COUNT(1) FROM [Item]) = 0 THEN 1 ELSE IDENT_CURRENT('Item') + 1 END AS Current_Identity; ");
+
+		if (result == NULL)
+			throw std::runtime_error("id not found !");
+		return result;
+	}
+
+	DataSet^ ServiceItem::GetDataSet()
+	{
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetItem, "SELECT reference, name, Item.amount as lot, price_excl_taxes as price, vat, reduction, Stock.amount as stock, reorder_threshold FROM [Item] INNER JOIN [Stock] ON Item.id_item = Stock.id_item; ");
+		return result;
+	}
+
+	DataSet^ ServiceItem::GetSearchDataSet(std::string value)
+	{
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetItem, "SELECT reference, name, Item.amount as lot, price_excl_taxes as price, vat, reduction, Stock.amount as stock, reorder_threshold FROM [Item] INNER JOIN [Stock] ON Item.id_item = Stock.id_item WHERE Item.reference LIKE '%" + value + "%' OR Item.name LIKE '%" + value + "%';");
+		return result;
+	}
+
 	Item ServiceItem::Add(Item item) {
-		this->dataContext.Insert("INSERT INTO [Item] (reference, name, amount, price_excl_taxes, vat, reduction) VALUES ('" + item.GetReference() + "', '" + item.GetName() + "', '" + std::to_string(item.GetAmount()) + "', '" + std::to_string(item.GetPriceExclTaxes()) + "', '" + std::to_string(item.GetVat()) + "', '" + std::to_string(item.GetReduction()) + "')");
+		item.SetId(this->dataContext.Insert("INSERT INTO [Item] (reference, name, amount, price_excl_taxes, vat, reduction) VALUES ('" + item.GetReference() + "', '" + item.GetName() + "', '" + std::to_string(item.GetAmount()) + "', '" + std::to_string(item.GetPriceExclTaxes()) + "', '" + std::to_string(item.GetVat()) + "', '" + std::to_string(item.GetReduction()) + "')"));
 		return item;
 	}
 
 	void ServiceItem::Remove(int id) {
-		this->dataContext.Query("DELETE FROM [Item] WHERE id = " + std::to_string(id));
+		this->dataContext.Query("DELETE FROM [Item] WHERE id_item = " + std::to_string(id));
 	}
 }

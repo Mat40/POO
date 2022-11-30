@@ -1,6 +1,6 @@
 #pragma once
 #include "ServiceAdress.h"
-#include "ServiceCustomer.h"
+#include "ServiceOrder.h"
 #include "ErrorForm.h"
 
 namespace MAIN1 {
@@ -13,9 +13,9 @@ namespace MAIN1 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de UpdateCustomerForm
+	/// Description résumée de UpdateOrderForm
 	/// </summary>
-	public ref class UpdateCustomerForm : public System::Windows::Forms::Form
+	public ref class UpdateOrderForm : public System::Windows::Forms::Form
 	{
 
 	public:
@@ -27,89 +27,22 @@ namespace MAIN1 {
 
 		Listener^ listener;
 		ErrorForm^ errorForm;
-		int customerID;
+		int orderID;
 		int deliveryID;
 		int billingID;
 
-		UpdateCustomerForm(Listener^ listener, Customer customer, Adress delivery, Adress billing)
+		UpdateOrderForm(Listener^ listener)
 		{
 			InitializeComponent();
 			this->listener = listener;
 
-			if (delivery.GetId() == billing.GetId()) {
-				this->checkBoxadress->Checked = true;
-				billingID = billing.GetId();
-				this->textboxpostalcode->Text = gcnew String(billing.GetPostalcode().c_str());
-				this->textboxcity->Text = gcnew String(billing.GetCity().c_str());
-				this->textBoxstreetname->Text = gcnew String(billing.GetStreetname().c_str());
-				this->textBoxstreetnumber->Text = gcnew String(billing.GetStreetnumber().c_str());
-				this->textBoxresidence->Text = gcnew String(billing.GetResidencename().c_str());
-				this->textBoxbuilding->Text = gcnew String(billing.GetBuildingname().c_str());
-				this->textBoxfloor->Text = gcnew String(billing.GetFloornumber().c_str());
-
-				customerID = customer.GetId();
-				this->textBoxfirstname->Text = gcnew String(customer.GetFirstname().c_str());
-				this->textBoxlastname->Text = gcnew String(customer.GetLastname().c_str());
-
-				std::string day = customer.GetBirthdate().substr(0, 2);
-				std::string month = customer.GetBirthdate().substr(3, 2);
-				std::string year = customer.GetBirthdate().substr(6, 4);
-				
-				this->dateTimePickerhiringdate->Value = System::DateTime(std::stoi(year), std::stoi(month), std::stoi(day), 0, 0, 0, 0);
-
-			}
-			else {
-				this->checkBoxadress->Checked = false;
-				billingID = billing.GetId();
-				this->textboxpostalcode->Text = gcnew String(billing.GetPostalcode().c_str());
-				this->textboxcity->Text = gcnew String(billing.GetCity().c_str());
-				this->textBoxstreetname->Text = gcnew String(billing.GetStreetname().c_str());
-				this->textBoxstreetnumber->Text = gcnew String(billing.GetStreetnumber().c_str());
-				this->textBoxresidence->Text = gcnew String(billing.GetResidencename().c_str());
-				this->textBoxbuilding->Text = gcnew String(billing.GetBuildingname().c_str());
-				this->textBoxfloor->Text = gcnew String(billing.GetFloornumber().c_str());
-
-				deliveryID = delivery.GetId();
-				this->textBoxpostalcode2->Text = gcnew String(delivery.GetPostalcode().c_str());
-				this->textBoxcity2->Text = gcnew String(delivery.GetCity().c_str());
-				this->textBoxstreetname2->Text = gcnew String(delivery.GetStreetname().c_str());
-				this->textBoxstreetnumber2->Text = gcnew String(delivery.GetStreetnumber().c_str());
-				this->textBoxresidence2->Text = gcnew String(delivery.GetResidencename().c_str());
-				this->textBoxbuilding2->Text = gcnew String(delivery.GetBuildingname().c_str());
-				this->textBoxfloor2->Text = gcnew String(delivery.GetFloornumber().c_str());
-
-				customerID = customer.GetId();
-				this->textBoxfirstname->Text = gcnew String(customer.GetFirstname().c_str());
-				this->textBoxlastname->Text = gcnew String(customer.GetLastname().c_str());
-
-				std::string day = customer.GetBirthdate().substr(0, 2);
-				std::string month = customer.GetBirthdate().substr(3, 2);
-				std::string year = customer.GetBirthdate().substr(6, 4);
-
-				this->dateTimePickerhiringdate->Value = System::DateTime(std::stoi(year), std::stoi(month), std::stoi(day), 0, 0, 0, 0);
-
-			}
 		}
-		/*public:
-
-			UpdateCustomerForm(void)
-			{
-				InitializeComponent();
-			}*/
-
-			/*MAIN1::CustomerForm^ frm;
-
-			UpdateCustomerForm(MAIN1::CustomerForm^ frm)
-			{
-				InitializeComponent();
-				this->frm = frm;
-			}*/
 
 	protected:
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~UpdateCustomerForm()
+		~UpdateOrderForm()
 		{
 			if (components)
 			{
@@ -147,7 +80,7 @@ namespace MAIN1 {
 
 	private: System::Windows::Forms::Button^ btncancel;
 	private: System::Windows::Forms::Button^ btnapply;
-	private: System::Windows::Forms::Label^ labelcustomer;
+	private: System::Windows::Forms::Label^ labelorder;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::TextBox^ textBoxfloor2;
 
@@ -179,7 +112,7 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(UpdateCustomerForm::typeid));
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(UpdateOrderForm::typeid));
 			this->panelheader = (gcnew System::Windows::Forms::Panel());
 			this->btnclose = (gcnew System::Windows::Forms::Button());
 			this->textboxpostalcode = (gcnew System::Windows::Forms::TextBox());
@@ -191,7 +124,12 @@ namespace MAIN1 {
 			this->textBoxfloor = (gcnew System::Windows::Forms::TextBox());
 			this->labelAdress = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->checkBoxadress = (gcnew System::Windows::Forms::CheckBox());
+			this->btncancel = (gcnew System::Windows::Forms::Button());
+			this->btnapply = (gcnew System::Windows::Forms::Button());
+			this->dateTimePickerhiringdate = (gcnew System::Windows::Forms::DateTimePicker());
+			this->textBoxlastname = (gcnew System::Windows::Forms::TextBox());
+			this->textBoxfirstname = (gcnew System::Windows::Forms::TextBox());
+			this->labelorder = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBoxfloor2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxstreetnumber2 = (gcnew System::Windows::Forms::TextBox());
@@ -200,12 +138,7 @@ namespace MAIN1 {
 			this->textBoxstreetname2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxcity2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxpostalcode2 = (gcnew System::Windows::Forms::TextBox());
-			this->btncancel = (gcnew System::Windows::Forms::Button());
-			this->btnapply = (gcnew System::Windows::Forms::Button());
-			this->dateTimePickerhiringdate = (gcnew System::Windows::Forms::DateTimePicker());
-			this->textBoxlastname = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxfirstname = (gcnew System::Windows::Forms::TextBox());
-			this->labelcustomer = (gcnew System::Windows::Forms::Label());
+			this->checkBoxadress = (gcnew System::Windows::Forms::CheckBox());
 			this->panelheader->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
@@ -216,13 +149,13 @@ namespace MAIN1 {
 			this->panelheader->Controls->Add(this->btnclose);
 			this->panelheader->Dock = System::Windows::Forms::DockStyle::Top;
 			this->panelheader->Location = System::Drawing::Point(0, 0);
-			this->panelheader->Margin = System::Windows::Forms::Padding(4);
+			this->panelheader->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->panelheader->Name = L"panelheader";
 			this->panelheader->Size = System::Drawing::Size(800, 43);
 			this->panelheader->TabIndex = 2;
-			this->panelheader->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &UpdateCustomerForm::UpdateCustomerForm_MouseDown);
-			this->panelheader->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &UpdateCustomerForm::UpdateCustomerForm_MouseMove);
-			this->panelheader->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &UpdateCustomerForm::UpdateCustomerForm_MouseUp);
+			this->panelheader->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &UpdateOrderForm::UpdateOrderForm_MouseDown);
+			this->panelheader->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &UpdateOrderForm::UpdateOrderForm_MouseMove);
+			this->panelheader->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &UpdateOrderForm::UpdateOrderForm_MouseUp);
 			// 
 			// btnclose
 			// 
@@ -234,13 +167,13 @@ namespace MAIN1 {
 				static_cast<System::Byte>(0)));
 			this->btnclose->ForeColor = System::Drawing::Color::White;
 			this->btnclose->Location = System::Drawing::Point(763, 0);
-			this->btnclose->Margin = System::Windows::Forms::Padding(4);
+			this->btnclose->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->btnclose->Name = L"btnclose";
 			this->btnclose->Size = System::Drawing::Size(37, 34);
 			this->btnclose->TabIndex = 5;
 			this->btnclose->Text = L"X";
 			this->btnclose->UseVisualStyleBackColor = false;
-			this->btnclose->Click += gcnew System::EventHandler(this, &UpdateCustomerForm::btnclose_Click);
+			this->btnclose->Click += gcnew System::EventHandler(this, &UpdateOrderForm::btnclose_Click);
 			// 
 			// textboxpostalcode
 			// 
@@ -312,7 +245,7 @@ namespace MAIN1 {
 				static_cast<System::Byte>(0)));
 			this->labelAdress->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
 				static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			this->labelAdress->Location = System::Drawing::Point(304, 12);
+			this->labelAdress->Location = System::Drawing::Point(293, 12);
 			this->labelAdress->Name = L"labelAdress";
 			this->labelAdress->Size = System::Drawing::Size(193, 49);
 			this->labelAdress->TabIndex = 11;
@@ -334,7 +267,7 @@ namespace MAIN1 {
 			this->panel1->Controls->Add(this->dateTimePickerhiringdate);
 			this->panel1->Controls->Add(this->textBoxlastname);
 			this->panel1->Controls->Add(this->textBoxfirstname);
-			this->panel1->Controls->Add(this->labelcustomer);
+			this->panel1->Controls->Add(this->labelorder);
 			this->panel1->Controls->Add(this->labelAdress);
 			this->panel1->Controls->Add(this->textBoxfloor);
 			this->panel1->Controls->Add(this->textBoxstreetnumber);
@@ -344,21 +277,88 @@ namespace MAIN1 {
 			this->panel1->Controls->Add(this->textboxcity);
 			this->panel1->Controls->Add(this->textboxpostalcode);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel1->Location = System::Drawing::Point(0, 43);
+			this->panel1->Location = System::Drawing::Point(0, 54);
 			this->panel1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(800, 687);
+			this->panel1->Size = System::Drawing::Size(1000, 859);
 			this->panel1->TabIndex = 12;
 			// 
-			// checkBoxadress
+			// btncancel
 			// 
-			this->checkBoxadress->AutoSize = true;
-			this->checkBoxadress->Location = System::Drawing::Point(541, 174);
-			this->checkBoxadress->Name = L"checkBoxadress";
-			this->checkBoxadress->Size = System::Drawing::Size(186, 20);
-			this->checkBoxadress->TabIndex = 27;
-			this->checkBoxadress->Text = L"Use Same Adress for both";
-			this->checkBoxadress->UseVisualStyleBackColor = true;
+			this->btncancel->FlatAppearance->BorderSize = 0;
+			this->btncancel->FlatAppearance->MouseOverBackColor = System::Drawing::SystemColors::Control;
+			this->btncancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btncancel->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
+			this->btncancel->ForeColor = System::Drawing::Color::DimGray;
+			this->btncancel->Location = System::Drawing::Point(16, 646);
+			this->btncancel->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btncancel->Name = L"btncancel";
+			this->btncancel->Size = System::Drawing::Size(109, 39);
+			this->btncancel->TabIndex = 18;
+			this->btncancel->Text = L"CANCEL";
+			this->btncancel->UseVisualStyleBackColor = true;
+			this->btncancel->Click += gcnew System::EventHandler(this, &UpdateOrderForm::btncancel_Click);
+			this->btncancel->MouseEnter += gcnew System::EventHandler(this, &UpdateOrderForm::btncancel_OnMouseEnter);
+			this->btncancel->MouseLeave += gcnew System::EventHandler(this, &UpdateOrderForm::btncancel_OnMouseLeave);
+			// 
+			// btnapply
+			// 
+			this->btnapply->FlatAppearance->BorderSize = 0;
+			this->btnapply->FlatAppearance->MouseOverBackColor = System::Drawing::SystemColors::Control;
+			this->btnapply->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnapply->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
+			this->btnapply->ForeColor = System::Drawing::Color::DimGray;
+			this->btnapply->Location = System::Drawing::Point(678, 646);
+			this->btnapply->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnapply->Name = L"btnapply";
+			this->btnapply->Size = System::Drawing::Size(109, 39);
+			this->btnapply->TabIndex = 17;
+			this->btnapply->Text = L"APPLY";
+			this->btnapply->UseVisualStyleBackColor = true;
+			this->btnapply->Click += gcnew System::EventHandler(this, &UpdateOrderForm::btnapply_Click);
+			this->btnapply->MouseEnter += gcnew System::EventHandler(this, &UpdateOrderForm::btnapply_OnMouseEnter);
+			this->btnapply->MouseLeave += gcnew System::EventHandler(this, &UpdateOrderForm::btnapply_OnMouseLeave);
+			// 
+			// dateTimePickerhiringdate
+			// 
+			this->dateTimePickerhiringdate->Format = System::Windows::Forms::DateTimePickerFormat::Short;
+			this->dateTimePickerhiringdate->Location = System::Drawing::Point(539, 547);
+			this->dateTimePickerhiringdate->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->dateTimePickerhiringdate->Name = L"dateTimePickerhiringdate";
+			this->dateTimePickerhiringdate->Size = System::Drawing::Size(200, 22);
+			this->dateTimePickerhiringdate->TabIndex = 15;
+			this->dateTimePickerhiringdate->Value = System::DateTime(2022, 11, 25, 0, 0, 0, 0);
+			// 
+			// textBoxlastname
+			// 
+			this->textBoxlastname->Location = System::Drawing::Point(300, 547);
+			this->textBoxlastname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBoxlastname->Name = L"textBoxlastname";
+			this->textBoxlastname->Size = System::Drawing::Size(200, 22);
+			this->textBoxlastname->TabIndex = 14;
+			this->textBoxlastname->Text = L"Lastname";
+			// 
+			// textBoxfirstname
+			// 
+			this->textBoxfirstname->Location = System::Drawing::Point(69, 547);
+			this->textBoxfirstname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBoxfirstname->Name = L"textBoxfirstname";
+			this->textBoxfirstname->Size = System::Drawing::Size(200, 22);
+			this->textBoxfirstname->TabIndex = 13;
+			this->textBoxfirstname->Text = L"Firstname";
+			// 
+			// labelorder
+			// 
+			this->labelorder->AutoSize = true;
+			this->labelorder->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->labelorder->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+				static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->labelorder->Location = System::Drawing::Point(271, 485);
+			this->labelorder->Name = L"labelorder";
+			this->labelorder->Size = System::Drawing::Size(257, 49);
+			this->labelorder->TabIndex = 11;
+			this->labelorder->Text = L"CUSTOMER";
 			// 
 			// label1
 			// 
@@ -367,7 +367,7 @@ namespace MAIN1 {
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
 				static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			this->label1->Location = System::Drawing::Point(285, 250);
+			this->label1->Location = System::Drawing::Point(293, 250);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(229, 49);
 			this->label1->TabIndex = 26;
@@ -381,6 +381,7 @@ namespace MAIN1 {
 			this->textBoxfloor2->Size = System::Drawing::Size(200, 22);
 			this->textBoxfloor2->TabIndex = 25;
 			this->textBoxfloor2->Text = L"Floor Number";
+
 			// 
 			// textBoxstreetnumber2
 			// 
@@ -436,84 +437,17 @@ namespace MAIN1 {
 			this->textBoxpostalcode2->TabIndex = 19;
 			this->textBoxpostalcode2->Text = L"Postal Code";
 			// 
-			// btncancel
+			// checkBoxadress
 			// 
-			this->btncancel->FlatAppearance->BorderSize = 0;
-			this->btncancel->FlatAppearance->MouseOverBackColor = System::Drawing::SystemColors::Control;
-			this->btncancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btncancel->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
-			this->btncancel->ForeColor = System::Drawing::Color::DimGray;
-			this->btncancel->Location = System::Drawing::Point(16, 646);
-			this->btncancel->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->btncancel->Name = L"btncancel";
-			this->btncancel->Size = System::Drawing::Size(109, 39);
-			this->btncancel->TabIndex = 18;
-			this->btncancel->Text = L"CANCEL";
-			this->btncancel->UseVisualStyleBackColor = true;
-			this->btncancel->Click += gcnew System::EventHandler(this, &UpdateCustomerForm::btncancel_Click);
-			this->btncancel->MouseEnter += gcnew System::EventHandler(this, &UpdateCustomerForm::btncancel_OnMouseEnter);
-			this->btncancel->MouseLeave += gcnew System::EventHandler(this, &UpdateCustomerForm::btncancel_OnMouseLeave);
+			this->checkBoxadress->AutoSize = true;
+			this->checkBoxadress->Location = System::Drawing::Point(541, 174);
+			this->checkBoxadress->Name = L"checkBoxadress";
+			this->checkBoxadress->Size = System::Drawing::Size(186, 20);
+			this->checkBoxadress->TabIndex = 27;
+			this->checkBoxadress->Text = L"Use Same Adress for both";
+			this->checkBoxadress->UseVisualStyleBackColor = true;
 			// 
-			// btnapply
-			// 
-			this->btnapply->FlatAppearance->BorderSize = 0;
-			this->btnapply->FlatAppearance->MouseOverBackColor = System::Drawing::SystemColors::Control;
-			this->btnapply->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnapply->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
-			this->btnapply->ForeColor = System::Drawing::Color::DimGray;
-			this->btnapply->Location = System::Drawing::Point(678, 646);
-			this->btnapply->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->btnapply->Name = L"btnapply";
-			this->btnapply->Size = System::Drawing::Size(109, 39);
-			this->btnapply->TabIndex = 17;
-			this->btnapply->Text = L"APPLY";
-			this->btnapply->UseVisualStyleBackColor = true;
-			this->btnapply->Click += gcnew System::EventHandler(this, &UpdateCustomerForm::btnapply_Click);
-			this->btnapply->MouseEnter += gcnew System::EventHandler(this, &UpdateCustomerForm::btnapply_OnMouseEnter);
-			this->btnapply->MouseLeave += gcnew System::EventHandler(this, &UpdateCustomerForm::btnapply_OnMouseLeave);
-			// 
-			// dateTimePickerhiringdate
-			// 
-			this->dateTimePickerhiringdate->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->dateTimePickerhiringdate->Location = System::Drawing::Point(539, 547);
-			this->dateTimePickerhiringdate->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->dateTimePickerhiringdate->Name = L"dateTimePickerhiringdate";
-			this->dateTimePickerhiringdate->Size = System::Drawing::Size(200, 22);
-			this->dateTimePickerhiringdate->TabIndex = 15;
-			this->dateTimePickerhiringdate->Value = System::DateTime(2022, 11, 25, 0, 0, 0, 0);
-			// 
-			// textBoxlastname
-			// 
-			this->textBoxlastname->Location = System::Drawing::Point(300, 547);
-			this->textBoxlastname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxlastname->Name = L"textBoxlastname";
-			this->textBoxlastname->Size = System::Drawing::Size(200, 22);
-			this->textBoxlastname->TabIndex = 14;
-			this->textBoxlastname->Text = L"Lastname";
-			// 
-			// textBoxfirstname
-			// 
-			this->textBoxfirstname->Location = System::Drawing::Point(69, 547);
-			this->textBoxfirstname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxfirstname->Name = L"textBoxfirstname";
-			this->textBoxfirstname->Size = System::Drawing::Size(200, 22);
-			this->textBoxfirstname->TabIndex = 13;
-			this->textBoxfirstname->Text = L"Firstname";
-			// 
-			// labelcustomer
-			// 
-			this->labelcustomer->AutoSize = true;
-			this->labelcustomer->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->labelcustomer->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
-				static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			this->labelcustomer->Location = System::Drawing::Point(271, 485);
-			this->labelcustomer->Name = L"labelcustomer";
-			this->labelcustomer->Size = System::Drawing::Size(257, 49);
-			this->labelcustomer->TabIndex = 11;
-			this->labelcustomer->Text = L"CUSTOMER";
-			// 
-			// UpdateCustomerForm
+			// UpdateOrderForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -523,9 +457,9 @@ namespace MAIN1 {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->Name = L"UpdateCustomerForm";
-			this->Text = L"UpdateCustomerForm";
-			this->Load += gcnew System::EventHandler(this, &UpdateCustomerForm::comboBoxsuperior_Load);
+			this->Name = L"UpdateOrderForm";
+			this->Text = L"UpdateOrderForm";
+			this->Load += gcnew System::EventHandler(this, &UpdateOrderForm::comboBoxsuperior_Load);
 			this->panelheader->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
@@ -559,19 +493,19 @@ namespace MAIN1 {
 		   /// Movable Window
 		   /// </summary>
 
-	private: System::Void UpdateCustomerForm_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	private: System::Void UpdateOrderForm_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		this->dragging = true;
 		this->offset = Point(e->X, e->Y);
 	}
 
-	private: System::Void UpdateCustomerForm_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	private: System::Void UpdateOrderForm_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		if (this->dragging) {
 			Point currentScreenPos = PointToScreen(e->Location);
 			Location = Point(currentScreenPos.X - this->offset.X, currentScreenPos.Y - this->offset.Y);
 		}
 	}
 
-	private: System::Void UpdateCustomerForm_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	private: System::Void UpdateOrderForm_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		this->dragging = false;
 	}
 
@@ -579,13 +513,13 @@ namespace MAIN1 {
 		   /// Form Load
 		   /// </summary>
 
-	private: System::Void UpdateCustomerForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void UpdateOrderForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		this->dragging = false;
 	}
 
 	private: System::Void comboBoxsuperior_Load(System::Object^ sender, System::EventArgs^ e) {
 		//this->comboBoxsuperior->Refresh();
-		//this->comboBoxsuperior->DataSource = BB8Manager_Core_Services::ServiceCustomer().GetDataSetSuperior()->Tables[0];
+		//this->comboBoxsuperior->DataSource = BB8Manager_Core_Services::ServiceOrder().GetDataSetSuperior()->Tables[0];
 		//this->comboBoxsuperior->DisplayMember = "Name";
 		//this->comboBoxsuperior->ValueMember = "ID";
 	}
@@ -593,122 +527,7 @@ namespace MAIN1 {
 		this->Close();
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (String::IsNullOrWhiteSpace(this->textBoxfirstname->Text) || String::IsNullOrWhiteSpace(this->textBoxlastname->Text) || String::IsNullOrWhiteSpace(this->textboxpostalcode->Text) || String::IsNullOrWhiteSpace(this->textboxcity->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetname->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetnumber->Text)) {
-			this->errorForm = gcnew ErrorForm("You forgot to specify some mandatory data");
-			this->errorForm->Show();
-		}
-		else {
-			Customer customer;
-
-			customer.SetId(customerID);
-			customer.SetFirstname(marshal_as<std::string>(this->textBoxfirstname->Text));
-			customer.SetLastname(marshal_as<std::string>(this->textBoxlastname->Text));
-			customer.SetBirthdate(marshal_as<std::string>(this->dateTimePickerhiringdate->Text));
-
-			ServiceCustomer().Update(customer);
-
-			if (this->checkBoxadress->Checked == true) {
-
-				Adress adress;
-				adress.SetId(billingID);
-				adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
-				adress.SetCity(marshal_as<std::string>(this->textboxcity->Text));
-				adress.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-				adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
-
-				if (this->textBoxresidence->Text != "") {
-					adress.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
-				}
-				else {
-					adress.SetResidencename("");
-				}
-
-				if (this->textBoxbuilding->Text != "") {
-					adress.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
-				}
-				else {
-					adress.SetBuildingname("");
-				}
-
-				if (this->textBoxfloor->Text != "") {
-					adress.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
-				}
-				else {
-					adress.SetFloornumber("");
-				}
-
-				ServiceAdress().Update(adress);
-
-				this->listener->onApplyClicked();
-
-				this->Close();
-			}
-			else {
-				Adress billing;
-				billing.SetId(billingID);
-				billing.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
-				billing.SetCity(marshal_as<std::string>(this->textboxcity->Text));
-				billing.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-				billing.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
-
-				if (this->textBoxresidence->Text != "") {
-					billing.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
-				}
-				else {
-					billing.SetResidencename("");
-				}
-
-				if (this->textBoxbuilding->Text != "") {
-					billing.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
-				}
-				else {
-					billing.SetBuildingname("");
-				}
-
-				if (this->textBoxfloor->Text != "") {
-					billing.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
-				}
-				else {
-					billing.SetFloornumber("");
-				}
-
-				ServiceAdress().Update(billing);
-
-				Adress delivery;
-				delivery.SetId(deliveryID);
-				delivery.SetPostalcode(marshal_as<std::string>(this->textBoxpostalcode2->Text));
-				delivery.SetCity(marshal_as<std::string>(this->textBoxcity2->Text));
-				delivery.SetStreetname(marshal_as<std::string>(this->textBoxstreetname2->Text));
-				delivery.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber2->Text));
-
-				if (this->textBoxresidence2->Text != "") {
-					delivery.SetResidencename(marshal_as<std::string>(this->textBoxresidence2->Text));
-				}
-				else {
-					delivery.SetResidencename("");
-				}
-
-				if (this->textBoxbuilding2->Text != "") {
-					delivery.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding2->Text));
-				}
-				else {
-					delivery.SetBuildingname("");
-				}
-
-				if (this->textBoxfloor2->Text != "") {
-					delivery.SetFloornumber(marshal_as<std::string>(this->textBoxfloor2->Text));
-				}
-				else {
-					delivery.SetFloornumber("");
-				}
-
-				ServiceAdress().Update(delivery);
-
-				this->listener->onApplyClicked();
-
-				this->Close();
-			}
-		}
+		
 	}
 	};
 }

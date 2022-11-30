@@ -1,6 +1,6 @@
 #pragma once
 #include "ServiceAdress.h"
-#include "ServiceCustomer.h"
+#include "ServiceOrder.h"
 
 namespace MAIN1 {
 
@@ -12,9 +12,9 @@ namespace MAIN1 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de AddCustomerForm
+	/// Description résumée de AddOrderForm
 	/// </summary>
-	public ref class AddCustomerForm : public System::Windows::Forms::Form
+	public ref class AddOrderForm : public System::Windows::Forms::Form
 	{
 
 	public:
@@ -26,31 +26,17 @@ namespace MAIN1 {
 
 		Listener^ listener;
 
-		AddCustomerForm(Listener^ listener)
+		AddOrderForm(Listener^ listener)
 		{
 			InitializeComponent();
 			this->listener = listener;
 		}
-		/*public:
-
-			AddCustomerForm(void)
-			{
-				InitializeComponent();
-			}*/
-
-			/*MAIN1::CustomerForm^ frm;
-
-			AddCustomerForm(MAIN1::CustomerForm^ frm)
-			{
-				InitializeComponent();
-				this->frm = frm;
-			}*/
 
 	protected:
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~AddCustomerForm()
+		~AddOrderForm()
 		{
 			if (components)
 			{
@@ -88,7 +74,7 @@ namespace MAIN1 {
 
 	private: System::Windows::Forms::Button^ btncancel;
 	private: System::Windows::Forms::Button^ btnapply;
-	private: System::Windows::Forms::Label^ labelcustomer;
+	private: System::Windows::Forms::Label^ labelorder;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::TextBox^ textBoxfloor2;
 
@@ -120,7 +106,7 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AddCustomerForm::typeid));
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AddOrderForm::typeid));
 			this->panelheader = (gcnew System::Windows::Forms::Panel());
 			this->btnclose = (gcnew System::Windows::Forms::Button());
 			this->textboxpostalcode = (gcnew System::Windows::Forms::TextBox());
@@ -146,7 +132,7 @@ namespace MAIN1 {
 			this->dateTimePickerhiringdate = (gcnew System::Windows::Forms::DateTimePicker());
 			this->textBoxlastname = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxfirstname = (gcnew System::Windows::Forms::TextBox());
-			this->labelcustomer = (gcnew System::Windows::Forms::Label());
+			this->labelorder = (gcnew System::Windows::Forms::Label());
 			this->panelheader->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
@@ -161,9 +147,9 @@ namespace MAIN1 {
 			this->panelheader->Name = L"panelheader";
 			this->panelheader->Size = System::Drawing::Size(800, 43);
 			this->panelheader->TabIndex = 2;
-			this->panelheader->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &AddCustomerForm::AddCustomerForm_MouseDown);
-			this->panelheader->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &AddCustomerForm::AddCustomerForm_MouseMove);
-			this->panelheader->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &AddCustomerForm::AddCustomerForm_MouseUp);
+			this->panelheader->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &AddOrderForm::AddOrderForm_MouseDown);
+			this->panelheader->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &AddOrderForm::AddOrderForm_MouseMove);
+			this->panelheader->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &AddOrderForm::AddOrderForm_MouseUp);
 			// 
 			// btnclose
 			// 
@@ -181,7 +167,7 @@ namespace MAIN1 {
 			this->btnclose->TabIndex = 5;
 			this->btnclose->Text = L"X";
 			this->btnclose->UseVisualStyleBackColor = false;
-			this->btnclose->Click += gcnew System::EventHandler(this, &AddCustomerForm::btnclose_Click);
+			this->btnclose->Click += gcnew System::EventHandler(this, &AddOrderForm::btnclose_Click);
 			// 
 			// textboxpostalcode
 			// 
@@ -191,8 +177,8 @@ namespace MAIN1 {
 			this->textboxpostalcode->Size = System::Drawing::Size(200, 22);
 			this->textboxpostalcode->TabIndex = 4;
 			this->textboxpostalcode->Text = L"Postal Code";
-			this->textboxpostalcode->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textboxpostalcode_RemoveText);
-			this->textboxpostalcode->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textboxpostalcode_AddText);
+			this->textboxpostalcode->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textboxpostalcode_RemoveText);
+			this->textboxpostalcode->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textboxpostalcode_AddText);
 			// 
 			// textboxcity
 			// 
@@ -202,8 +188,8 @@ namespace MAIN1 {
 			this->textboxcity->Size = System::Drawing::Size(200, 22);
 			this->textboxcity->TabIndex = 5;
 			this->textboxcity->Text = L"City";
-			this->textboxcity->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textboxcity_RemoveText);
-			this->textboxcity->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textboxcity_AddText);
+			this->textboxcity->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textboxcity_RemoveText);
+			this->textboxcity->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textboxcity_AddText);
 			// 
 			// textBoxstreetname
 			// 
@@ -213,8 +199,8 @@ namespace MAIN1 {
 			this->textBoxstreetname->Size = System::Drawing::Size(200, 22);
 			this->textBoxstreetname->TabIndex = 6;
 			this->textBoxstreetname->Text = L"Street Name";
-			this->textBoxstreetname->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetname_RemoveText);
-			this->textBoxstreetname->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetname_AddText);
+			this->textBoxstreetname->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetname_RemoveText);
+			this->textBoxstreetname->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetname_AddText);
 			// 
 			// textBoxresidence
 			// 
@@ -224,8 +210,8 @@ namespace MAIN1 {
 			this->textBoxresidence->Size = System::Drawing::Size(200, 22);
 			this->textBoxresidence->TabIndex = 7;
 			this->textBoxresidence->Text = L"Residence Name";
-			this->textBoxresidence->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxresidence_RemoveText);
-			this->textBoxresidence->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxresidence_AddText);
+			this->textBoxresidence->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxresidence_RemoveText);
+			this->textBoxresidence->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxresidence_AddText);
 			// 
 			// textBoxbuilding
 			// 
@@ -235,8 +221,8 @@ namespace MAIN1 {
 			this->textBoxbuilding->Size = System::Drawing::Size(200, 22);
 			this->textBoxbuilding->TabIndex = 8;
 			this->textBoxbuilding->Text = L"Building Name";
-			this->textBoxbuilding->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxbuilding_RemoveText);
-			this->textBoxbuilding->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxbuilding_AddText);
+			this->textBoxbuilding->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxbuilding_RemoveText);
+			this->textBoxbuilding->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxbuilding_AddText);
 			// 
 			// textBoxstreetnumber
 			// 
@@ -246,8 +232,8 @@ namespace MAIN1 {
 			this->textBoxstreetnumber->Size = System::Drawing::Size(200, 22);
 			this->textBoxstreetnumber->TabIndex = 9;
 			this->textBoxstreetnumber->Text = L"Street Number";
-			this->textBoxstreetnumber->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetnumber_RemoveText);
-			this->textBoxstreetnumber->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetnumber_AddText);
+			this->textBoxstreetnumber->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetnumber_RemoveText);
+			this->textBoxstreetnumber->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetnumber_AddText);
 			// 
 			// textBoxfloor
 			// 
@@ -257,8 +243,8 @@ namespace MAIN1 {
 			this->textBoxfloor->Size = System::Drawing::Size(200, 22);
 			this->textBoxfloor->TabIndex = 10;
 			this->textBoxfloor->Text = L"Floor Number";
-			this->textBoxfloor->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxfloor_RemoveText);
-			this->textBoxfloor->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxfloor_AddText);
+			this->textBoxfloor->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfloor_RemoveText);
+			this->textBoxfloor->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfloor_AddText);
 			// 
 			// labelAdress
 			// 
@@ -289,7 +275,7 @@ namespace MAIN1 {
 			this->panel1->Controls->Add(this->dateTimePickerhiringdate);
 			this->panel1->Controls->Add(this->textBoxlastname);
 			this->panel1->Controls->Add(this->textBoxfirstname);
-			this->panel1->Controls->Add(this->labelcustomer);
+			this->panel1->Controls->Add(this->labelorder);
 			this->panel1->Controls->Add(this->labelAdress);
 			this->panel1->Controls->Add(this->textBoxfloor);
 			this->panel1->Controls->Add(this->textBoxstreetnumber);
@@ -336,8 +322,8 @@ namespace MAIN1 {
 			this->textBoxfloor2->Size = System::Drawing::Size(200, 22);
 			this->textBoxfloor2->TabIndex = 25;
 			this->textBoxfloor2->Text = L"Floor Number";
-			this->textBoxfloor2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxfloor2_RemoveText);
-			this->textBoxfloor2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxfloor2_AddText);
+			this->textBoxfloor2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfloor2_RemoveText);
+			this->textBoxfloor2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfloor2_AddText);
 			// 
 			// textBoxstreetnumber2
 			// 
@@ -347,8 +333,8 @@ namespace MAIN1 {
 			this->textBoxstreetnumber2->Size = System::Drawing::Size(200, 22);
 			this->textBoxstreetnumber2->TabIndex = 24;
 			this->textBoxstreetnumber2->Text = L"Street Number";
-			this->textBoxstreetnumber2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetnumber2_RemoveText);
-			this->textBoxstreetnumber2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetnumber2_AddText);
+			this->textBoxstreetnumber2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetnumber2_RemoveText);
+			this->textBoxstreetnumber2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetnumber2_AddText);
 			// 
 			// textBoxbuilding2
 			// 
@@ -358,8 +344,8 @@ namespace MAIN1 {
 			this->textBoxbuilding2->Size = System::Drawing::Size(200, 22);
 			this->textBoxbuilding2->TabIndex = 23;
 			this->textBoxbuilding2->Text = L"Building Name";
-			this->textBoxbuilding2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxbuilding2_RemoveText);
-			this->textBoxbuilding2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxbuilding2_AddText);
+			this->textBoxbuilding2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxbuilding2_RemoveText);
+			this->textBoxbuilding2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxbuilding2_AddText);
 			// 
 			// textBoxresidence2
 			// 
@@ -369,8 +355,8 @@ namespace MAIN1 {
 			this->textBoxresidence2->Size = System::Drawing::Size(200, 22);
 			this->textBoxresidence2->TabIndex = 22;
 			this->textBoxresidence2->Text = L"Residence Name";
-			this->textBoxresidence2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxresidence2_RemoveText);
-			this->textBoxresidence2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxresidence2_AddText);
+			this->textBoxresidence2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxresidence2_RemoveText);
+			this->textBoxresidence2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxresidence2_AddText);
 			// 
 			// textBoxstreetname2
 			// 
@@ -380,8 +366,8 @@ namespace MAIN1 {
 			this->textBoxstreetname2->Size = System::Drawing::Size(200, 22);
 			this->textBoxstreetname2->TabIndex = 21;
 			this->textBoxstreetname2->Text = L"Street Name";
-			this->textBoxstreetname2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetname2_RemoveText);
-			this->textBoxstreetname2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxstreetname2_AddText);
+			this->textBoxstreetname2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetname2_RemoveText);
+			this->textBoxstreetname2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetname2_AddText);
 			// 
 			// textBoxcity2
 			// 
@@ -391,8 +377,8 @@ namespace MAIN1 {
 			this->textBoxcity2->Size = System::Drawing::Size(200, 22);
 			this->textBoxcity2->TabIndex = 20;
 			this->textBoxcity2->Text = L"City";
-			this->textBoxcity2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxcity2_RemoveText);
-			this->textBoxcity2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxcity2_AddText);
+			this->textBoxcity2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxcity2_RemoveText);
+			this->textBoxcity2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxcity2_AddText);
 			// 
 			// textBoxpostalcode2
 			// 
@@ -402,8 +388,8 @@ namespace MAIN1 {
 			this->textBoxpostalcode2->Size = System::Drawing::Size(200, 22);
 			this->textBoxpostalcode2->TabIndex = 19;
 			this->textBoxpostalcode2->Text = L"Postal Code";
-			this->textBoxpostalcode2->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxpostalcode2_RemoveText);
-			this->textBoxpostalcode2->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxpostalcode2_AddText);
+			this->textBoxpostalcode2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxpostalcode2_RemoveText);
+			this->textBoxpostalcode2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxpostalcode2_AddText);
 			// 
 			// btncancel
 			// 
@@ -419,9 +405,9 @@ namespace MAIN1 {
 			this->btncancel->TabIndex = 18;
 			this->btncancel->Text = L"CANCEL";
 			this->btncancel->UseVisualStyleBackColor = true;
-			this->btncancel->Click += gcnew System::EventHandler(this, &AddCustomerForm::btncancel_Click);
-			this->btncancel->MouseEnter += gcnew System::EventHandler(this, &AddCustomerForm::btncancel_OnMouseEnter);
-			this->btncancel->MouseLeave += gcnew System::EventHandler(this, &AddCustomerForm::btncancel_OnMouseLeave);
+			this->btncancel->Click += gcnew System::EventHandler(this, &AddOrderForm::btncancel_Click);
+			this->btncancel->MouseEnter += gcnew System::EventHandler(this, &AddOrderForm::btncancel_OnMouseEnter);
+			this->btncancel->MouseLeave += gcnew System::EventHandler(this, &AddOrderForm::btncancel_OnMouseLeave);
 			// 
 			// btnapply
 			// 
@@ -437,9 +423,9 @@ namespace MAIN1 {
 			this->btnapply->TabIndex = 17;
 			this->btnapply->Text = L"APPLY";
 			this->btnapply->UseVisualStyleBackColor = true;
-			this->btnapply->Click += gcnew System::EventHandler(this, &AddCustomerForm::btnapply_Click);
-			this->btnapply->MouseEnter += gcnew System::EventHandler(this, &AddCustomerForm::btnapply_OnMouseEnter);
-			this->btnapply->MouseLeave += gcnew System::EventHandler(this, &AddCustomerForm::btnapply_OnMouseLeave);
+			this->btnapply->Click += gcnew System::EventHandler(this, &AddOrderForm::btnapply_Click);
+			this->btnapply->MouseEnter += gcnew System::EventHandler(this, &AddOrderForm::btnapply_OnMouseEnter);
+			this->btnapply->MouseLeave += gcnew System::EventHandler(this, &AddOrderForm::btnapply_OnMouseLeave);
 			// 
 			// dateTimePickerhiringdate
 			// 
@@ -459,8 +445,8 @@ namespace MAIN1 {
 			this->textBoxlastname->Size = System::Drawing::Size(200, 22);
 			this->textBoxlastname->TabIndex = 14;
 			this->textBoxlastname->Text = L"Lastname";
-			this->textBoxlastname->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxlastname_RemoveText);
-			this->textBoxlastname->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxlastname_AddText);
+			this->textBoxlastname->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxlastname_RemoveText);
+			this->textBoxlastname->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxlastname_AddText);
 			// 
 			// textBoxfirstname
 			// 
@@ -470,23 +456,23 @@ namespace MAIN1 {
 			this->textBoxfirstname->Size = System::Drawing::Size(200, 22);
 			this->textBoxfirstname->TabIndex = 13;
 			this->textBoxfirstname->Text = L"Firstname";
-			this->textBoxfirstname->GotFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxfirstname_RemoveText);
-			this->textBoxfirstname->LostFocus += gcnew System::EventHandler(this, &AddCustomerForm::textBoxfirstname_AddText);
+			this->textBoxfirstname->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfirstname_RemoveText);
+			this->textBoxfirstname->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfirstname_AddText);
 			// 
-			// labelcustomer
+			// labelorder
 			// 
-			this->labelcustomer->AutoSize = true;
-			this->labelcustomer->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->labelorder->AutoSize = true;
+			this->labelorder->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->labelcustomer->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+			this->labelorder->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
 				static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			this->labelcustomer->Location = System::Drawing::Point(271, 485);
-			this->labelcustomer->Name = L"labelcustomer";
-			this->labelcustomer->Size = System::Drawing::Size(257, 49);
-			this->labelcustomer->TabIndex = 11;
-			this->labelcustomer->Text = L"CUSTOMER";
+			this->labelorder->Location = System::Drawing::Point(271, 485);
+			this->labelorder->Name = L"labelorder";
+			this->labelorder->Size = System::Drawing::Size(257, 49);
+			this->labelorder->TabIndex = 11;
+			this->labelorder->Text = L"CUSTOMER";
 			// 
-			// AddCustomerForm
+			// AddOrderForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -496,9 +482,9 @@ namespace MAIN1 {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->Name = L"AddCustomerForm";
-			this->Text = L"AddCustomerForm";
-			this->Load += gcnew System::EventHandler(this, &AddCustomerForm::comboBoxsuperior_Load);
+			this->Name = L"AddOrderForm";
+			this->Text = L"AddOrderForm";
+			this->Load += gcnew System::EventHandler(this, &AddOrderForm::comboBoxsuperior_Load);
 			this->panelheader->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
@@ -532,19 +518,19 @@ namespace MAIN1 {
 		   /// Movable Window
 		   /// </summary>
 
-	private: System::Void AddCustomerForm_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	private: System::Void AddOrderForm_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		this->dragging = true;
 		this->offset = Point(e->X, e->Y);
 	}
 
-	private: System::Void AddCustomerForm_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	private: System::Void AddOrderForm_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		if (this->dragging) {
 			Point currentScreenPos = PointToScreen(e->Location);
 			Location = Point(currentScreenPos.X - this->offset.X, currentScreenPos.Y - this->offset.Y);
 		}
 	}
 
-	private: System::Void AddCustomerForm_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	private: System::Void AddOrderForm_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		this->dragging = false;
 	}
 
@@ -560,7 +546,7 @@ namespace MAIN1 {
 
 	private: System::Void textboxpostalcode_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textboxpostalcode->Text))
+		if (this->textboxpostalcode->Text == "")
 			this->textboxpostalcode->Text = "Postal Code";
 	}
 	private: System::Void textBoxpostalcode2_RemoveText(System::Object^ sender, System::EventArgs^ e)
@@ -571,7 +557,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxpostalcode2_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxpostalcode2->Text))
+		if (this->textBoxpostalcode2->Text == "")
 			this->textBoxpostalcode2->Text = "Postal Code";
 	}
 
@@ -583,7 +569,7 @@ namespace MAIN1 {
 
 	private: System::Void textboxcity_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textboxcity->Text))
+		if (this->textboxcity->Text == "")
 			this->textboxcity->Text = "City";
 	}
 
@@ -595,7 +581,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxcity2_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxcity2->Text))
+		if (this->textBoxcity2->Text == "")
 			this->textBoxcity2->Text = "City";
 	}
 
@@ -607,7 +593,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxstreetname_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxstreetname->Text))
+		if (this->textBoxstreetname->Text == "")
 			this->textBoxstreetname->Text = "Street Name";
 	}
 
@@ -619,7 +605,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxstreetname2_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxstreetname2->Text))
+		if (this->textBoxstreetname2->Text == "")
 			this->textBoxstreetname2->Text = "Street Name";
 	}
 
@@ -631,7 +617,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxstreetnumber_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxstreetnumber->Text))
+		if (this->textBoxstreetnumber->Text == "")
 			this->textBoxstreetnumber->Text = "Street Number";
 	}
 	private: System::Void textBoxstreetnumber2_RemoveText(System::Object^ sender, System::EventArgs^ e)
@@ -642,7 +628,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxstreetnumber2_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxstreetnumber2->Text))
+		if (this->textBoxstreetnumber2->Text == "")
 			this->textBoxstreetnumber2->Text = "Street Number";
 	}
 
@@ -654,7 +640,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxresidence_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxresidence->Text))
+		if (this->textBoxresidence->Text == "")
 			this->textBoxresidence->Text = "Residence Name";
 	}
 
@@ -666,7 +652,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxresidence2_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxresidence2->Text))
+		if (this->textBoxresidence2->Text == "")
 			this->textBoxresidence2->Text = "Residence Name";
 	}
 
@@ -678,7 +664,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxbuilding_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxbuilding->Text))
+		if (this->textBoxbuilding->Text == "")
 			this->textBoxbuilding->Text = "Building Name";
 	}
 	private: System::Void textBoxbuilding2_RemoveText(System::Object^ sender, System::EventArgs^ e)
@@ -689,7 +675,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxbuilding2_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxbuilding2->Text))
+		if (this->textBoxbuilding2->Text == "")
 			this->textBoxbuilding2->Text = "Building Name";
 	}
 
@@ -701,7 +687,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxfloor_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxfloor->Text))
+		if (this->textBoxfloor->Text == "")
 			this->textBoxfloor->Text = "Floor Number";
 	}
 
@@ -713,7 +699,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxfloor2_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxfloor2->Text))
+		if (this->textBoxfloor2->Text == "")
 			this->textBoxfloor2->Text = "Floor Number";
 	}
 
@@ -725,7 +711,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxfirstname_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxfirstname->Text))
+		if (this->textBoxfirstname->Text == "")
 			this->textBoxfirstname->Text = "Firstname";
 	}
 
@@ -737,7 +723,7 @@ namespace MAIN1 {
 
 	private: System::Void textBoxlastname_AddText(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (String::IsNullOrWhiteSpace(this->textBoxlastname->Text))
+		if (this->textBoxlastname->Text == "")
 			this->textBoxlastname->Text = "Lastname";
 	}
 
@@ -745,13 +731,13 @@ namespace MAIN1 {
 		   /// Form Load
 		   /// </summary>
 
-	private: System::Void AddCustomerForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void AddOrderForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		this->dragging = false;
 	}
 
 	private: System::Void comboBoxsuperior_Load(System::Object^ sender, System::EventArgs^ e) {
 		//this->comboBoxsuperior->Refresh();
-		//this->comboBoxsuperior->DataSource = BB8Manager_Core_Services::ServiceCustomer().GetDataSetSuperior()->Tables[0];
+		//this->comboBoxsuperior->DataSource = BB8Manager_Core_Services::ServiceOrder().GetDataSetSuperior()->Tables[0];
 		//this->comboBoxsuperior->DisplayMember = "Name";
 		//this->comboBoxsuperior->ValueMember = "ID";
 	}
@@ -759,131 +745,7 @@ namespace MAIN1 {
 		this->Close();
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
-		
-		if (this->checkBoxadress->Checked == true) {
-			if (this->textboxpostalcode->Text != "Postal Code" && this->textboxcity->Text != "City" && this->textBoxstreetname->Text != "Street Name" && this->textBoxstreetnumber->Text != "Street Number" && this->textBoxfirstname->Text != "Firstname" && this->textBoxlastname->Text != "Lastname") {
 
-				Adress adress;
-				adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
-				adress.SetCity(marshal_as<std::string>(this->textboxcity->Text));
-				adress.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-				adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
-
-				if (this->textBoxresidence->Text != "Residence Name") {
-					adress.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
-				}
-				else {
-					adress.SetResidencename("");
-				}
-
-				if (this->textBoxbuilding->Text != "Building Name") {
-					adress.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
-				}
-				else {
-					adress.SetBuildingname("");
-				}
-
-				if (this->textBoxfloor->Text != "Floor Number") {
-					adress.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
-				}
-				else {
-					adress.SetFloornumber("");
-				}
-
-				adress = ServiceAdress().Add(adress);
-
-				Customer customer;
-
-				customer.SetFirstname(marshal_as<std::string>(this->textBoxfirstname->Text));
-				customer.SetLastname(marshal_as<std::string>(this->textBoxlastname->Text));
-				customer.SetBirthdate(marshal_as<std::string>(this->dateTimePickerhiringdate->Text));
-				customer.SetIdDeliveryAdress(adress.GetId());
-				customer.SetIdBillingAdress(adress.GetId());
-
-				customer = ServiceCustomer().Add(customer);
-
-				this->listener->onApplyClicked();
-
-				this->Close();
-			}
-
-		}
-		else {
-			if ((this->textboxpostalcode->Text && this->textBoxpostalcode2->Text != "Postal Code") && (this->textboxcity->Text && this->textBoxcity2->Text != "City") && (this->textBoxstreetname->Text && this->textBoxstreetname2->Text != "Street Name") && (this->textBoxstreetnumber->Text && this->textBoxstreetnumber2->Text != "Street Number") && (this->textBoxfirstname->Text != "Firstname") && (this->textBoxlastname->Text != "Lastname")) {
-
-				Adress delivery;
-				delivery.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
-				delivery.SetCity(marshal_as<std::string>(this->textboxcity->Text));
-				delivery.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-				delivery.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
-
-				if (this->textBoxresidence->Text != "Residence Name") {
-					delivery.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
-				}
-				else {
-					delivery.SetResidencename("");
-				}
-
-				if (this->textBoxbuilding->Text != "Building Name") {
-					delivery.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
-				}
-				else {
-					delivery.SetBuildingname("");
-				}
-
-				if (this->textBoxfloor->Text != "Floor Number") {
-					delivery.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
-				}
-				else {
-					delivery.SetFloornumber("");
-				}
-
-				delivery = ServiceAdress().Add(delivery);
-
-				Adress billing;
-				billing.SetPostalcode(marshal_as<std::string>(this->textBoxpostalcode2->Text));
-				billing.SetCity(marshal_as<std::string>(this->textBoxcity2->Text));
-				billing.SetStreetname(marshal_as<std::string>(this->textBoxstreetname2->Text));
-				billing.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber2->Text));
-
-				if (this->textBoxresidence2->Text != "Residence Name") {
-					billing.SetResidencename(marshal_as<std::string>(this->textBoxresidence2->Text));
-				}
-				else {
-					billing.SetResidencename("");
-				}
-
-				if (this->textBoxbuilding2->Text != "Building Name") {
-					billing.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding2->Text));
-				}
-				else {
-					billing.SetBuildingname("");
-				}
-
-				if (this->textBoxfloor2->Text != "Floor Number") {
-					billing.SetFloornumber(marshal_as<std::string>(this->textBoxfloor2->Text));
-				}
-				else {
-					billing.SetFloornumber("");
-				}
-
-				billing = ServiceAdress().Add(billing);
-
-				Customer customer;
-
-				customer.SetFirstname(marshal_as<std::string>(this->textBoxfirstname->Text));
-				customer.SetLastname(marshal_as<std::string>(this->textBoxlastname->Text));
-				customer.SetBirthdate(marshal_as<std::string>(this->dateTimePickerhiringdate->Text));
-				customer.SetIdDeliveryAdress(delivery.GetId());
-				customer.SetIdBillingAdress(billing.GetId());
-
-				customer = ServiceCustomer().Add(customer);
-
-				this->listener->onApplyClicked();
-
-				this->Close();
-			}
-		}
 	}
 	};
 }

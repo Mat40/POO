@@ -1,4 +1,5 @@
 //#include "pch.h"
+#pragma once
 #include "ServiceAdress.h"
 
 namespace BB8Manager_Core_Services {

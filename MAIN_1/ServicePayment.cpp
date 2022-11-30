@@ -1,10 +1,11 @@
+#pragma once
 #include "ServicePayment.h"
 
 namespace BB8Manager_Core_Services {
 
-	list<Payment> ServicePayment::GetAll()
+	std::list<Payment> ServicePayment::GetAll()
 	{
-		list<Payment> paymentList;
+		std::list<Payment> paymentList;
 
 		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Payment,
 			"SELECT * FROM [Payment]");

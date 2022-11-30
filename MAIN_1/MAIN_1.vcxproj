@@ -144,6 +144,8 @@
     <ClCompile Include="AbstractService.cpp" />
     <ClCompile Include="AddCustomerForm.cpp" />
     <ClCompile Include="AddEmployeeForm.cpp" />
+    <ClCompile Include="AddOrderForm.cpp" />
+    <ClCompile Include="AddStockForm.cpp" />
     <ClCompile Include="Adress.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="CustomerForm.cpp" />
@@ -168,6 +170,8 @@
     <ClCompile Include="StockForm.cpp" />
     <ClCompile Include="UpdateCustomerForm.cpp" />
     <ClCompile Include="UpdateEmployeeForm.cpp" />
+    <ClCompile Include="UpdateOrderForm.cpp" />
+    <ClCompile Include="UpdateStockForm.cpp" />
     <ClCompile Include="WholesalePrice.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +180,12 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="AddEmployeeForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="AddOrderForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="AddStockForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Adress.h" />
@@ -220,6 +230,12 @@
     <ClInclude Include="UpdateEmployeeForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="UpdateOrderForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="UpdateStockForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="WholesalePrice.h" />
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddEmployeeForm.resx">
       <DependentUpon>AddEmployeeForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddStockForm.resx">
+      <DependentUpon>AddStockForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerForm.resx">
       <DependentUpon>CustomerForm.h</DependentUpon>
@@ -255,6 +274,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateEmployeeForm.resx">
       <DependentUpon>UpdateEmployeeForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateStockForm.resx">
+      <DependentUpon>UpdateStockForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

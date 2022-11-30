@@ -74,6 +74,18 @@ namespace BB8Manager_Core_Data {
 		return std::stoi(this->ToUnmanagedString(result->ToString()));
 	}
 
+	int DataContext::QueryInt(std::string queryString) {
+		String^ query = gcnew String(queryString.c_str());
+		SqlCommand^ command = gcnew SqlCommand(query, this->connection);
+		command->CommandType = CommandType::Text;
+
+		this->connection->Open();
+		Object^ result = command->ExecuteScalar();
+		this->connection->Close();
+
+		return std::stoi(this->ToUnmanagedString(result->ToString()));
+	}
+
 	/// <summary>
 	/// 
 	/// </summary>
@@ -170,9 +182,22 @@ namespace BB8Manager_Core_Data {
 			map->ColumnMappings->Add("reduction", "reduction");
 			return map;
 		}
-		case DataContext::Tables::Order:
+		case DataContext::Tables::DataSetItem:
 		{
-			DataTableMapping^ map = gcnew DataTableMapping("Table", "Order");
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Item");
+			map->ColumnMappings->Add("reference", "Reference");
+			map->ColumnMappings->Add("name", "Name");
+			map->ColumnMappings->Add("lot", "Lot");
+			map->ColumnMappings->Add("price", "Price");
+			map->ColumnMappings->Add("vat", "VAT (%)");
+			map->ColumnMappings->Add("reduction", "Reduction (%)");
+			map->ColumnMappings->Add("stock", "Stock");
+			map->ColumnMappings->Add("reorder_threshold", "Reorder Threshold");
+			return map;
+		}
+		case DataContext::Tables::Ordered:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Ordered");
 			map->ColumnMappings->Add("id_order", "id");
 			map->ColumnMappings->Add("reference", "reference");
 			map->ColumnMappings->Add("datedelivery", "datedelivery");
@@ -180,6 +205,18 @@ namespace BB8Manager_Core_Data {
 			map->ColumnMappings->Add("datesettlement", "datesettlement");
 			map->ColumnMappings->Add("settlementbalance", "settlementbalance");
 			map->ColumnMappings->Add("id_customer", "id_customer");
+			return map;
+		}
+		case DataContext::Tables::DataSetOrdered:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Ordered");
+			map->ColumnMappings->Add("reference", "Reference");
+			map->ColumnMappings->Add("name", "Customer");
+			map->ColumnMappings->Add("datedelivery", "Delivery Date");
+			map->ColumnMappings->Add("dateinssuance", "Inssuance Date");
+			map->ColumnMappings->Add("datesettlement", "Settlement Date");
+			map->ColumnMappings->Add("settlementbalance", "Balance");
+			map->ColumnMappings->Add("fullprice", "Price");
 			return map;
 		}
 		case DataContext::Tables::Payment:
@@ -195,16 +232,16 @@ namespace BB8Manager_Core_Data {
 		case DataContext::Tables::Stock:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Stock");
-			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("id_stock", "id");
 			map->ColumnMappings->Add("amount", "amount");
-			map->ColumnMappings->Add("reorderthreshold", "reorderthreshold");
+			map->ColumnMappings->Add("reorder_threshold", "reorder_threshold");
 			map->ColumnMappings->Add("id_item", "id_item");
 			return map;
 		}
 		case DataContext::Tables::WholesalePrice:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "WholesalePrice");
-			map->ColumnMappings->Add("id", "id");
+			map->ColumnMappings->Add("id_reduc", "id");
 			map->ColumnMappings->Add("itemamount", "itemamount");
 			map->ColumnMappings->Add("price_excl_taxes", "price_excl_taxes");
 			return map;
