@@ -49,4 +49,8 @@ namespace BB8Manager_Core_Services {
 	void ServiceStock::Remove(int id) {
 		this->dataContext.Query("DELETE FROM [Stock] WHERE id_item = " + std::to_string(id));
 	}
+
+	void ServiceStock::Update(Stock stock) {
+		this->dataContext.Query("UPDATE [Stock] SET amount = '" + std::to_string(stock.GetAmount()) + "', reorder_threshold = '" + std::to_string(stock.GetReorderThreshold()) + "' WHERE id_stock = '" + std::to_string(stock.GetIdItem()) + "'");
+	}
 }

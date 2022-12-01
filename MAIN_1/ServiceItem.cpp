@@ -76,4 +76,8 @@ namespace BB8Manager_Core_Services {
 	void ServiceItem::Remove(int id) {
 		this->dataContext.Query("DELETE FROM [Item] WHERE id_item = " + std::to_string(id));
 	}
+
+	void ServiceItem::Update(Item item) {
+		this->dataContext.Query("UPDATE [Item] SET name = '" + item.GetName() + "', amount = '" + std::to_string(item.GetAmount()) + "', price_excl_taxes = '" + std::to_string(item.GetPriceExclTaxes()) + "', vat = '" + std::to_string(item.GetVat()) + "', reduction = '" + std::to_string(item.GetReduction()) + "' WHERE id_item = '" + std::to_string(item.GetId()) + "'");
+	}
 }

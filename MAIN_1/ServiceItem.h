@@ -17,5 +17,6 @@ namespace BB8Manager_Core_Services {
 		int GetMaxId();
 		Item Add(Item item);
 		void Remove(int id);
+		void Update(Item item);
 	};
 }

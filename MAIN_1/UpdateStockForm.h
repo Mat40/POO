@@ -52,6 +52,8 @@ namespace MAIN1 {
 	}
 	};*/
 
+	
+
 
 	/// <summary>
 	/// Description résumée de UpdateStockForm
@@ -67,11 +69,16 @@ namespace MAIN1 {
 		};
 
 		Listener^ listener;
+		int itemID;
+		int stockID;
 
 		UpdateStockForm(Listener^ listener, Item item, Stock stock)
 		{
 			InitializeComponent();
 			this->listener = listener;
+
+			this->itemID = item.GetId();
+			this->stockID = stock.GetId();
 
 			this->textboxname->Text = gcnew String(item.GetName().c_str());
 			this->textboxlot->Text = gcnew String(std::to_string(item.GetAmount()).c_str());
@@ -79,8 +86,21 @@ namespace MAIN1 {
 			this->textBoxstock->Text = gcnew String(std::to_string(stock.GetAmount()).c_str());
 			this->textBoxreorder->Text = gcnew String(std::to_string(stock.GetReorderThreshold()).c_str());
 		
-			/*this->comboBoxvat->SelectedValue = safe_cast<ComboboxItem^>(comboBoxvat->SelectedItem))->Value->ToString();
-			this->comboBoxvat->SelectedValue = item.GetVat();*/
+
+			this->comboBoxreduction->Items->Clear();
+			this->comboBoxvat->Items->Clear();
+			for (int i = 0; i <= 100; i += 10) {
+				this->comboBoxreduction->Items->Add(gcnew ComboboxItem(i + "% Discount", i));
+				this->comboBoxvat->Items->Add(gcnew ComboboxItem(i + "% VAT", i));
+			}
+			/*this->comboBoxreduction->DisplayMember = "Text";
+			this->comboBoxreduction->ValueMember = "Value";
+			this->comboBoxvat->DisplayMember = "Text";
+			this->comboBoxvat->ValueMember = "Value";*/
+
+			//safe_cast<ComboboxItem^>(this->comboBoxvat->SelectedValue)->Value = item.GetVat();
+			//this->comboBoxvat->SelectedValue = ;
+			//this->comboBoxvat->SelectedValue = item.GetVat();
 		}
 
 	protected:
@@ -456,33 +476,37 @@ namespace MAIN1 {
 
 	private: System::Void comboBox_Load(System::Object^ sender, System::EventArgs^ e) {
 
-		comboBoxreduction->Items->Clear();
-		comboBoxvat->Items->Clear();
+		/*this->comboBoxreduction->Items->Clear();
+		this->comboBoxvat->Items->Clear();
 		for (int i = 0; i <= 100; i += 10) {
-			comboBoxreduction->Items->Add(gcnew ComboboxItem(i + "% Discount", i));
-			comboBoxvat->Items->Add(gcnew ComboboxItem(i + "% VAT", i));
+			this->comboBoxreduction->Items->Add(gcnew ComboboxItem(i + "% Discount", i));
+			this->comboBoxvat->Items->Add(gcnew ComboboxItem(i + "% VAT", i));
 		}
+		this->comboBoxreduction->DisplayMember = "Text";
+		this->comboBoxreduction->ValueMember = "Value";
+		this->comboBoxvat->DisplayMember = "Text";
+		this->comboBoxvat->ValueMember = "Value";*/
 	}
 	private: System::Void btncancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (this->textboxname->Text != "Name" && this->textboxlot->Text != "Lot" && this->textBoxprice->Text != "Price (exclude taxes)" && this->textBoxstock->Text != "Stock" && this->textBoxreorder->Text != "Reorder Threshold") {
+		if (this->textboxname->Text != "Name" && this->textboxlot->Text != "Lot" && this->textBoxprice->Text != "Price (exclude taxes)" && this->textBoxstock->Text != "Stock" && this->textBoxreorder->Text != "Reorder Threshold" && this->comboBoxvat->Text->ToString() != "Vat" && this->comboBoxreduction->Text->ToString() != "Discount") {
 			Item item;
-			item.SetReference(std::string("PR_A") + std::to_string(ServiceItem().GetMaxId()));
+			item.SetId(itemID);
 			item.SetName(marshal_as<std::string>(this->textboxname->Text));
 			item.SetAmount(std::stoi(marshal_as<std::string>(this->textboxlot->Text)));
 			item.SetPriceExclTaxes(std::stof(marshal_as<std::string>(this->textBoxprice->Text)));
 
 			item.SetVat(std::stof(marshal_as<std::string>((safe_cast<ComboboxItem^>(comboBoxvat->SelectedItem))->Value->ToString())));
 			item.SetReduction(std::stof(marshal_as<std::string>((safe_cast<ComboboxItem^>(comboBoxreduction->SelectedItem))->Value->ToString())));
-			item = ServiceItem().Add(item);
+			ServiceItem().Update(item);
 
 			Stock stock;
-			stock.SetIdItem(item.GetId());
+			stock.SetId(stockID);
 			stock.SetAmount(std::stoi(marshal_as<std::string>(this->textBoxstock->Text)));
 			stock.SetReorderThreshold(std::stoi(marshal_as<std::string>(this->textBoxreorder->Text)));
-			stock = ServiceStock().Add(stock);
+			ServiceStock().Update(stock);
 
 			this->listener->onApplyClicked();
 			this->Close();

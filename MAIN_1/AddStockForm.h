@@ -456,7 +456,7 @@ namespace MAIN1 {
 		this->Close();
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (this->textboxname->Text != "Name" && this->textboxlot->Text != "Lot" && this->textBoxprice->Text != "Price (exclude taxes)" && this->textBoxstock->Text != "Stock" && this->textBoxreorder->Text != "Reorder Threshold") {
+		if (this->textboxname->Text != "Name" && this->textboxlot->Text != "Lot" && this->textBoxprice->Text != "Price (exclude taxes)" && this->textBoxstock->Text != "Stock" && this->textBoxreorder->Text != "Reorder Threshold" && this->comboBoxvat->Text->ToString() != "Vat" && this->comboBoxreduction->Text->ToString() != "Discount") {
 			Item item;
 			item.SetReference(std::string("PR_A") + std::to_string(ServiceItem().GetMaxId()));
 			item.SetName(marshal_as<std::string>(this->textboxname->Text));

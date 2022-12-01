@@ -14,5 +14,6 @@ namespace BB8Manager_Core_Services {
 		Stock Get(int id);
 		Stock Add(Stock stock);
 		void Remove(int id);
+		void Update(Stock stock);
 	};
 }
