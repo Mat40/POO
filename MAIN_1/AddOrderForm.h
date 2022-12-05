@@ -424,7 +424,7 @@ namespace MAIN1 {
 		}
 
 		// Keep only two numbers after decimal point
-		totalorderprice = std::ceil(totalorderprice * 100.0) / 100.0;
+		totalorderprice = std::ceil(totalorderprice * 100) / 100;
 
 		if (totalorderprice > 0) {
 			Order order;

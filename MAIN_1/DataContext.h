@@ -1,5 +1,3 @@
-// compile with: /clr
-
 #include <stdlib.h>
 #include <string.h>
 #include <msclr\marshal.h>

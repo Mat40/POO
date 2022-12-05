@@ -89,6 +89,14 @@ namespace BB8Manager_Core_Services {
 		int id = this->dataContext.Insert("INSERT INTO [Hold] (quantity, id_order, id_item) VALUES ('" + std::to_string(quantity) + "', '" + std::to_string(id_order) + "', '" + std::to_string(id_item) + "')");
 	}
 
+	void ServiceOrder::UpdateHold(int quantity, int id_order, int id_item) {
+		this->dataContext.Query("UPDATE [Hold] SET quantity = '" + std::to_string(quantity) + "' WHERE id_order = '" + std::to_string(id_order) + "' AND id_item = '" + std::to_string(id_item) + "'");
+	}
+
+	void ServiceOrder::RemoveHold(int id_order, int id_item) {
+		this->dataContext.Query("DELETE FROM [Hold] WHERE id_order = '" + std::to_string(id_order) + "' AND id_item = '" + std::to_string(id_item) + "'");
+	}
+
 	int ServiceOrder::GetMaxId()
 	{
 		std::string result = this->dataContext.QueryReturn("SELECT CASE WHEN(SELECT COUNT(1) FROM [Ordered]) = 0 THEN 1 ELSE IDENT_CURRENT('Ordered') + 1 END AS Current_Identity; ");
@@ -108,4 +116,8 @@ namespace BB8Manager_Core_Services {
 		}
 		return amount;
 	}
+	void ServiceOrder::Update(std::string reference, float totalorderprice, std::string datesettlement, float balance) {
+		this->dataContext.Query("UPDATE [Ordered] SET fullprice = '" + std::to_string(totalorderprice) + "', datesettlement = '" + datesettlement +"', settlementbalance = '" + std::to_string(balance) + "'  WHERE reference = '" + reference + "'");
+	}
+
 }

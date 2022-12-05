@@ -44,7 +44,7 @@ namespace BB8Manager_Core_Services {
 	}
 
 	Payment ServicePayment::Add(Payment payment) {
-		this->dataContext.Insert("INSERT INTO [Payment] (datepayment, meanpayment, amountpayment, datesettlement) VALUES ('" + payment.GetDatePayment() + "', '" + payment.GetMeanPayment() + "', '" + std::to_string(payment.GetAmountPayment()) + "', '" + std::to_string(payment.GetIdOrder()) + "')");
+		this->dataContext.Insert("INSERT INTO [Payment] (datepayment, meanpayment, amountpayment, id_order) VALUES ('" + payment.GetDatePayment() + "', '" + payment.GetMeanPayment() + "', '" + std::to_string(payment.GetAmountPayment()) + "', '" + std::to_string(payment.GetIdOrder()) + "')");
 		return payment;
 	}
 

@@ -6,6 +6,9 @@
 #include "ServicePayment.h"
 #include "ErrorForm.h"
 #include "AddStockForm.h"
+#include <iostream>
+#include <ctime>
+#include <regex>
 
 namespace MAIN1 {
 
@@ -30,6 +33,7 @@ namespace MAIN1 {
 		};
 
 		Listener^ listener;
+		String^ OrderRef;
 
 		UpdateOrderForm(Listener^ listener, Order order)
 		{
@@ -43,10 +47,12 @@ namespace MAIN1 {
 				this->dataGridView->Rows[i]->Cells[2]->Value = itemamount;
 			}
 
+			this->OrderRef = gcnew String(order.GetReference().c_str());
+
 			this->comboBoxpayment->Items->Clear();
-			this->comboBoxpayment->Items->Add(gcnew ComboboxItem("Paypal", 0));
-			this->comboBoxpayment->Items->Add(gcnew ComboboxItem("Bank Card", 1));
-			this->comboBoxpayment->Items->Add(gcnew ComboboxItem("Cash", 2));
+			this->comboBoxpayment->Items->Add(gcnew ComboboxItem("Paypal", 1));
+			this->comboBoxpayment->Items->Add(gcnew ComboboxItem("Bank Card", 2));
+			this->comboBoxpayment->Items->Add(gcnew ComboboxItem("Cash", 3));
 		}
 
 	protected:
@@ -397,74 +403,68 @@ namespace MAIN1 {
 		this->Close();
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
-		//// Inssuance date (Current date)
-		//char date1[80];
-		//char date2[80];
-		//time_t t = time(0);
-		//strftime(date1, 80, "%Y-%m-%d", localtime(&t));
+		//// Settlement date (Current date)
+		char date1[80];
+		time_t t = time(0);
+		strftime(date1, 80, "%Y-%m-%d", localtime(&t));
 
-		//// Delivery date (add 5 days to current date)
-		//tm* tmptr = NULL;
-		//tmptr = localtime(&t);
-		//tmptr->tm_mday += 5;
-		//time_t finaldate = mktime(tmptr);
-		//strftime(date2, 80, "%Y-%m-%d", localtime(&finaldate));
+		std::string datesettlement = date1;
 
-		//std::string dateinssuance = date1;
-		//std::string datedelivery = date2;
+		float totalorderprice = 0;
 
-		///////// USELESS AS FUCK
-		////// Reformat customer name
-		////std::string customername = marshal_as<std::string>(this->comboBoxcustomer->Text->ToString());
-		////std::size_t pos = customername.find(" ");
-		////std::string firstname = customername.substr(0, pos);
-		////std::string lastname = customername.substr(pos, std::string::npos);
+		for (int i = 0; i <= this->dataGridView->RowCount - 2; i++) {
+			int itemamount = std::stoi(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[2]->Value->ToString()));
+			if (itemamount > 0) {
+				Item item = ServiceItem().Get(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[0]->Value->ToString()));
+				float itemprice = item.GetPriceExclTaxes() * (1 + (item.GetVat() / 100));
+				float totalprice = itemprice * itemamount;
+				totalorderprice += totalprice;
+			}
+		}
 
-		//Customer customer = ServiceCustomer().Get(std::stoi(marshal_as<std::string>(this->comboBoxcustomer->SelectedValue->ToString())));
-		//Adress adress = ServiceAdress().Get(customer.GetIdDeliveryAdress());
+		std::string price = marshal_as<std::string>(this->textboxprice->Text->ToString());
 
-		//std::string reference = customer.GetFirstname().substr(0, 2) + customer.GetLastname().substr(0, 2) + dateinssuance.substr(0, 4) + adress.GetCity().substr(0, 3);
+		if (totalorderprice > 0 && std::regex_match(price, std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && std::regex_match(price, std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && totalorderprice >= std::stoi(price)) {
+			Order order = ServiceOrder().Get(marshal_as<std::string>(this->OrderRef->ToString()));
 
-		//for (int i = 0; i < reference.length(); ++i)
-		//{
-		//	reference[i] = ::toupper(reference[i]);
-		//}
+			float balance = totalorderprice - std::stof(price);
 
-		//float totalorderprice;
+			ServiceOrder().Update(marshal_as<std::string>(this->OrderRef->ToString()), totalorderprice, datesettlement, balance);
 
-		//for (int i = 0; i <= this->dataGridView->RowCount - 2; i++) {
-		//	int itemamount = std::stoi(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[2]->Value->ToString()));
-		//	if (itemamount > 0) {
-		//		Item item = ServiceItem().Get(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[0]->Value->ToString()));
-		//		float itemprice = item.GetPriceExclTaxes() * (1 + (item.GetVat() / 100));
-		//		float totalprice = itemprice * itemamount;
-		//		totalorderprice += totalprice;
-		//	}
-		//}
+			for (int i = 0; i <= this->dataGridView->RowCount - 2; i++) {
+				if (std::regex_match(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[2]->Value->ToString()), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?")))) {
+					int itemamount = std::stoi(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[2]->Value->ToString()));
+					Item item = ServiceItem().Get(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[0]->Value->ToString()));
+					int HoldAmount = ServiceOrder().GetHoldAmount(order.GetId(), item.GetId());
+					Stock stock = ServiceStock().Get(item.GetId());
+					stock.SetAmount(stock.GetAmount() - (itemamount - HoldAmount));
+					if (itemamount > 0) {
+						if (HoldAmount > 0) {
+							ServiceOrder().UpdateHold(itemamount, order.GetId(), item.GetId());
+							ServiceStock().Update(stock);
+						}
+						else {
+							ServiceOrder().AddHold(itemamount, order.GetId(), item.GetId());
+						}
+					}
+					else if (itemamount == 0) {
+						ServiceOrder().RemoveHold(order.GetId(), item.GetId());
+						ServiceStock().Update(stock);
+					}
+				}
+			}
 
-		//if (totalorderprice > 0) {
-		//	Order order;
-		//	order.SetDateInssuance(dateinssuance);
-		//	order.SetDateDelivery(datedelivery);
-		//	order.SetReference(ServiceOrder().GetLastOrderRef(reference));
-		//	order.SetIdCustomer(customer.GetId());
-		//	order.SetFullprice(totalorderprice);
-		//	order.SetSettlementBalance(totalorderprice);
-		//	order.SetDateSettlement(dateinssuance);
-		//	order = ServiceOrder().Add(order);
+			Payment payment;
+			payment.SetDatePayment(datesettlement);
+			payment.SetIdOrder(order.GetId());
+			payment.SetMeanPayment(marshal_as<std::string>(safe_cast<ComboboxItem^>(comboBoxpayment->SelectedItem)->Value->ToString()));
+			payment.SetAmountPayment(std::stof(price));
+			payment = ServicePayment().Add(payment);
 
-		//	for (int i = 0; i <= this->dataGridView->RowCount - 2; i++) {
-		//		int itemamount = std::stoi(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[2]->Value->ToString()));
-		//		if (itemamount > 0) {
-		//			Item item = ServiceItem().Get(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[0]->Value->ToString()));
-		//			ServiceOrder().AddHold(itemamount, order.GetId(), item.GetId());
-		//		}
-		//	}
+			this->listener->onApplyClicked();
 
-		//	this->listener->onApplyClicked();
-
-		//	this->Close();
-		//}
+			this->Close();
+		}
 	}
 	};
 }

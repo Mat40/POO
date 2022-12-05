@@ -18,7 +18,10 @@ namespace BB8Manager_Core_Services {
 		void Remove(int id);
 		std::string GetLastOrderRef(std::string reflike);
 		void AddHold(int quantity, int id_order, int id_item);
+		void UpdateHold(int quantity, int id_order, int id_item);
 		int GetMaxId();
 		int GetHoldAmount(int id_order, int id_item);
+		void RemoveHold(int id_order, int id_item);
+		void Update(std::string reference, float totalorderprice, std::string datesettlement, float balance);
 	};
 }
