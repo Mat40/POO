@@ -19,7 +19,7 @@ namespace BB8Manager_Core_Data {
 	ref class DataContext
 	{
 	public:
-		enum class Tables { Adress, Customer, DataSetCustomerName, DataSetCustomer, Employee, DataSetEmployee, DataSetSuperior, Item, DataSetItem, DataSetItemOnly, Ordered, DataSetOrdered, Payment, Stock, WholesalePrice };
+		enum class Tables { Adress, Customer, DataSetCustomerName, DataSetCustomer, Employee, DataSetEmployee, DataSetSuperior, Item, DataSetItem, DataSetItemDashboard, DataSetItemOnly, Ordered, DataSetOrdered, Payment, Stock, WholesalePrice };
 
 		DataContext();
 		DataRowCollection^ Fetch(Tables tableName, std::string queryString);

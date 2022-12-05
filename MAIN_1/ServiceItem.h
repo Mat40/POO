@@ -19,5 +19,9 @@ namespace BB8Manager_Core_Services {
 		Item Add(Item item);
 		void Remove(int id);
 		void Update(Item item);
+
+		DataSet^ GetLeastSold();
+		DataSet^ GetMostSold();
+		DataSet^ GetSoldOut();
 	};
 }

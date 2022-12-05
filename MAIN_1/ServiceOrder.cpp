@@ -120,4 +120,51 @@ namespace BB8Manager_Core_Services {
 		this->dataContext.Query("UPDATE [Ordered] SET fullprice = '" + std::to_string(totalorderprice) + "', datesettlement = '" + datesettlement +"', settlementbalance = '" + std::to_string(balance) + "'  WHERE reference = '" + reference + "'");
 	}
 
+	std::string ServiceOrder::GetAvgPrice()
+	{
+		return dataContext.QueryReturn("SELECT AVG(fullprice) FROM [Ordered]; ");
+	}
+	// automatiser pour tester touts les ids prouits
+	std::string ServiceOrder::GetStockPriceValueHT()
+	{
+		return dataContext.QueryReturn("SELECT sum(price_excl_taxes * S.amount) from [Item] I INNER JOIN [Stock] S on S.id_stock = I.id_item ");
+	}
+	std::string ServiceOrder::GetStockPriceValueTTC()
+	{
+		return dataContext.QueryReturn("SELECT sum((vat + price_excl_taxes) * S.amount) from [Item] I INNER JOIN [Stock] S on S.id_stock = I.id_item");
+	}
+
+	std::string ServiceOrder::GetItemReorderNeeded()
+	{
+		return dataContext.QueryReturn("select id_stock From [Stock] where amount < reorder_threshold; ");
+	}
+
+	std::string ServiceOrder::GetTotalSalesPriceMonth(int mois)
+	{
+		std::string var_return;
+		var_return = dataContext.QueryReturn("SELECT SUM(fullprice) FROM [Ordered] where month(datesettlement) = '" + std::to_string(mois) + "'");
+
+		if (var_return == "") {
+			return "pas de valeur ce mois si";
+		}
+		else {
+			return var_return;
+		}
+
+	}
+
+	std::string ServiceOrder::GetCustomerTotalSpend(int userid)
+	{
+		std::string var_return;
+		var_return = dataContext.QueryReturn("SELECT sum(fullprice) from [Ordered] where id_customer = '" + std::to_string(userid) + "'"); // 1"); // 
+
+
+		if (var_return == "") {
+			return "pas de valeur pour cette utilisateur";
+		}
+		else {
+			return var_return;
+		}
+	}
+
 }

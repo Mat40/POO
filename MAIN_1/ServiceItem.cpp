@@ -86,4 +86,20 @@ namespace BB8Manager_Core_Services {
 	void ServiceItem::Update(Item item) {
 		this->dataContext.Query("UPDATE [Item] SET name = '" + item.GetName() + "', amount = '" + std::to_string(item.GetAmount()) + "', price_excl_taxes = '" + std::to_string(item.GetPriceExclTaxes()) + "', vat = '" + std::to_string(item.GetVat()) + "', reduction = '" + std::to_string(item.GetReduction()) + "' WHERE id_item = '" + std::to_string(item.GetId()) + "'");
 	}
+
+	DataSet^ ServiceItem::GetMostSold()
+	{
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetItemDashboard, "SELECT TOP 10 Item.reference FROM [Hold] LEFT JOIN [Item] on Hold.id_item = Item.id_item GROUP BY Item.reference ORDER BY COUNT(HOLD.id_item) DESC ");
+		return result;
+	}
+	DataSet^ ServiceItem::GetLeastSold()
+	{
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetItemDashboard, "SELECT TOP 10 Item.reference FROM [Hold] LEFT JOIN [Item] on Hold.id_item = Item.id_item GROUP BY Item.reference ORDER BY COUNT(HOLD.id_item) ");
+		return result;
+	}
+	DataSet^ ServiceItem::GetSoldOut()
+	{
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetItemDashboard, "select [Item].reference From  [Item]  LEFT JOIN  [Stock] on [Stock].id_item = [Item].id_item where [Stock].amount < reorder_threshold; ");
+		return result;
+	}
 }

@@ -217,6 +217,12 @@ namespace BB8Manager_Core_Data {
 			map->ColumnMappings->Add("reorder_threshold", "Reorder Threshold");
 			return map;
 		}
+		case DataContext::Tables::DataSetItemDashboard:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Item");
+			map->ColumnMappings->Add("reference", "Reference");
+			return map;
+		}
 		case DataContext::Tables::DataSetItemOnly:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Item");

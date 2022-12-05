@@ -23,5 +23,12 @@ namespace BB8Manager_Core_Services {
 		int GetHoldAmount(int id_order, int id_item);
 		void RemoveHold(int id_order, int id_item);
 		void Update(std::string reference, float totalorderprice, std::string datesettlement, float balance);
+
+		std::string GetAvgPrice();
+		std::string ServiceOrder::GetStockPriceValueHT();
+		std::string ServiceOrder::GetStockPriceValueTTC();
+		std::string ServiceOrder::GetItemReorderNeeded();
+		std::string ServiceOrder::GetTotalSalesPriceMonth(int mois);
+		std::string ServiceOrder::GetCustomerTotalSpend(int userid);
 	};
 }
