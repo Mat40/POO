@@ -12,6 +12,7 @@ namespace BB8Manager_Core_Services {
 	public:
 		std::list<Item> GetAll();
 		DataSet^ GetDataSet();
+		DataSet^ GetItemDataSet();
 		DataSet^ GetSearchDataSet(std::string value);
 		Item Get(std::string ref);
 		int GetMaxId();

@@ -26,8 +26,8 @@ namespace BB8Manager_Core_Services {
 		return orderList;
 	}
 
-	Order ServiceOrder::Get(int id) {
-		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Ordered, "SELECT * FROM [Order] WHERE id = " + std::to_string(id));
+	Order ServiceOrder::Get(std::string reference) {
+		DataRowCollection^ results = this->dataContext.Fetch(DataContext::Tables::Ordered, "SELECT * FROM [Ordered] WHERE reference = '" + reference + "'");
 
 		if (results->Count == 0)
 			throw std::runtime_error("adress not found !");
@@ -59,16 +59,53 @@ namespace BB8Manager_Core_Services {
 	{
 		//DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::Employee, "SELECT * FROM [Employee]");
 
-		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetOrdered, "SELECT reference, Customer.firstname + ' ' + Customer.lastname as name, reference, datedelivery, dateinssuance, datesettlement, settlementbalance, fullprice FROM [Ordered] INNER JOIN [Customer] ON Ordered.id_customer = Customer.id_customer WHERE Customer.firstname LIKE '" + value + "%' OR Customer.lastname LIKE '" + value + "%';");
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetOrdered, "SELECT reference, Customer.firstname + ' ' + Customer.lastname as name, reference, datedelivery, dateinssuance, datesettlement, settlementbalance, fullprice FROM [Ordered] INNER JOIN [Customer] ON Ordered.id_customer = Customer.id_customer WHERE Customer.firstname LIKE '" + value + "%' OR Customer.lastname LIKE '" + value + "%' OR Ordered.reference LIKE '" + value + "%';");
 		return result;
 	}
 
 	Order ServiceOrder::Add(Order order) {
-		this->dataContext.Insert("INSERT INTO [Order] (reference, datedelivery, dateinssuance, datesettlement, settlementbalance, id_customer) VALUES ('" + order.GetReference() + "', '" + order.GetDateDelivery() + "', '" + order.GetDateInssuance() + "', '" + order.GetDateSettlement() + "', '" + std::to_string(order.GetSettlementBalance()) + "', '" + std::to_string(order.GetIdCustomer()) + "')");
+		order.SetId(this->dataContext.Insert("INSERT INTO [Ordered] (reference, datedelivery, dateinssuance, datesettlement, settlementbalance, fullprice, id_customer) VALUES ('" + order.GetReference() + "', '" + order.GetDateDelivery() + "', '" + order.GetDateInssuance() + "', '" + order.GetDateSettlement() + "', '" + std::to_string(order.GetSettlementBalance()) + "', '" + std::to_string(order.GetFullprice()) + "', '" + std::to_string(order.GetIdCustomer()) + "')"));
 		return order;
 	}
 
 	void ServiceOrder::Remove(int id) {
-		this->dataContext.Query("DELETE FROM [Order] WHERE id = " + std::to_string(id));
+		this->dataContext.Query("DELETE FROM [Hold] WHERE id_order = " + std::to_string(id));
+		this->dataContext.Query("DELETE FROM [Ordered] WHERE id_order = " + std::to_string(id));
+	}
+
+	std::string ServiceOrder::GetLastOrderRef(std::string reflike) {
+		std::string result = this->dataContext.QueryReturn("SELECT TOP 1 reference FROM [Ordered] WHERE reference LIKE '" + reflike + "%' ORDER BY id_order DESC;");
+		std::string reference;
+		if (result == "") {
+			reference = reflike + "1";
+		}
+		else {
+			reference = reflike + std::to_string(std::stoi(result.substr(11, 12)) + 1);
+		}
+		return reference;
+	}
+
+	void ServiceOrder::AddHold(int quantity, int id_order, int id_item) {
+		int id = this->dataContext.Insert("INSERT INTO [Hold] (quantity, id_order, id_item) VALUES ('" + std::to_string(quantity) + "', '" + std::to_string(id_order) + "', '" + std::to_string(id_item) + "')");
+	}
+
+	int ServiceOrder::GetMaxId()
+	{
+		std::string result = this->dataContext.QueryReturn("SELECT CASE WHEN(SELECT COUNT(1) FROM [Ordered]) = 0 THEN 1 ELSE IDENT_CURRENT('Ordered') + 1 END AS Current_Identity; ");
+
+		if (std::stoi(result) == NULL)
+			throw std::runtime_error("id not found !");
+		return std::stoi(result);
+	}
+	int ServiceOrder::GetHoldAmount(int id_order, int id_item) {
+		std::string result = this->dataContext.QueryReturn("SELECT quantity FROM [Hold] WHERE id_order = '" + std::to_string(id_order) + "' AND id_item = '" + std::to_string(id_item) + "';");
+		int amount;
+		if (result == "") {
+			amount = 0;
+		}
+		else {
+			amount = std::stoi(result);
+		}
+		return amount;
 	}
 }

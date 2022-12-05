@@ -51,6 +51,12 @@ namespace BB8Manager_Core_Data {
 			dataSet->Tables[0]->Rows->InsertAt(defaultRow, 0);
 		}
 
+		if (tableName == DataContext::Tables::DataSetItemOnly) {
+			DataColumn^ amountColumn = gcnew DataColumn("Amount", Type::GetType("System.Int32"));
+			amountColumn->DefaultValue = 0;
+			dataSet->Tables[0]->Columns->Add(amountColumn);
+		}
+
 		this->connection->Close();
 
 		return dataSet;
@@ -74,7 +80,7 @@ namespace BB8Manager_Core_Data {
 		return std::stoi(this->ToUnmanagedString(result->ToString()));
 	}
 
-	int DataContext::QueryInt(std::string queryString) {
+	std::string DataContext::QueryReturn(std::string queryString) {
 		String^ query = gcnew String(queryString.c_str());
 		SqlCommand^ command = gcnew SqlCommand(query, this->connection);
 		command->CommandType = CommandType::Text;
@@ -83,7 +89,16 @@ namespace BB8Manager_Core_Data {
 		Object^ result = command->ExecuteScalar();
 		this->connection->Close();
 
-		return std::stoi(this->ToUnmanagedString(result->ToString()));
+		std::string returnstring;
+
+		if (result == nullptr) {
+			returnstring = "";
+		}
+		else {
+			returnstring = this->ToUnmanagedString(result->ToString());
+		}
+
+		return returnstring;
 	}
 
 	/// <summary>
@@ -142,6 +157,13 @@ namespace BB8Manager_Core_Data {
 			map->ColumnMappings->Add("deliveryadress", "Delivery Adress");
 			return map;
 		}
+		case DataContext::Tables::DataSetCustomerName:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Customer");
+			map->ColumnMappings->Add("id_customer", "ID");
+			map->ColumnMappings->Add("name", "Name");
+			return map;
+		}
 		case DataContext::Tables::Employee:
 		{
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Employee");
@@ -193,6 +215,13 @@ namespace BB8Manager_Core_Data {
 			map->ColumnMappings->Add("reduction", "Reduction (%)");
 			map->ColumnMappings->Add("stock", "Stock");
 			map->ColumnMappings->Add("reorder_threshold", "Reorder Threshold");
+			return map;
+		}
+		case DataContext::Tables::DataSetItemOnly:
+		{
+			DataTableMapping^ map = gcnew DataTableMapping("Table", "Item");
+			map->ColumnMappings->Add("reference", "Reference");
+			map->ColumnMappings->Add("name", "Name");
 			return map;
 		}
 		case DataContext::Tables::Ordered:

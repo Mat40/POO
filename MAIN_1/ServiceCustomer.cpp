@@ -1,4 +1,3 @@
-//#include "pch.h"
 #pragma once
 #include "ServiceCustomer.h"
 
@@ -72,9 +71,13 @@ namespace BB8Manager_Core_Services {
 
 	DataSet^ ServiceCustomer::GetSearchDataSet(std::string value)
 	{
-		//DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::Employee, "SELECT * FROM [Employee]");
-
 		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetCustomer, "DROP TABLE IF EXISTS [dbo].[temptable1];DROP TABLE IF EXISTS [dbo].[temptable2];SELECT Customer.id_customer, firstname, lastname, birthdate, streetnumber + ' ' + streetname + ' ' + city + ' ' + postalcode as deliveryadress INTO temptable1 FROM [Customer] JOIN [Has] ON Customer.id_customer = has.id_customer JOIN [Adress] ON has.id_adress = Adress.id_adress WHERE has.billing = '1';SELECT Customer.id_customer, streetnumber + ' ' + streetname + ' ' + city + ' ' + postalcode AS billingadress INTO temptable2 FROM [Customer] JOIN [Has] ON Customer.id_customer = has.id_customer JOIN [Adress] ON has.id_adress = Adress.id_adress WHERE has.delivery = '1';SELECT temptable1.id_customer, temptable1.firstname + ' ' + temptable1.lastname AS customername, birthdate, deliveryadress, billingadress FROM temptable1 INNER JOIN temptable2 ON temptable1.id_customer = temptable2.id_customer WHERE temptable1.firstname LIKE '" + value + "%' OR temptable1.lastname LIKE '" + value + "%';DROP TABLE IF EXISTS [dbo].[temptable1];DROP TABLE IF EXISTS [dbo].[temptable2];");
+		return result;
+	}
+
+	DataSet^ ServiceCustomer::GetDataSetCustomer()
+	{
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetCustomerName, "SELECT Customer.id_customer, Customer.firstname + ' ' + Customer.lastname as name FROM [Customer];");
 		return result;
 	}
 

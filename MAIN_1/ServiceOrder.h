@@ -11,10 +11,14 @@ namespace BB8Manager_Core_Services {
 	{
 	public:
 		std::list<Order> GetAll();
-		Order Get(int id);
+		Order Get(std::string reference);
 		DataSet^ GetDataSet();
 		DataSet^ GetSearchDataSet(std::string value);
 		Order Add(Order order);
 		void Remove(int id);
+		std::string GetLastOrderRef(std::string reflike);
+		void AddHold(int quantity, int id_order, int id_item);
+		int GetMaxId();
+		int GetHoldAmount(int id_order, int id_item);
 	};
 }

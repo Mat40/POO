@@ -38,6 +38,10 @@ namespace BB8Manager_Core_Data_DAO {
 	{
 		this->settlementbalance = settlementbalance;
 	}
+	void Order::SetFullprice(float fullprice)
+	{
+		this->fullprice = fullprice;
+	}
 	void Order::SetIdCustomer(int id_customer)
 	{
 		this->id_customer = id_customer;
@@ -65,6 +69,10 @@ namespace BB8Manager_Core_Data_DAO {
 	float Order::GetSettlementBalance()
 	{
 		return this->settlementbalance;
+	}
+	float Order::GetFullprice()
+	{
+		return this->fullprice;
 	}
 	int Order::GetIdCustomer()
 	{

@@ -1,7 +1,11 @@
 #pragma once
-#include "ServiceAdress.h"
+#include "ServiceAdress.h".
+#include "ServiceCustomer.h"
 #include "ServiceOrder.h"
+#include "ServiceItem.h"
+#include "ServicePayment.h"
 #include "ErrorForm.h"
+#include "AddStockForm.h"
 
 namespace MAIN1 {
 
@@ -26,16 +30,23 @@ namespace MAIN1 {
 		};
 
 		Listener^ listener;
-		ErrorForm^ errorForm;
-		int orderID;
-		int deliveryID;
-		int billingID;
 
-		UpdateOrderForm(Listener^ listener)
+		UpdateOrderForm(Listener^ listener, Order order)
 		{
 			InitializeComponent();
+			refresh_dataGridView();
 			this->listener = listener;
 
+			for (int i = 0; i <= this->dataGridView->RowCount - 2; i++) {
+				Item item = ServiceItem().Get(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[0]->Value->ToString()));
+				int itemamount = ServiceOrder().GetHoldAmount(order.GetId(), item.GetId());
+				this->dataGridView->Rows[i]->Cells[2]->Value = itemamount;
+			}
+
+			this->comboBoxpayment->Items->Clear();
+			this->comboBoxpayment->Items->Add(gcnew ComboboxItem("Paypal", 0));
+			this->comboBoxpayment->Items->Add(gcnew ComboboxItem("Bank Card", 1));
+			this->comboBoxpayment->Items->Add(gcnew ComboboxItem("Cash", 2));
 		}
 
 	protected:
@@ -52,50 +63,23 @@ namespace MAIN1 {
 	private: System::Windows::Forms::Panel^ panelheader;
 	protected:
 	private: System::Windows::Forms::Button^ btnclose;
-	private: System::Windows::Forms::TextBox^ textboxpostalcode;
-
-	private: System::Windows::Forms::TextBox^ textboxcity;
-	private: System::Windows::Forms::TextBox^ textBoxstreetname;
-	private: System::Windows::Forms::TextBox^ textBoxresidence;
-	private: System::Windows::Forms::TextBox^ textBoxbuilding;
 
 	private: bool dragging;
 	private: Point offset;
 
 
-	private: System::Windows::Forms::TextBox^ textBoxstreetnumber;
-	private: System::Windows::Forms::TextBox^ textBoxfloor;
-
-
-	private: System::Windows::Forms::Label^ labelAdress;
 	private: System::Windows::Forms::Panel^ panel1;
-
-	private: System::Windows::Forms::DateTimePicker^ dateTimePickerhiringdate;
-
-
-	private: System::Windows::Forms::TextBox^ textBoxlastname;
-
-	private: System::Windows::Forms::TextBox^ textBoxfirstname;
-
-
 	private: System::Windows::Forms::Button^ btncancel;
 	private: System::Windows::Forms::Button^ btnapply;
-	private: System::Windows::Forms::Label^ labelorder;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::TextBox^ textBoxfloor2;
+	private: System::Windows::Forms::Label^ labelitem;
 
-	private: System::Windows::Forms::TextBox^ textBoxstreetnumber2;
-	private: System::Windows::Forms::TextBox^ textBoxbuilding2;
+	private: Bunifu::UI::WinForms::BunifuDataGridView^ dataGridView;
+	private: System::Windows::Forms::Label^ labelpayment;
+	private: System::Windows::Forms::ComboBox^ comboBoxpayment;
+	private: System::Windows::Forms::TextBox^ textboxprice;
 
 
-	private: System::Windows::Forms::TextBox^ textBoxresidence2;
 
-	private: System::Windows::Forms::TextBox^ textBoxstreetname2;
-
-	private: System::Windows::Forms::TextBox^ textBoxcity2;
-
-	private: System::Windows::Forms::TextBox^ textBoxpostalcode2;
-	private: System::Windows::Forms::CheckBox^ checkBoxadress;
 
 
 
@@ -112,35 +96,23 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(UpdateOrderForm::typeid));
 			this->panelheader = (gcnew System::Windows::Forms::Panel());
 			this->btnclose = (gcnew System::Windows::Forms::Button());
-			this->textboxpostalcode = (gcnew System::Windows::Forms::TextBox());
-			this->textboxcity = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxstreetname = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxresidence = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxbuilding = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxstreetnumber = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxfloor = (gcnew System::Windows::Forms::TextBox());
-			this->labelAdress = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->textboxprice = (gcnew System::Windows::Forms::TextBox());
+			this->comboBoxpayment = (gcnew System::Windows::Forms::ComboBox());
+			this->labelpayment = (gcnew System::Windows::Forms::Label());
+			this->dataGridView = (gcnew Bunifu::UI::WinForms::BunifuDataGridView());
+			this->labelitem = (gcnew System::Windows::Forms::Label());
 			this->btncancel = (gcnew System::Windows::Forms::Button());
 			this->btnapply = (gcnew System::Windows::Forms::Button());
-			this->dateTimePickerhiringdate = (gcnew System::Windows::Forms::DateTimePicker());
-			this->textBoxlastname = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxfirstname = (gcnew System::Windows::Forms::TextBox());
-			this->labelorder = (gcnew System::Windows::Forms::Label());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->textBoxfloor2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxstreetnumber2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxbuilding2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxresidence2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxstreetname2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxcity2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxpostalcode2 = (gcnew System::Windows::Forms::TextBox());
-			this->checkBoxadress = (gcnew System::Windows::Forms::CheckBox());
 			this->panelheader->SuspendLayout();
 			this->panel1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// panelheader
@@ -149,9 +121,8 @@ namespace MAIN1 {
 			this->panelheader->Controls->Add(this->btnclose);
 			this->panelheader->Dock = System::Windows::Forms::DockStyle::Top;
 			this->panelheader->Location = System::Drawing::Point(0, 0);
-			this->panelheader->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->panelheader->Name = L"panelheader";
-			this->panelheader->Size = System::Drawing::Size(800, 43);
+			this->panelheader->Size = System::Drawing::Size(600, 35);
 			this->panelheader->TabIndex = 2;
 			this->panelheader->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &UpdateOrderForm::UpdateOrderForm_MouseDown);
 			this->panelheader->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &UpdateOrderForm::UpdateOrderForm_MouseMove);
@@ -166,122 +137,148 @@ namespace MAIN1 {
 			this->btnclose->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnclose->ForeColor = System::Drawing::Color::White;
-			this->btnclose->Location = System::Drawing::Point(763, 0);
-			this->btnclose->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnclose->Location = System::Drawing::Point(572, 0);
 			this->btnclose->Name = L"btnclose";
-			this->btnclose->Size = System::Drawing::Size(37, 34);
+			this->btnclose->Size = System::Drawing::Size(28, 28);
 			this->btnclose->TabIndex = 5;
 			this->btnclose->Text = L"X";
 			this->btnclose->UseVisualStyleBackColor = false;
 			this->btnclose->Click += gcnew System::EventHandler(this, &UpdateOrderForm::btnclose_Click);
 			// 
-			// textboxpostalcode
-			// 
-			this->textboxpostalcode->Location = System::Drawing::Point(69, 74);
-			this->textboxpostalcode->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textboxpostalcode->Name = L"textboxpostalcode";
-			this->textboxpostalcode->Size = System::Drawing::Size(200, 22);
-			this->textboxpostalcode->TabIndex = 4;
-			this->textboxpostalcode->Text = L"Postal Code";
-			// 
-			// textboxcity
-			// 
-			this->textboxcity->Location = System::Drawing::Point(300, 74);
-			this->textboxcity->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textboxcity->Name = L"textboxcity";
-			this->textboxcity->Size = System::Drawing::Size(200, 22);
-			this->textboxcity->TabIndex = 5;
-			this->textboxcity->Text = L"City";
-			// 
-			// textBoxstreetname
-			// 
-			this->textBoxstreetname->Location = System::Drawing::Point(539, 74);
-			this->textBoxstreetname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxstreetname->Name = L"textBoxstreetname";
-			this->textBoxstreetname->Size = System::Drawing::Size(200, 22);
-			this->textBoxstreetname->TabIndex = 6;
-			this->textBoxstreetname->Text = L"Street Name";
-			// 
-			// textBoxresidence
-			// 
-			this->textBoxresidence->Location = System::Drawing::Point(300, 123);
-			this->textBoxresidence->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxresidence->Name = L"textBoxresidence";
-			this->textBoxresidence->Size = System::Drawing::Size(200, 22);
-			this->textBoxresidence->TabIndex = 7;
-			this->textBoxresidence->Text = L"Residence Name";
-			// 
-			// textBoxbuilding
-			// 
-			this->textBoxbuilding->Location = System::Drawing::Point(539, 123);
-			this->textBoxbuilding->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxbuilding->Name = L"textBoxbuilding";
-			this->textBoxbuilding->Size = System::Drawing::Size(200, 22);
-			this->textBoxbuilding->TabIndex = 8;
-			this->textBoxbuilding->Text = L"Building Name";
-			// 
-			// textBoxstreetnumber
-			// 
-			this->textBoxstreetnumber->Location = System::Drawing::Point(69, 123);
-			this->textBoxstreetnumber->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxstreetnumber->Name = L"textBoxstreetnumber";
-			this->textBoxstreetnumber->Size = System::Drawing::Size(200, 22);
-			this->textBoxstreetnumber->TabIndex = 9;
-			this->textBoxstreetnumber->Text = L"Street Number";
-			// 
-			// textBoxfloor
-			// 
-			this->textBoxfloor->Location = System::Drawing::Point(300, 172);
-			this->textBoxfloor->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxfloor->Name = L"textBoxfloor";
-			this->textBoxfloor->Size = System::Drawing::Size(200, 22);
-			this->textBoxfloor->TabIndex = 10;
-			this->textBoxfloor->Text = L"Floor Number";
-			// 
-			// labelAdress
-			// 
-			this->labelAdress->AutoSize = true;
-			this->labelAdress->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->labelAdress->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
-				static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			this->labelAdress->Location = System::Drawing::Point(293, 12);
-			this->labelAdress->Name = L"labelAdress";
-			this->labelAdress->Size = System::Drawing::Size(193, 49);
-			this->labelAdress->TabIndex = 11;
-			this->labelAdress->Text = L"BILLING";
-			// 
 			// panel1
 			// 
-			this->panel1->Controls->Add(this->checkBoxadress);
-			this->panel1->Controls->Add(this->label1);
-			this->panel1->Controls->Add(this->textBoxfloor2);
-			this->panel1->Controls->Add(this->textBoxstreetnumber2);
-			this->panel1->Controls->Add(this->textBoxbuilding2);
-			this->panel1->Controls->Add(this->textBoxresidence2);
-			this->panel1->Controls->Add(this->textBoxstreetname2);
-			this->panel1->Controls->Add(this->textBoxcity2);
-			this->panel1->Controls->Add(this->textBoxpostalcode2);
+			this->panel1->Controls->Add(this->textboxprice);
+			this->panel1->Controls->Add(this->comboBoxpayment);
+			this->panel1->Controls->Add(this->labelpayment);
+			this->panel1->Controls->Add(this->dataGridView);
+			this->panel1->Controls->Add(this->labelitem);
 			this->panel1->Controls->Add(this->btncancel);
 			this->panel1->Controls->Add(this->btnapply);
-			this->panel1->Controls->Add(this->dateTimePickerhiringdate);
-			this->panel1->Controls->Add(this->textBoxlastname);
-			this->panel1->Controls->Add(this->textBoxfirstname);
-			this->panel1->Controls->Add(this->labelorder);
-			this->panel1->Controls->Add(this->labelAdress);
-			this->panel1->Controls->Add(this->textBoxfloor);
-			this->panel1->Controls->Add(this->textBoxstreetnumber);
-			this->panel1->Controls->Add(this->textBoxbuilding);
-			this->panel1->Controls->Add(this->textBoxresidence);
-			this->panel1->Controls->Add(this->textBoxstreetname);
-			this->panel1->Controls->Add(this->textboxcity);
-			this->panel1->Controls->Add(this->textboxpostalcode);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel1->Location = System::Drawing::Point(0, 54);
-			this->panel1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->panel1->Location = System::Drawing::Point(0, 35);
+			this->panel1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(1000, 859);
+			this->panel1->Size = System::Drawing::Size(600, 496);
 			this->panel1->TabIndex = 12;
+			// 
+			// textboxprice
+			// 
+			this->textboxprice->Location = System::Drawing::Point(335, 86);
+			this->textboxprice->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textboxprice->Name = L"textboxprice";
+			this->textboxprice->Size = System::Drawing::Size(151, 20);
+			this->textboxprice->TabIndex = 31;
+			// 
+			// comboBoxpayment
+			// 
+			this->comboBoxpayment->FormattingEnabled = true;
+			this->comboBoxpayment->Location = System::Drawing::Point(105, 85);
+			this->comboBoxpayment->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->comboBoxpayment->Name = L"comboBoxpayment";
+			this->comboBoxpayment->Size = System::Drawing::Size(151, 21);
+			this->comboBoxpayment->TabIndex = 30;
+			this->comboBoxpayment->Text = L"Means Payment";
+			// 
+			// labelpayment
+			// 
+			this->labelpayment->AutoSize = true;
+			this->labelpayment->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->labelpayment->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+				static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->labelpayment->Location = System::Drawing::Point(218, 28);
+			this->labelpayment->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->labelpayment->Name = L"labelpayment";
+			this->labelpayment->Size = System::Drawing::Size(176, 40);
+			this->labelpayment->TabIndex = 29;
+			this->labelpayment->Text = L"PAYMENT";
+			// 
+			// dataGridView
+			// 
+			this->dataGridView->AllowCustomTheming = true;
+			dataGridViewCellStyle1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
+				static_cast<System::Int32>(static_cast<System::Byte>(251)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::Black;
+			this->dataGridView->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			this->dataGridView->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			this->dataGridView->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->dataGridView->CellBorderStyle = System::Windows::Forms::DataGridViewCellBorderStyle::SingleHorizontal;
+			this->dataGridView->ColumnHeadersBorderStyle = System::Windows::Forms::DataGridViewHeaderBorderStyle::None;
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 11.75F, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dataGridView->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+			this->dataGridView->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView->CurrentTheme->AlternatingRowsStyle->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
+				static_cast<System::Int32>(static_cast<System::Byte>(251)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->dataGridView->CurrentTheme->AlternatingRowsStyle->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
+			this->dataGridView->CurrentTheme->AlternatingRowsStyle->ForeColor = System::Drawing::Color::Black;
+			this->dataGridView->CurrentTheme->AlternatingRowsStyle->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->dataGridView->CurrentTheme->AlternatingRowsStyle->SelectionForeColor = System::Drawing::Color::Black;
+			this->dataGridView->CurrentTheme->BackColor = System::Drawing::Color::White;
+			this->dataGridView->CurrentTheme->GridColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(221)),
+				static_cast<System::Int32>(static_cast<System::Byte>(238)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->dataGridView->CurrentTheme->HeaderStyle->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->dataGridView->CurrentTheme->HeaderStyle->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 11.75F, System::Drawing::FontStyle::Bold));
+			this->dataGridView->CurrentTheme->HeaderStyle->ForeColor = System::Drawing::Color::White;
+			this->dataGridView->CurrentTheme->HeaderStyle->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->dataGridView->CurrentTheme->HeaderStyle->SelectionForeColor = System::Drawing::Color::White;
+			this->dataGridView->CurrentTheme->Name = nullptr;
+			this->dataGridView->CurrentTheme->RowsStyle->BackColor = System::Drawing::Color::White;
+			this->dataGridView->CurrentTheme->RowsStyle->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
+			this->dataGridView->CurrentTheme->RowsStyle->ForeColor = System::Drawing::Color::Black;
+			this->dataGridView->CurrentTheme->RowsStyle->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->dataGridView->CurrentTheme->RowsStyle->SelectionForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle3->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridView->DefaultCellStyle = dataGridViewCellStyle3;
+			this->dataGridView->EnableHeadersVisualStyles = false;
+			this->dataGridView->GridColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(221)), static_cast<System::Int32>(static_cast<System::Byte>(238)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->dataGridView->HeaderBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->dataGridView->HeaderBgColor = System::Drawing::Color::Empty;
+			this->dataGridView->HeaderForeColor = System::Drawing::Color::White;
+			this->dataGridView->Location = System::Drawing::Point(58, 202);
+			this->dataGridView->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->dataGridView->Name = L"dataGridView";
+			this->dataGridView->RowHeadersVisible = false;
+			this->dataGridView->RowHeadersWidth = 51;
+			this->dataGridView->RowTemplate->Height = 40;
+			this->dataGridView->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
+			this->dataGridView->Size = System::Drawing::Size(483, 226);
+			this->dataGridView->TabIndex = 28;
+			this->dataGridView->Theme = Bunifu::UI::WinForms::BunifuDataGridView::PresetThemes::Light;
+			// 
+			// labelitem
+			// 
+			this->labelitem->AutoSize = true;
+			this->labelitem->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->labelitem->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+				static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->labelitem->Location = System::Drawing::Point(242, 142);
+			this->labelitem->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->labelitem->Name = L"labelitem";
+			this->labelitem->Size = System::Drawing::Size(124, 40);
+			this->labelitem->TabIndex = 26;
+			this->labelitem->Text = L"ITEMS";
 			// 
 			// btncancel
 			// 
@@ -290,10 +287,10 @@ namespace MAIN1 {
 			this->btncancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btncancel->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
 			this->btncancel->ForeColor = System::Drawing::Color::DimGray;
-			this->btncancel->Location = System::Drawing::Point(16, 646);
-			this->btncancel->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btncancel->Location = System::Drawing::Point(11, 453);
+			this->btncancel->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btncancel->Name = L"btncancel";
-			this->btncancel->Size = System::Drawing::Size(109, 39);
+			this->btncancel->Size = System::Drawing::Size(82, 32);
 			this->btncancel->TabIndex = 18;
 			this->btncancel->Text = L"CANCEL";
 			this->btncancel->UseVisualStyleBackColor = true;
@@ -308,10 +305,10 @@ namespace MAIN1 {
 			this->btnapply->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnapply->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
 			this->btnapply->ForeColor = System::Drawing::Color::DimGray;
-			this->btnapply->Location = System::Drawing::Point(678, 646);
-			this->btnapply->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnapply->Location = System::Drawing::Point(507, 453);
+			this->btnapply->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnapply->Name = L"btnapply";
-			this->btnapply->Size = System::Drawing::Size(109, 39);
+			this->btnapply->Size = System::Drawing::Size(82, 32);
 			this->btnapply->TabIndex = 17;
 			this->btnapply->Text = L"APPLY";
 			this->btnapply->UseVisualStyleBackColor = true;
@@ -319,154 +316,34 @@ namespace MAIN1 {
 			this->btnapply->MouseEnter += gcnew System::EventHandler(this, &UpdateOrderForm::btnapply_OnMouseEnter);
 			this->btnapply->MouseLeave += gcnew System::EventHandler(this, &UpdateOrderForm::btnapply_OnMouseLeave);
 			// 
-			// dateTimePickerhiringdate
-			// 
-			this->dateTimePickerhiringdate->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->dateTimePickerhiringdate->Location = System::Drawing::Point(539, 547);
-			this->dateTimePickerhiringdate->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->dateTimePickerhiringdate->Name = L"dateTimePickerhiringdate";
-			this->dateTimePickerhiringdate->Size = System::Drawing::Size(200, 22);
-			this->dateTimePickerhiringdate->TabIndex = 15;
-			this->dateTimePickerhiringdate->Value = System::DateTime(2022, 11, 25, 0, 0, 0, 0);
-			// 
-			// textBoxlastname
-			// 
-			this->textBoxlastname->Location = System::Drawing::Point(300, 547);
-			this->textBoxlastname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxlastname->Name = L"textBoxlastname";
-			this->textBoxlastname->Size = System::Drawing::Size(200, 22);
-			this->textBoxlastname->TabIndex = 14;
-			this->textBoxlastname->Text = L"Lastname";
-			// 
-			// textBoxfirstname
-			// 
-			this->textBoxfirstname->Location = System::Drawing::Point(69, 547);
-			this->textBoxfirstname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxfirstname->Name = L"textBoxfirstname";
-			this->textBoxfirstname->Size = System::Drawing::Size(200, 22);
-			this->textBoxfirstname->TabIndex = 13;
-			this->textBoxfirstname->Text = L"Firstname";
-			// 
-			// labelorder
-			// 
-			this->labelorder->AutoSize = true;
-			this->labelorder->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->labelorder->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
-				static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			this->labelorder->Location = System::Drawing::Point(271, 485);
-			this->labelorder->Name = L"labelorder";
-			this->labelorder->Size = System::Drawing::Size(257, 49);
-			this->labelorder->TabIndex = 11;
-			this->labelorder->Text = L"CUSTOMER";
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
-				static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			this->label1->Location = System::Drawing::Point(293, 250);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(229, 49);
-			this->label1->TabIndex = 26;
-			this->label1->Text = L"DELIVERY";
-			// 
-			// textBoxfloor2
-			// 
-			this->textBoxfloor2->Location = System::Drawing::Point(300, 410);
-			this->textBoxfloor2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxfloor2->Name = L"textBoxfloor2";
-			this->textBoxfloor2->Size = System::Drawing::Size(200, 22);
-			this->textBoxfloor2->TabIndex = 25;
-			this->textBoxfloor2->Text = L"Floor Number";
-
-			// 
-			// textBoxstreetnumber2
-			// 
-			this->textBoxstreetnumber2->Location = System::Drawing::Point(69, 361);
-			this->textBoxstreetnumber2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxstreetnumber2->Name = L"textBoxstreetnumber2";
-			this->textBoxstreetnumber2->Size = System::Drawing::Size(200, 22);
-			this->textBoxstreetnumber2->TabIndex = 24;
-			this->textBoxstreetnumber2->Text = L"Street Number";
-			// 
-			// textBoxbuilding2
-			// 
-			this->textBoxbuilding2->Location = System::Drawing::Point(539, 361);
-			this->textBoxbuilding2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxbuilding2->Name = L"textBoxbuilding2";
-			this->textBoxbuilding2->Size = System::Drawing::Size(200, 22);
-			this->textBoxbuilding2->TabIndex = 23;
-			this->textBoxbuilding2->Text = L"Building Name";
-			// 
-			// textBoxresidence2
-			// 
-			this->textBoxresidence2->Location = System::Drawing::Point(300, 361);
-			this->textBoxresidence2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxresidence2->Name = L"textBoxresidence2";
-			this->textBoxresidence2->Size = System::Drawing::Size(200, 22);
-			this->textBoxresidence2->TabIndex = 22;
-			this->textBoxresidence2->Text = L"Residence Name";
-			// 
-			// textBoxstreetname2
-			// 
-			this->textBoxstreetname2->Location = System::Drawing::Point(539, 312);
-			this->textBoxstreetname2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxstreetname2->Name = L"textBoxstreetname2";
-			this->textBoxstreetname2->Size = System::Drawing::Size(200, 22);
-			this->textBoxstreetname2->TabIndex = 21;
-			this->textBoxstreetname2->Text = L"Street Name";
-			// 
-			// textBoxcity2
-			// 
-			this->textBoxcity2->Location = System::Drawing::Point(300, 312);
-			this->textBoxcity2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxcity2->Name = L"textBoxcity2";
-			this->textBoxcity2->Size = System::Drawing::Size(200, 22);
-			this->textBoxcity2->TabIndex = 20;
-			this->textBoxcity2->Text = L"City";
-			// 
-			// textBoxpostalcode2
-			// 
-			this->textBoxpostalcode2->Location = System::Drawing::Point(69, 312);
-			this->textBoxpostalcode2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxpostalcode2->Name = L"textBoxpostalcode2";
-			this->textBoxpostalcode2->Size = System::Drawing::Size(200, 22);
-			this->textBoxpostalcode2->TabIndex = 19;
-			this->textBoxpostalcode2->Text = L"Postal Code";
-			// 
-			// checkBoxadress
-			// 
-			this->checkBoxadress->AutoSize = true;
-			this->checkBoxadress->Location = System::Drawing::Point(541, 174);
-			this->checkBoxadress->Name = L"checkBoxadress";
-			this->checkBoxadress->Size = System::Drawing::Size(186, 20);
-			this->checkBoxadress->TabIndex = 27;
-			this->checkBoxadress->Text = L"Use Same Adress for both";
-			this->checkBoxadress->UseVisualStyleBackColor = true;
-			// 
 			// UpdateOrderForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(800, 730);
+			this->ClientSize = System::Drawing::Size(600, 531);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->panelheader);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"UpdateOrderForm";
 			this->Text = L"UpdateOrderForm";
-			this->Load += gcnew System::EventHandler(this, &UpdateOrderForm::comboBoxsuperior_Load);
 			this->panelheader->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->EndInit();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
+
+	public: System::Void refresh_dataGridView() {
+		this->dataGridView->Refresh();
+		this->dataGridView->DataSource = ServiceItem().GetItemDataSet();
+		this->dataGridView->DataMember = "Item";
+		this->dataGridView->Columns["Reference"]->ReadOnly = true;
+		this->dataGridView->Columns["Name"]->ReadOnly = true;
+	}
 
 
 	private: System::Void btnclose_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -516,18 +393,79 @@ namespace MAIN1 {
 	private: System::Void UpdateOrderForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		this->dragging = false;
 	}
-
-	private: System::Void comboBoxsuperior_Load(System::Object^ sender, System::EventArgs^ e) {
-		//this->comboBoxsuperior->Refresh();
-		//this->comboBoxsuperior->DataSource = BB8Manager_Core_Services::ServiceOrder().GetDataSetSuperior()->Tables[0];
-		//this->comboBoxsuperior->DisplayMember = "Name";
-		//this->comboBoxsuperior->ValueMember = "ID";
-	}
 	private: System::Void btncancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
-		
+		//// Inssuance date (Current date)
+		//char date1[80];
+		//char date2[80];
+		//time_t t = time(0);
+		//strftime(date1, 80, "%Y-%m-%d", localtime(&t));
+
+		//// Delivery date (add 5 days to current date)
+		//tm* tmptr = NULL;
+		//tmptr = localtime(&t);
+		//tmptr->tm_mday += 5;
+		//time_t finaldate = mktime(tmptr);
+		//strftime(date2, 80, "%Y-%m-%d", localtime(&finaldate));
+
+		//std::string dateinssuance = date1;
+		//std::string datedelivery = date2;
+
+		///////// USELESS AS FUCK
+		////// Reformat customer name
+		////std::string customername = marshal_as<std::string>(this->comboBoxcustomer->Text->ToString());
+		////std::size_t pos = customername.find(" ");
+		////std::string firstname = customername.substr(0, pos);
+		////std::string lastname = customername.substr(pos, std::string::npos);
+
+		//Customer customer = ServiceCustomer().Get(std::stoi(marshal_as<std::string>(this->comboBoxcustomer->SelectedValue->ToString())));
+		//Adress adress = ServiceAdress().Get(customer.GetIdDeliveryAdress());
+
+		//std::string reference = customer.GetFirstname().substr(0, 2) + customer.GetLastname().substr(0, 2) + dateinssuance.substr(0, 4) + adress.GetCity().substr(0, 3);
+
+		//for (int i = 0; i < reference.length(); ++i)
+		//{
+		//	reference[i] = ::toupper(reference[i]);
+		//}
+
+		//float totalorderprice;
+
+		//for (int i = 0; i <= this->dataGridView->RowCount - 2; i++) {
+		//	int itemamount = std::stoi(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[2]->Value->ToString()));
+		//	if (itemamount > 0) {
+		//		Item item = ServiceItem().Get(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[0]->Value->ToString()));
+		//		float itemprice = item.GetPriceExclTaxes() * (1 + (item.GetVat() / 100));
+		//		float totalprice = itemprice * itemamount;
+		//		totalorderprice += totalprice;
+		//	}
+		//}
+
+		//if (totalorderprice > 0) {
+		//	Order order;
+		//	order.SetDateInssuance(dateinssuance);
+		//	order.SetDateDelivery(datedelivery);
+		//	order.SetReference(ServiceOrder().GetLastOrderRef(reference));
+		//	order.SetIdCustomer(customer.GetId());
+		//	order.SetFullprice(totalorderprice);
+		//	order.SetSettlementBalance(totalorderprice);
+		//	order.SetDateSettlement(dateinssuance);
+		//	order = ServiceOrder().Add(order);
+
+		//	for (int i = 0; i <= this->dataGridView->RowCount - 2; i++) {
+		//		int itemamount = std::stoi(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[2]->Value->ToString()));
+		//		if (itemamount > 0) {
+		//			Item item = ServiceItem().Get(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[0]->Value->ToString()));
+		//			ServiceOrder().AddHold(itemamount, order.GetId(), item.GetId());
+		//		}
+		//	}
+
+		//	this->listener->onApplyClicked();
+
+		//	this->Close();
+		//}
 	}
 	};
 }
+

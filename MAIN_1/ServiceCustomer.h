@@ -16,6 +16,7 @@ namespace BB8Manager_Core_Services {
 		void Remove(int id);
 		DataSet^ GetDataSet();
 		DataSet^ GetSearchDataSet(std::string value);
+		DataSet^ GetDataSetCustomer();
 		void Update(Customer customer);
 	};
 }

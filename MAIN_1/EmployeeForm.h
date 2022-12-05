@@ -122,10 +122,10 @@ namespace MAIN1 {
 			// 
 			this->employeeLayoutPanel->Controls->Add(this->panel2);
 			this->employeeLayoutPanel->Controls->Add(this->panelDataGridView);
-			this->employeeLayoutPanel->Location = System::Drawing::Point(9, 10);
-			this->employeeLayoutPanel->Margin = System::Windows::Forms::Padding(2);
+			this->employeeLayoutPanel->Location = System::Drawing::Point(12, 12);
+			this->employeeLayoutPanel->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->employeeLayoutPanel->Name = L"employeeLayoutPanel";
-			this->employeeLayoutPanel->Size = System::Drawing::Size(902, 538);
+			this->employeeLayoutPanel->Size = System::Drawing::Size(1203, 662);
 			this->employeeLayoutPanel->TabIndex = 0;
 			// 
 			// panel2
@@ -135,10 +135,10 @@ namespace MAIN1 {
 			this->panel2->Controls->Add(this->btndelete);
 			this->panel2->Controls->Add(this->btnadd);
 			this->panel2->Controls->Add(this->btnupdate);
-			this->panel2->Location = System::Drawing::Point(2, 2);
-			this->panel2->Margin = System::Windows::Forms::Padding(2);
+			this->panel2->Location = System::Drawing::Point(3, 2);
+			this->panel2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(898, 45);
+			this->panel2->Size = System::Drawing::Size(1197, 55);
 			this->panel2->TabIndex = 0;
 			// 
 			// btnsearch
@@ -147,19 +147,20 @@ namespace MAIN1 {
 			this->btnsearch->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnsearch->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F));
 			this->btnsearch->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnsearch.Image")));
-			this->btnsearch->Location = System::Drawing::Point(275, 5);
-			this->btnsearch->Margin = System::Windows::Forms::Padding(2);
+			this->btnsearch->Location = System::Drawing::Point(367, 6);
+			this->btnsearch->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnsearch->Name = L"btnsearch";
-			this->btnsearch->Size = System::Drawing::Size(35, 35);
+			this->btnsearch->Size = System::Drawing::Size(47, 43);
 			this->btnsearch->TabIndex = 4;
 			this->btnsearch->UseVisualStyleBackColor = true;
 			this->btnsearch->Click += gcnew System::EventHandler(this, &EmployeeForm::btnsearch_Click);
 			// 
 			// textBoxsearch
 			// 
-			this->textBoxsearch->Location = System::Drawing::Point(12, 13);
+			this->textBoxsearch->Location = System::Drawing::Point(16, 16);
+			this->textBoxsearch->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBoxsearch->Name = L"textBoxsearch";
-			this->textBoxsearch->Size = System::Drawing::Size(258, 20);
+			this->textBoxsearch->Size = System::Drawing::Size(343, 22);
 			this->textBoxsearch->TabIndex = 3;
 			this->textBoxsearch->TextChanged += gcnew System::EventHandler(this, &EmployeeForm::textBoxsearch_TextChanged);
 			this->textBoxsearch->Enter += gcnew System::EventHandler(this, &EmployeeForm::textBoxsearch_Enter);
@@ -172,10 +173,10 @@ namespace MAIN1 {
 			this->btndelete->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btndelete->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F));
 			this->btndelete->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btndelete.Image")));
-			this->btndelete->Location = System::Drawing::Point(840, 5);
-			this->btndelete->Margin = System::Windows::Forms::Padding(2);
+			this->btndelete->Location = System::Drawing::Point(1120, 6);
+			this->btndelete->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btndelete->Name = L"btndelete";
-			this->btndelete->Size = System::Drawing::Size(35, 35);
+			this->btndelete->Size = System::Drawing::Size(47, 43);
 			this->btndelete->TabIndex = 2;
 			this->btndelete->UseVisualStyleBackColor = true;
 			this->btndelete->Click += gcnew System::EventHandler(this, &EmployeeForm::btndelete_Click);
@@ -186,10 +187,10 @@ namespace MAIN1 {
 			this->btnadd->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnadd->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F));
 			this->btnadd->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnadd.Image")));
-			this->btnadd->Location = System::Drawing::Point(762, 5);
-			this->btnadd->Margin = System::Windows::Forms::Padding(2);
+			this->btnadd->Location = System::Drawing::Point(1016, 6);
+			this->btnadd->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnadd->Name = L"btnadd";
-			this->btnadd->Size = System::Drawing::Size(35, 35);
+			this->btnadd->Size = System::Drawing::Size(47, 43);
 			this->btnadd->TabIndex = 1;
 			this->btnadd->UseVisualStyleBackColor = true;
 			this->btnadd->Click += gcnew System::EventHandler(this, &EmployeeForm::button1_Click);
@@ -200,10 +201,10 @@ namespace MAIN1 {
 			this->btnupdate->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnupdate->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10.2F));
 			this->btnupdate->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnupdate.Image")));
-			this->btnupdate->Location = System::Drawing::Point(801, 5);
-			this->btnupdate->Margin = System::Windows::Forms::Padding(2);
+			this->btnupdate->Location = System::Drawing::Point(1068, 6);
+			this->btnupdate->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnupdate->Name = L"btnupdate";
-			this->btnupdate->Size = System::Drawing::Size(35, 35);
+			this->btnupdate->Size = System::Drawing::Size(47, 43);
 			this->btnupdate->TabIndex = 0;
 			this->btnupdate->UseVisualStyleBackColor = true;
 			this->btnupdate->Click += gcnew System::EventHandler(this, &EmployeeForm::btnupdate_Click);
@@ -211,10 +212,10 @@ namespace MAIN1 {
 			// panelDataGridView
 			// 
 			this->panelDataGridView->Controls->Add(this->dataGridView);
-			this->panelDataGridView->Location = System::Drawing::Point(2, 51);
-			this->panelDataGridView->Margin = System::Windows::Forms::Padding(2);
+			this->panelDataGridView->Location = System::Drawing::Point(3, 61);
+			this->panelDataGridView->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->panelDataGridView->Name = L"panelDataGridView";
-			this->panelDataGridView->Size = System::Drawing::Size(900, 485);
+			this->panelDataGridView->Size = System::Drawing::Size(1200, 597);
 			this->panelDataGridView->TabIndex = 0;
 			// 
 			// dataGridView
@@ -282,25 +283,27 @@ namespace MAIN1 {
 				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
 			this->dataGridView->HeaderBgColor = System::Drawing::Color::Empty;
 			this->dataGridView->HeaderForeColor = System::Drawing::Color::White;
-			this->dataGridView->Location = System::Drawing::Point(2, 2);
-			this->dataGridView->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView->Location = System::Drawing::Point(3, 2);
+			this->dataGridView->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dataGridView->MultiSelect = false;
 			this->dataGridView->Name = L"dataGridView";
+			this->dataGridView->ReadOnly = true;
 			this->dataGridView->RowHeadersVisible = false;
+			this->dataGridView->RowHeadersWidth = 51;
 			this->dataGridView->RowTemplate->Height = 40;
 			this->dataGridView->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			this->dataGridView->Size = System::Drawing::Size(896, 481);
+			this->dataGridView->Size = System::Drawing::Size(1195, 592);
 			this->dataGridView->TabIndex = 1;
 			this->dataGridView->Theme = Bunifu::UI::WinForms::BunifuDataGridView::PresetThemes::Light;
-			this->dataGridView->ReadOnly = true;
 			// 
 			// EmployeeForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(920, 557);
+			this->ClientSize = System::Drawing::Size(1227, 686);
 			this->Controls->Add(this->employeeLayoutPanel);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"EmployeeForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Employee";

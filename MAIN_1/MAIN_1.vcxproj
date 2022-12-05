@@ -245,6 +245,9 @@
     <EmbeddedResource Include="AddEmployeeForm.resx">
       <DependentUpon>AddEmployeeForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddOrderForm.resx">
+      <DependentUpon>AddOrderForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddStockForm.resx">
       <DependentUpon>AddStockForm.h</DependentUpon>
     </EmbeddedResource>
@@ -274,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateEmployeeForm.resx">
       <DependentUpon>UpdateEmployeeForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateOrderForm.resx">
+      <DependentUpon>UpdateOrderForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateStockForm.resx">
       <DependentUpon>UpdateStockForm.h</DependentUpon>

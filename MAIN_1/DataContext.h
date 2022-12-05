@@ -21,14 +21,14 @@ namespace BB8Manager_Core_Data {
 	ref class DataContext
 	{
 	public:
-		enum class Tables { Adress, Customer, DataSetCustomer, Employee, DataSetEmployee, DataSetSuperior, Item, DataSetItem, Ordered, DataSetOrdered, Payment, Stock, WholesalePrice };
+		enum class Tables { Adress, Customer, DataSetCustomerName, DataSetCustomer, Employee, DataSetEmployee, DataSetSuperior, Item, DataSetItem, DataSetItemOnly, Ordered, DataSetOrdered, Payment, Stock, WholesalePrice };
 
 		DataContext();
 		DataRowCollection^ Fetch(Tables tableName, std::string queryString);
 		DataSet^ GetDataSet(Tables tableName, std::string queryString);
 		int Insert(std::string queryString);
 		void Query(std::string queryString);
-		int QueryInt(std::string queryString);
+		std::string QueryReturn(std::string queryString);
 		std::string ToUnmanagedString(String^ value);
 	private:
 		String^ connectionString =

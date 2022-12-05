@@ -11,6 +11,7 @@ namespace BB8Manager_Core_Data_DAO {
 		std::string dateinssuance;
 		std::string datesettlement;
 		float settlementbalance;
+		float fullprice;
 		int id_customer;
 	public:
 		Order();
@@ -22,6 +23,7 @@ namespace BB8Manager_Core_Data_DAO {
 		void SetDateInssuance(std::string dateinssuance);
 		void SetDateSettlement(std::string datesettlement);
 		void SetSettlementBalance(float settlementbalance);
+		void SetFullprice(float fullprice);
 		void SetIdCustomer(int id_customer);
 
 		int GetId();
@@ -30,6 +32,7 @@ namespace BB8Manager_Core_Data_DAO {
 		std::string GetDateInssuance();
 		std::string GetDateSettlement();
 		float GetSettlementBalance();
+		float GetFullprice();
 		int GetIdCustomer();
 	};
 }

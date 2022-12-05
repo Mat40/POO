@@ -1,6 +1,11 @@
 #pragma once
-#include "ServiceAdress.h"
+#include "AddStockForm.h"
+#include "ServiceItem.h"
 #include "ServiceOrder.h"
+#include "ServiceAdress.h"
+#include "ServiceCustomer.h"
+#include <iostream>
+#include <ctime>
 
 namespace MAIN1 {
 
@@ -29,6 +34,7 @@ namespace MAIN1 {
 		AddOrderForm(Listener^ listener)
 		{
 			InitializeComponent();
+			refresh_dataGridView();
 			this->listener = listener;
 		}
 
@@ -46,50 +52,19 @@ namespace MAIN1 {
 	private: System::Windows::Forms::Panel^ panelheader;
 	protected:
 	private: System::Windows::Forms::Button^ btnclose;
-	private: System::Windows::Forms::TextBox^ textboxpostalcode;
-
-	private: System::Windows::Forms::TextBox^ textboxcity;
-	private: System::Windows::Forms::TextBox^ textBoxstreetname;
-	private: System::Windows::Forms::TextBox^ textBoxresidence;
-	private: System::Windows::Forms::TextBox^ textBoxbuilding;
 
 	private: bool dragging;
 	private: Point offset;
 
-
-	private: System::Windows::Forms::TextBox^ textBoxstreetnumber;
-	private: System::Windows::Forms::TextBox^ textBoxfloor;
-
-
-	private: System::Windows::Forms::Label^ labelAdress;
+	private: System::Windows::Forms::Label^ labelCustomer;
 	private: System::Windows::Forms::Panel^ panel1;
-
-	private: System::Windows::Forms::DateTimePicker^ dateTimePickerhiringdate;
-
-
-	private: System::Windows::Forms::TextBox^ textBoxlastname;
-
-	private: System::Windows::Forms::TextBox^ textBoxfirstname;
-
-
 	private: System::Windows::Forms::Button^ btncancel;
 	private: System::Windows::Forms::Button^ btnapply;
-	private: System::Windows::Forms::Label^ labelorder;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::TextBox^ textBoxfloor2;
-
-	private: System::Windows::Forms::TextBox^ textBoxstreetnumber2;
-	private: System::Windows::Forms::TextBox^ textBoxbuilding2;
+	private: System::Windows::Forms::Label^ labelitem;
+	private: System::Windows::Forms::ComboBox^ comboBoxcustomer;
+	private: Bunifu::UI::WinForms::BunifuDataGridView^ dataGridView;
 
 
-	private: System::Windows::Forms::TextBox^ textBoxresidence2;
-
-	private: System::Windows::Forms::TextBox^ textBoxstreetname2;
-
-	private: System::Windows::Forms::TextBox^ textBoxcity2;
-
-	private: System::Windows::Forms::TextBox^ textBoxpostalcode2;
-	private: System::Windows::Forms::CheckBox^ checkBoxadress;
 
 
 
@@ -106,35 +81,22 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AddOrderForm::typeid));
 			this->panelheader = (gcnew System::Windows::Forms::Panel());
 			this->btnclose = (gcnew System::Windows::Forms::Button());
-			this->textboxpostalcode = (gcnew System::Windows::Forms::TextBox());
-			this->textboxcity = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxstreetname = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxresidence = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxbuilding = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxstreetnumber = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxfloor = (gcnew System::Windows::Forms::TextBox());
-			this->labelAdress = (gcnew System::Windows::Forms::Label());
+			this->labelCustomer = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->checkBoxadress = (gcnew System::Windows::Forms::CheckBox());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->textBoxfloor2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxstreetnumber2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxbuilding2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxresidence2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxstreetname2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxcity2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxpostalcode2 = (gcnew System::Windows::Forms::TextBox());
+			this->dataGridView = (gcnew Bunifu::UI::WinForms::BunifuDataGridView());
+			this->comboBoxcustomer = (gcnew System::Windows::Forms::ComboBox());
+			this->labelitem = (gcnew System::Windows::Forms::Label());
 			this->btncancel = (gcnew System::Windows::Forms::Button());
 			this->btnapply = (gcnew System::Windows::Forms::Button());
-			this->dateTimePickerhiringdate = (gcnew System::Windows::Forms::DateTimePicker());
-			this->textBoxlastname = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxfirstname = (gcnew System::Windows::Forms::TextBox());
-			this->labelorder = (gcnew System::Windows::Forms::Label());
 			this->panelheader->SuspendLayout();
 			this->panel1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// panelheader
@@ -169,227 +131,127 @@ namespace MAIN1 {
 			this->btnclose->UseVisualStyleBackColor = false;
 			this->btnclose->Click += gcnew System::EventHandler(this, &AddOrderForm::btnclose_Click);
 			// 
-			// textboxpostalcode
+			// labelCustomer
 			// 
-			this->textboxpostalcode->Location = System::Drawing::Point(69, 74);
-			this->textboxpostalcode->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textboxpostalcode->Name = L"textboxpostalcode";
-			this->textboxpostalcode->Size = System::Drawing::Size(200, 22);
-			this->textboxpostalcode->TabIndex = 4;
-			this->textboxpostalcode->Text = L"Postal Code";
-			this->textboxpostalcode->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textboxpostalcode_RemoveText);
-			this->textboxpostalcode->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textboxpostalcode_AddText);
-			// 
-			// textboxcity
-			// 
-			this->textboxcity->Location = System::Drawing::Point(300, 74);
-			this->textboxcity->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textboxcity->Name = L"textboxcity";
-			this->textboxcity->Size = System::Drawing::Size(200, 22);
-			this->textboxcity->TabIndex = 5;
-			this->textboxcity->Text = L"City";
-			this->textboxcity->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textboxcity_RemoveText);
-			this->textboxcity->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textboxcity_AddText);
-			// 
-			// textBoxstreetname
-			// 
-			this->textBoxstreetname->Location = System::Drawing::Point(539, 74);
-			this->textBoxstreetname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxstreetname->Name = L"textBoxstreetname";
-			this->textBoxstreetname->Size = System::Drawing::Size(200, 22);
-			this->textBoxstreetname->TabIndex = 6;
-			this->textBoxstreetname->Text = L"Street Name";
-			this->textBoxstreetname->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetname_RemoveText);
-			this->textBoxstreetname->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetname_AddText);
-			// 
-			// textBoxresidence
-			// 
-			this->textBoxresidence->Location = System::Drawing::Point(300, 123);
-			this->textBoxresidence->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxresidence->Name = L"textBoxresidence";
-			this->textBoxresidence->Size = System::Drawing::Size(200, 22);
-			this->textBoxresidence->TabIndex = 7;
-			this->textBoxresidence->Text = L"Residence Name";
-			this->textBoxresidence->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxresidence_RemoveText);
-			this->textBoxresidence->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxresidence_AddText);
-			// 
-			// textBoxbuilding
-			// 
-			this->textBoxbuilding->Location = System::Drawing::Point(539, 123);
-			this->textBoxbuilding->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxbuilding->Name = L"textBoxbuilding";
-			this->textBoxbuilding->Size = System::Drawing::Size(200, 22);
-			this->textBoxbuilding->TabIndex = 8;
-			this->textBoxbuilding->Text = L"Building Name";
-			this->textBoxbuilding->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxbuilding_RemoveText);
-			this->textBoxbuilding->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxbuilding_AddText);
-			// 
-			// textBoxstreetnumber
-			// 
-			this->textBoxstreetnumber->Location = System::Drawing::Point(69, 123);
-			this->textBoxstreetnumber->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxstreetnumber->Name = L"textBoxstreetnumber";
-			this->textBoxstreetnumber->Size = System::Drawing::Size(200, 22);
-			this->textBoxstreetnumber->TabIndex = 9;
-			this->textBoxstreetnumber->Text = L"Street Number";
-			this->textBoxstreetnumber->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetnumber_RemoveText);
-			this->textBoxstreetnumber->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetnumber_AddText);
-			// 
-			// textBoxfloor
-			// 
-			this->textBoxfloor->Location = System::Drawing::Point(300, 172);
-			this->textBoxfloor->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxfloor->Name = L"textBoxfloor";
-			this->textBoxfloor->Size = System::Drawing::Size(200, 22);
-			this->textBoxfloor->TabIndex = 10;
-			this->textBoxfloor->Text = L"Floor Number";
-			this->textBoxfloor->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfloor_RemoveText);
-			this->textBoxfloor->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfloor_AddText);
-			// 
-			// labelAdress
-			// 
-			this->labelAdress->AutoSize = true;
-			this->labelAdress->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->labelCustomer->AutoSize = true;
+			this->labelCustomer->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->labelAdress->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+			this->labelCustomer->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
 				static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			this->labelAdress->Location = System::Drawing::Point(293, 12);
-			this->labelAdress->Name = L"labelAdress";
-			this->labelAdress->Size = System::Drawing::Size(193, 49);
-			this->labelAdress->TabIndex = 11;
-			this->labelAdress->Text = L"BILLING";
+			this->labelCustomer->Location = System::Drawing::Point(272, 12);
+			this->labelCustomer->Name = L"labelCustomer";
+			this->labelCustomer->Size = System::Drawing::Size(257, 49);
+			this->labelCustomer->TabIndex = 11;
+			this->labelCustomer->Text = L"CUSTOMER";
 			// 
 			// panel1
 			// 
-			this->panel1->Controls->Add(this->checkBoxadress);
-			this->panel1->Controls->Add(this->label1);
-			this->panel1->Controls->Add(this->textBoxfloor2);
-			this->panel1->Controls->Add(this->textBoxstreetnumber2);
-			this->panel1->Controls->Add(this->textBoxbuilding2);
-			this->panel1->Controls->Add(this->textBoxresidence2);
-			this->panel1->Controls->Add(this->textBoxstreetname2);
-			this->panel1->Controls->Add(this->textBoxcity2);
-			this->panel1->Controls->Add(this->textBoxpostalcode2);
+			this->panel1->Controls->Add(this->dataGridView);
+			this->panel1->Controls->Add(this->comboBoxcustomer);
+			this->panel1->Controls->Add(this->labelitem);
 			this->panel1->Controls->Add(this->btncancel);
 			this->panel1->Controls->Add(this->btnapply);
-			this->panel1->Controls->Add(this->dateTimePickerhiringdate);
-			this->panel1->Controls->Add(this->textBoxlastname);
-			this->panel1->Controls->Add(this->textBoxfirstname);
-			this->panel1->Controls->Add(this->labelorder);
-			this->panel1->Controls->Add(this->labelAdress);
-			this->panel1->Controls->Add(this->textBoxfloor);
-			this->panel1->Controls->Add(this->textBoxstreetnumber);
-			this->panel1->Controls->Add(this->textBoxbuilding);
-			this->panel1->Controls->Add(this->textBoxresidence);
-			this->panel1->Controls->Add(this->textBoxstreetname);
-			this->panel1->Controls->Add(this->textboxcity);
-			this->panel1->Controls->Add(this->textboxpostalcode);
+			this->panel1->Controls->Add(this->labelCustomer);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panel1->Location = System::Drawing::Point(0, 43);
 			this->panel1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(800, 687);
+			this->panel1->Size = System::Drawing::Size(800, 610);
 			this->panel1->TabIndex = 12;
 			// 
-			// checkBoxadress
+			// dataGridView
 			// 
-			this->checkBoxadress->AutoSize = true;
-			this->checkBoxadress->Location = System::Drawing::Point(541, 174);
-			this->checkBoxadress->Name = L"checkBoxadress";
-			this->checkBoxadress->Size = System::Drawing::Size(186, 20);
-			this->checkBoxadress->TabIndex = 27;
-			this->checkBoxadress->Text = L"Use Same Adress for both";
-			this->checkBoxadress->UseVisualStyleBackColor = true;
+			this->dataGridView->AllowCustomTheming = true;
+			dataGridViewCellStyle1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
+				static_cast<System::Int32>(static_cast<System::Byte>(251)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::Black;
+			this->dataGridView->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			this->dataGridView->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			this->dataGridView->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->dataGridView->CellBorderStyle = System::Windows::Forms::DataGridViewCellBorderStyle::SingleHorizontal;
+			this->dataGridView->ColumnHeadersBorderStyle = System::Windows::Forms::DataGridViewHeaderBorderStyle::None;
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 11.75F, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dataGridView->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+			this->dataGridView->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView->CurrentTheme->AlternatingRowsStyle->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
+				static_cast<System::Int32>(static_cast<System::Byte>(251)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->dataGridView->CurrentTheme->AlternatingRowsStyle->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
+			this->dataGridView->CurrentTheme->AlternatingRowsStyle->ForeColor = System::Drawing::Color::Black;
+			this->dataGridView->CurrentTheme->AlternatingRowsStyle->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->dataGridView->CurrentTheme->AlternatingRowsStyle->SelectionForeColor = System::Drawing::Color::Black;
+			this->dataGridView->CurrentTheme->BackColor = System::Drawing::Color::White;
+			this->dataGridView->CurrentTheme->GridColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(221)),
+				static_cast<System::Int32>(static_cast<System::Byte>(238)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->dataGridView->CurrentTheme->HeaderStyle->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->dataGridView->CurrentTheme->HeaderStyle->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 11.75F, System::Drawing::FontStyle::Bold));
+			this->dataGridView->CurrentTheme->HeaderStyle->ForeColor = System::Drawing::Color::White;
+			this->dataGridView->CurrentTheme->HeaderStyle->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->dataGridView->CurrentTheme->HeaderStyle->SelectionForeColor = System::Drawing::Color::White;
+			this->dataGridView->CurrentTheme->Name = nullptr;
+			this->dataGridView->CurrentTheme->RowsStyle->BackColor = System::Drawing::Color::White;
+			this->dataGridView->CurrentTheme->RowsStyle->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
+			this->dataGridView->CurrentTheme->RowsStyle->ForeColor = System::Drawing::Color::Black;
+			this->dataGridView->CurrentTheme->RowsStyle->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->dataGridView->CurrentTheme->RowsStyle->SelectionForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle3->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridView->DefaultCellStyle = dataGridViewCellStyle3;
+			this->dataGridView->EnableHeadersVisualStyles = false;
+			this->dataGridView->GridColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(221)), static_cast<System::Int32>(static_cast<System::Byte>(238)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->dataGridView->HeaderBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->dataGridView->HeaderBgColor = System::Drawing::Color::Empty;
+			this->dataGridView->HeaderForeColor = System::Drawing::Color::White;
+			this->dataGridView->Location = System::Drawing::Point(78, 237);
+			this->dataGridView->Name = L"dataGridView";
+			this->dataGridView->RowHeadersVisible = false;
+			this->dataGridView->RowHeadersWidth = 51;
+			this->dataGridView->RowTemplate->Height = 40;
+			this->dataGridView->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
+			this->dataGridView->Size = System::Drawing::Size(644, 278);
+			this->dataGridView->TabIndex = 28;
+			this->dataGridView->Theme = Bunifu::UI::WinForms::BunifuDataGridView::PresetThemes::Light;
 			// 
-			// label1
+			// comboBoxcustomer
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->comboBoxcustomer->FormattingEnabled = true;
+			this->comboBoxcustomer->Location = System::Drawing::Point(300, 82);
+			this->comboBoxcustomer->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->comboBoxcustomer->Name = L"comboBoxcustomer";
+			this->comboBoxcustomer->Size = System::Drawing::Size(200, 24);
+			this->comboBoxcustomer->TabIndex = 27;
+			// 
+			// labelitem
+			// 
+			this->labelitem->AutoSize = true;
+			this->labelitem->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+			this->labelitem->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
 				static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			this->label1->Location = System::Drawing::Point(293, 250);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(229, 49);
-			this->label1->TabIndex = 26;
-			this->label1->Text = L"DELIVERY";
-			// 
-			// textBoxfloor2
-			// 
-			this->textBoxfloor2->Location = System::Drawing::Point(300, 410);
-			this->textBoxfloor2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxfloor2->Name = L"textBoxfloor2";
-			this->textBoxfloor2->Size = System::Drawing::Size(200, 22);
-			this->textBoxfloor2->TabIndex = 25;
-			this->textBoxfloor2->Text = L"Floor Number";
-			this->textBoxfloor2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfloor2_RemoveText);
-			this->textBoxfloor2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfloor2_AddText);
-			// 
-			// textBoxstreetnumber2
-			// 
-			this->textBoxstreetnumber2->Location = System::Drawing::Point(69, 361);
-			this->textBoxstreetnumber2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxstreetnumber2->Name = L"textBoxstreetnumber2";
-			this->textBoxstreetnumber2->Size = System::Drawing::Size(200, 22);
-			this->textBoxstreetnumber2->TabIndex = 24;
-			this->textBoxstreetnumber2->Text = L"Street Number";
-			this->textBoxstreetnumber2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetnumber2_RemoveText);
-			this->textBoxstreetnumber2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetnumber2_AddText);
-			// 
-			// textBoxbuilding2
-			// 
-			this->textBoxbuilding2->Location = System::Drawing::Point(539, 361);
-			this->textBoxbuilding2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxbuilding2->Name = L"textBoxbuilding2";
-			this->textBoxbuilding2->Size = System::Drawing::Size(200, 22);
-			this->textBoxbuilding2->TabIndex = 23;
-			this->textBoxbuilding2->Text = L"Building Name";
-			this->textBoxbuilding2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxbuilding2_RemoveText);
-			this->textBoxbuilding2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxbuilding2_AddText);
-			// 
-			// textBoxresidence2
-			// 
-			this->textBoxresidence2->Location = System::Drawing::Point(300, 361);
-			this->textBoxresidence2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxresidence2->Name = L"textBoxresidence2";
-			this->textBoxresidence2->Size = System::Drawing::Size(200, 22);
-			this->textBoxresidence2->TabIndex = 22;
-			this->textBoxresidence2->Text = L"Residence Name";
-			this->textBoxresidence2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxresidence2_RemoveText);
-			this->textBoxresidence2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxresidence2_AddText);
-			// 
-			// textBoxstreetname2
-			// 
-			this->textBoxstreetname2->Location = System::Drawing::Point(539, 312);
-			this->textBoxstreetname2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxstreetname2->Name = L"textBoxstreetname2";
-			this->textBoxstreetname2->Size = System::Drawing::Size(200, 22);
-			this->textBoxstreetname2->TabIndex = 21;
-			this->textBoxstreetname2->Text = L"Street Name";
-			this->textBoxstreetname2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetname2_RemoveText);
-			this->textBoxstreetname2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxstreetname2_AddText);
-			// 
-			// textBoxcity2
-			// 
-			this->textBoxcity2->Location = System::Drawing::Point(300, 312);
-			this->textBoxcity2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxcity2->Name = L"textBoxcity2";
-			this->textBoxcity2->Size = System::Drawing::Size(200, 22);
-			this->textBoxcity2->TabIndex = 20;
-			this->textBoxcity2->Text = L"City";
-			this->textBoxcity2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxcity2_RemoveText);
-			this->textBoxcity2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxcity2_AddText);
-			// 
-			// textBoxpostalcode2
-			// 
-			this->textBoxpostalcode2->Location = System::Drawing::Point(69, 312);
-			this->textBoxpostalcode2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxpostalcode2->Name = L"textBoxpostalcode2";
-			this->textBoxpostalcode2->Size = System::Drawing::Size(200, 22);
-			this->textBoxpostalcode2->TabIndex = 19;
-			this->textBoxpostalcode2->Text = L"Postal Code";
-			this->textBoxpostalcode2->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxpostalcode2_RemoveText);
-			this->textBoxpostalcode2->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxpostalcode2_AddText);
+			this->labelitem->Location = System::Drawing::Point(323, 163);
+			this->labelitem->Name = L"labelitem";
+			this->labelitem->Size = System::Drawing::Size(154, 49);
+			this->labelitem->TabIndex = 26;
+			this->labelitem->Text = L"ITEMS";
 			// 
 			// btncancel
 			// 
@@ -398,7 +260,7 @@ namespace MAIN1 {
 			this->btncancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btncancel->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
 			this->btncancel->ForeColor = System::Drawing::Color::DimGray;
-			this->btncancel->Location = System::Drawing::Point(16, 646);
+			this->btncancel->Location = System::Drawing::Point(12, 560);
 			this->btncancel->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btncancel->Name = L"btncancel";
 			this->btncancel->Size = System::Drawing::Size(109, 39);
@@ -416,7 +278,7 @@ namespace MAIN1 {
 			this->btnapply->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnapply->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
 			this->btnapply->ForeColor = System::Drawing::Color::DimGray;
-			this->btnapply->Location = System::Drawing::Point(678, 646);
+			this->btnapply->Location = System::Drawing::Point(679, 560);
 			this->btnapply->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnapply->Name = L"btnapply";
 			this->btnapply->Size = System::Drawing::Size(109, 39);
@@ -427,56 +289,11 @@ namespace MAIN1 {
 			this->btnapply->MouseEnter += gcnew System::EventHandler(this, &AddOrderForm::btnapply_OnMouseEnter);
 			this->btnapply->MouseLeave += gcnew System::EventHandler(this, &AddOrderForm::btnapply_OnMouseLeave);
 			// 
-			// dateTimePickerhiringdate
-			// 
-			this->dateTimePickerhiringdate->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->dateTimePickerhiringdate->Location = System::Drawing::Point(539, 547);
-			this->dateTimePickerhiringdate->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->dateTimePickerhiringdate->Name = L"dateTimePickerhiringdate";
-			this->dateTimePickerhiringdate->Size = System::Drawing::Size(200, 22);
-			this->dateTimePickerhiringdate->TabIndex = 15;
-			this->dateTimePickerhiringdate->Value = System::DateTime(2022, 11, 25, 0, 0, 0, 0);
-			// 
-			// textBoxlastname
-			// 
-			this->textBoxlastname->Location = System::Drawing::Point(300, 547);
-			this->textBoxlastname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxlastname->Name = L"textBoxlastname";
-			this->textBoxlastname->Size = System::Drawing::Size(200, 22);
-			this->textBoxlastname->TabIndex = 14;
-			this->textBoxlastname->Text = L"Lastname";
-			this->textBoxlastname->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxlastname_RemoveText);
-			this->textBoxlastname->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxlastname_AddText);
-			// 
-			// textBoxfirstname
-			// 
-			this->textBoxfirstname->Location = System::Drawing::Point(69, 547);
-			this->textBoxfirstname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->textBoxfirstname->Name = L"textBoxfirstname";
-			this->textBoxfirstname->Size = System::Drawing::Size(200, 22);
-			this->textBoxfirstname->TabIndex = 13;
-			this->textBoxfirstname->Text = L"Firstname";
-			this->textBoxfirstname->GotFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfirstname_RemoveText);
-			this->textBoxfirstname->LostFocus += gcnew System::EventHandler(this, &AddOrderForm::textBoxfirstname_AddText);
-			// 
-			// labelorder
-			// 
-			this->labelorder->AutoSize = true;
-			this->labelorder->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->labelorder->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
-				static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			this->labelorder->Location = System::Drawing::Point(271, 485);
-			this->labelorder->Name = L"labelorder";
-			this->labelorder->Size = System::Drawing::Size(257, 49);
-			this->labelorder->TabIndex = 11;
-			this->labelorder->Text = L"CUSTOMER";
-			// 
 			// AddOrderForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(800, 730);
+			this->ClientSize = System::Drawing::Size(800, 653);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->panelheader);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
@@ -484,14 +301,23 @@ namespace MAIN1 {
 			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"AddOrderForm";
 			this->Text = L"AddOrderForm";
-			this->Load += gcnew System::EventHandler(this, &AddOrderForm::comboBoxsuperior_Load);
+			this->Load += gcnew System::EventHandler(this, &AddOrderForm::comboBoxcustomer_Load);
 			this->panelheader->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->EndInit();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
+
+	public: System::Void refresh_dataGridView() {
+		this->dataGridView->Refresh();
+		this->dataGridView->DataSource = ServiceItem().GetItemDataSet();
+		this->dataGridView->DataMember = "Item";
+		this->dataGridView->Columns["Reference"]->ReadOnly = true;
+		this->dataGridView->Columns["Name"]->ReadOnly = true;
+	}
 
 
 	private: System::Void btnclose_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -535,199 +361,6 @@ namespace MAIN1 {
 	}
 
 		   /// <summary>
-		   /// Placeholder Textbox
-		   /// </summary>
-
-	private: System::Void textboxpostalcode_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textboxpostalcode->Text == "Postal Code")
-			this->textboxpostalcode->Text = "";
-	}
-
-	private: System::Void textboxpostalcode_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textboxpostalcode->Text == "")
-			this->textboxpostalcode->Text = "Postal Code";
-	}
-	private: System::Void textBoxpostalcode2_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxpostalcode2->Text == "Postal Code")
-			this->textBoxpostalcode2->Text = "";
-	}
-
-	private: System::Void textBoxpostalcode2_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxpostalcode2->Text == "")
-			this->textBoxpostalcode2->Text = "Postal Code";
-	}
-
-	private: System::Void textboxcity_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textboxcity->Text == "City")
-			this->textboxcity->Text = "";
-	}
-
-	private: System::Void textboxcity_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textboxcity->Text == "")
-			this->textboxcity->Text = "City";
-	}
-
-	private: System::Void textBoxcity2_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxcity2->Text == "City")
-			this->textBoxcity2->Text = "";
-	}
-
-	private: System::Void textBoxcity2_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxcity2->Text == "")
-			this->textBoxcity2->Text = "City";
-	}
-
-	private: System::Void textBoxstreetname_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxstreetname->Text == "Street Name")
-			this->textBoxstreetname->Text = "";
-	}
-
-	private: System::Void textBoxstreetname_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxstreetname->Text == "")
-			this->textBoxstreetname->Text = "Street Name";
-	}
-
-	private: System::Void textBoxstreetname2_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxstreetname2->Text == "Street Name")
-			this->textBoxstreetname2->Text = "";
-	}
-
-	private: System::Void textBoxstreetname2_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxstreetname2->Text == "")
-			this->textBoxstreetname2->Text = "Street Name";
-	}
-
-	private: System::Void textBoxstreetnumber_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxstreetnumber->Text == "Street Number")
-			this->textBoxstreetnumber->Text = "";
-	}
-
-	private: System::Void textBoxstreetnumber_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxstreetnumber->Text == "")
-			this->textBoxstreetnumber->Text = "Street Number";
-	}
-	private: System::Void textBoxstreetnumber2_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxstreetnumber2->Text == "Street Number")
-			this->textBoxstreetnumber2->Text = "";
-	}
-
-	private: System::Void textBoxstreetnumber2_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxstreetnumber2->Text == "")
-			this->textBoxstreetnumber2->Text = "Street Number";
-	}
-
-	private: System::Void textBoxresidence_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxresidence->Text == "Residence Name")
-			this->textBoxresidence->Text = "";
-	}
-
-	private: System::Void textBoxresidence_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxresidence->Text == "")
-			this->textBoxresidence->Text = "Residence Name";
-	}
-
-	private: System::Void textBoxresidence2_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxresidence2->Text == "Residence Name")
-			this->textBoxresidence2->Text = "";
-	}
-
-	private: System::Void textBoxresidence2_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxresidence2->Text == "")
-			this->textBoxresidence2->Text = "Residence Name";
-	}
-
-	private: System::Void textBoxbuilding_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxbuilding->Text == "Building Name")
-			this->textBoxbuilding->Text = "";
-	}
-
-	private: System::Void textBoxbuilding_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxbuilding->Text == "")
-			this->textBoxbuilding->Text = "Building Name";
-	}
-	private: System::Void textBoxbuilding2_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxbuilding2->Text == "Building Name")
-			this->textBoxbuilding2->Text = "";
-	}
-
-	private: System::Void textBoxbuilding2_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxbuilding2->Text == "")
-			this->textBoxbuilding2->Text = "Building Name";
-	}
-
-	private: System::Void textBoxfloor_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxfloor->Text == "Floor Number")
-			this->textBoxfloor->Text = "";
-	}
-
-	private: System::Void textBoxfloor_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxfloor->Text == "")
-			this->textBoxfloor->Text = "Floor Number";
-	}
-
-	private: System::Void textBoxfloor2_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxfloor2->Text == "Floor Number")
-			this->textBoxfloor2->Text = "";
-	}
-
-	private: System::Void textBoxfloor2_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxfloor2->Text == "")
-			this->textBoxfloor2->Text = "Floor Number";
-	}
-
-	private: System::Void textBoxfirstname_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxfirstname->Text == "Firstname")
-			this->textBoxfirstname->Text = "";
-	}
-
-	private: System::Void textBoxfirstname_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxfirstname->Text == "")
-			this->textBoxfirstname->Text = "Firstname";
-	}
-
-	private: System::Void textBoxlastname_RemoveText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxlastname->Text == "Lastname")
-			this->textBoxlastname->Text = "";
-	}
-
-	private: System::Void textBoxlastname_AddText(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (this->textBoxlastname->Text == "")
-			this->textBoxlastname->Text = "Lastname";
-	}
-
-		   /// <summary>
 		   /// Form Load
 		   /// </summary>
 
@@ -735,17 +368,87 @@ namespace MAIN1 {
 		this->dragging = false;
 	}
 
-	private: System::Void comboBoxsuperior_Load(System::Object^ sender, System::EventArgs^ e) {
-		//this->comboBoxsuperior->Refresh();
-		//this->comboBoxsuperior->DataSource = BB8Manager_Core_Services::ServiceOrder().GetDataSetSuperior()->Tables[0];
-		//this->comboBoxsuperior->DisplayMember = "Name";
-		//this->comboBoxsuperior->ValueMember = "ID";
+	private: System::Void comboBoxcustomer_Load(System::Object^ sender, System::EventArgs^ e) {
+		this->comboBoxcustomer->Refresh();
+		this->comboBoxcustomer->DataSource = BB8Manager_Core_Services::ServiceCustomer().GetDataSetCustomer()->Tables[0];
+		this->comboBoxcustomer->DisplayMember = "Name";
+		this->comboBoxcustomer->ValueMember = "ID";
 	}
 	private: System::Void btncancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Inssuance date (Current date)
+		char date1[80];
+		char date2[80];
+		time_t t = time(0);
+		strftime(date1, 80, "%Y-%m-%d", localtime(&t));
 
+		// Delivery date (add 5 days to current date)
+		tm* tmptr = NULL;
+		tmptr = localtime(&t);
+		tmptr->tm_mday += 5;
+		time_t finaldate = mktime(tmptr);
+		strftime(date2, 80, "%Y-%m-%d", localtime(&finaldate));
+
+		std::string dateinssuance = date1;
+		std::string datedelivery = date2;
+
+		/////// USELESS AS FUCK
+		//// Reformat customer name
+		//std::string customername = marshal_as<std::string>(this->comboBoxcustomer->Text->ToString());
+		//std::size_t pos = customername.find(" ");
+		//std::string firstname = customername.substr(0, pos);
+		//std::string lastname = customername.substr(pos, std::string::npos);
+
+		Customer customer = ServiceCustomer().Get(std::stoi(marshal_as<std::string>(this->comboBoxcustomer->SelectedValue->ToString())));
+		Adress adress = ServiceAdress().Get(customer.GetIdDeliveryAdress());
+
+		std::string reference = customer.GetFirstname().substr(0, 2) + customer.GetLastname().substr(0, 2) + dateinssuance.substr(0,4) + adress.GetCity().substr(0,3);
+
+		for (int i = 0; i < reference.length(); ++i)
+		{
+			reference[i] = ::toupper(reference[i]);
+		}
+
+		float totalorderprice = 0;
+
+		for (int i = 0; i <= this->dataGridView->RowCount - 2; i++) {
+			int itemamount = std::stoi(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[2]->Value->ToString()));
+			if (itemamount > 0) {
+				Item item = ServiceItem().Get(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[0]->Value->ToString()));
+				float itemprice = item.GetPriceExclTaxes() * (1 + (item.GetVat() / 100));
+				float totalprice = itemprice * itemamount;
+				totalorderprice += totalprice;
+			}
+		}
+
+		// Keep only two numbers after decimal point
+		totalorderprice = std::ceil(totalorderprice * 100.0) / 100.0;
+
+		if (totalorderprice > 0) {
+			Order order;
+			order.SetDateInssuance(dateinssuance);
+			order.SetDateDelivery(datedelivery);
+			order.SetReference(ServiceOrder().GetLastOrderRef(reference));
+			order.SetIdCustomer(customer.GetId());
+			order.SetFullprice(totalorderprice);
+			order.SetSettlementBalance(totalorderprice);
+			order.SetDateSettlement(dateinssuance);
+			order = ServiceOrder().Add(order);
+
+			for (int i = 0; i <= this->dataGridView->RowCount - 2; i++) {
+				int itemamount = std::stoi(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[2]->Value->ToString()));
+				if (itemamount > 0) {
+					Item item = ServiceItem().Get(marshal_as<std::string>(this->dataGridView->Rows[i]->Cells[0]->Value->ToString()));
+					ServiceOrder().AddHold(itemamount, order.GetId(), item.GetId());
+				}
+			}
+
+			this->listener->onApplyClicked();
+
+			this->Close();
+		}
 	}
-	};
+};
 }

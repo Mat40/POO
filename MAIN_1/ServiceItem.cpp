@@ -49,16 +49,22 @@ namespace BB8Manager_Core_Services {
 
 	int ServiceItem::GetMaxId()
 	{
-		int result = this->dataContext.QueryInt("SELECT CASE WHEN(SELECT COUNT(1) FROM [Item]) = 0 THEN 1 ELSE IDENT_CURRENT('Item') + 1 END AS Current_Identity; ");
+		std::string result = this->dataContext.QueryReturn("SELECT CASE WHEN(SELECT COUNT(1) FROM [Item]) = 0 THEN 1 ELSE IDENT_CURRENT('Item') + 1 END AS Current_Identity; ");
 
-		if (result == NULL)
+		if (std::stoi(result) == NULL)
 			throw std::runtime_error("id not found !");
-		return result;
+		return std::stoi(result);
 	}
 
 	DataSet^ ServiceItem::GetDataSet()
 	{
 		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetItem, "SELECT reference, name, Item.amount as lot, price_excl_taxes as price, vat, reduction, Stock.amount as stock, reorder_threshold FROM [Item] INNER JOIN [Stock] ON Item.id_item = Stock.id_item; ");
+		return result;
+	}
+
+	DataSet^ ServiceItem::GetItemDataSet()
+	{
+		DataSet^ result = this->dataContext.GetDataSet(DataContext::Tables::DataSetItemOnly, "SELECT reference, name FROM [Item] INNER JOIN [Stock] ON Item.id_item = Stock.id_item; ");
 		return result;
 	}
 

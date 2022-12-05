@@ -49,6 +49,6 @@ namespace BB8Manager_Core_Services {
 	}
 
 	void ServicePayment::Remove(int id) {
-		this->dataContext.Query("DELETE FROM [Payment] WHERE id = " + std::to_string(id));
+		this->dataContext.Query("DELETE FROM [Payment] WHERE id_order = " + std::to_string(id));
 	}
 }

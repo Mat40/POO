@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "AddOrderForm.h"
 #include "UpdateOrderForm.h"
+#include "ServicePayment.h"
 
 namespace MAIN1 {
 
@@ -66,12 +67,6 @@ namespace MAIN1 {
 		private:
 			OrderForm^ m_parent;
 		};
-		/*public:
-			OrderForm(void)
-			{
-				InitializeComponent();
-				refresh_dataGridView();
-			}*/
 
 
 	private: System::Windows::Forms::FlowLayoutPanel^ orderLayoutPanel;
@@ -335,33 +330,27 @@ namespace MAIN1 {
 		{
 			int selectedrowindex = this->dataGridView->SelectedCells[0]->RowIndex;
 			DataGridViewRow^ selectedRow = this->dataGridView->Rows[selectedrowindex];
-			int cellValue = std::stoi(marshal_as<std::string>(selectedRow->Cells["ID"]->Value->ToString()));
+			std::string cellValue = marshal_as<std::string>(selectedRow->Cells["Reference"]->Value->ToString());
 			Order order;
-			//order = ServiceOrder().Get(cellValue);
-			//ServiceAdress().Remove(order.GetIdBillingAdress());
-			//ServiceAdress().Remove(order.GetIdDeliveryAdress());
-			//ServiceOrder().Remove(cellValue);
+			order = ServiceOrder().Get(cellValue);
+			ServicePayment().Remove(order.GetId());
+			ServiceOrder().Remove(order.GetId());
+	
 			refresh_dataGridView();
 		}
 	}
 	private: System::Void btnupdate_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (this->dataGridView->SelectedRows->Count > 0)
 		{
-			/*int selectedrowindex = this->dataGridView->SelectedCells[0]->RowIndex;
+			int selectedrowindex = this->dataGridView->SelectedCells[0]->RowIndex;
 			DataGridViewRow^ selectedRow = this->dataGridView->Rows[selectedrowindex];
-			int IDcellValue = std::stoi(marshal_as<std::string>(selectedRow->Cells["ID"]->Value->ToString()));
+			std::string IDcellValue = marshal_as<std::string>(selectedRow->Cells["Reference"]->Value->ToString());
 
 			Order order;
 			order = ServiceOrder().Get(IDcellValue);
 
-			Adress delivery;
-			delivery = ServiceAdress().Get(order.GetIdDeliveryAdress());
-
-			Adress billing;
-			billing = ServiceAdress().Get(order.GetIdBillingAdress());
-
-			this->updateOrderForm = gcnew UpdateOrderForm(gcnew UpdateOrderListenerImpl(this), order, delivery, billing);
-			this->updateOrderForm->Show();*/
+			this->updateOrderForm = gcnew UpdateOrderForm(gcnew UpdateOrderListenerImpl(this), order);
+			this->updateOrderForm->Show();
 		}
 	}
 	private: System::Void btnsearch_Click(System::Object^ sender, System::EventArgs^ e) {
