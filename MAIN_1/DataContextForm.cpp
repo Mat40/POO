@@ -99,7 +99,22 @@ namespace BB8Manager_Core_Data {
 		command->ExecuteNonQuery();
 		this->connection->Close();
 	}
-
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="Query_return"></param>
+	std::string DataContext::Query_return(std::string queryString){
+	String^ query = gcnew String(queryString.c_str());
+		SqlCommand^ command = gcnew SqlCommand(query, this->connection);
+		command->CommandType = CommandType::Text;
+		this->connection->Open();
+		std::string return_var = marshal_as<std::string>(command->ExecuteScalar()->ToString());
+		this->connection->Close();
+		return return_var;
+	}
 	/// <summary>
 	/// 
 	/// </summary>
@@ -175,7 +190,7 @@ namespace BB8Manager_Core_Data {
 			DataTableMapping^ map = gcnew DataTableMapping("Table", "Item");
 			map->ColumnMappings->Add("id_item", "id");
 			map->ColumnMappings->Add("reference", "reference");
-			map->ColumnMappings->Add("name", "name");
+			map->ColumnMappings->Add("nameproduct", "nameproduct");/////////////////////////
 			map->ColumnMappings->Add("amount", "amount");
 			map->ColumnMappings->Add("price_excl_taxes", "price_excl_taxes");
 			map->ColumnMappings->Add("vat", "vat");

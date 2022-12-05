@@ -71,4 +71,27 @@ namespace BB8Manager_Core_Services {
 	void ServiceOrder::Remove(int id) {
 		this->dataContext.Query("DELETE FROM [Order] WHERE id = " + std::to_string(id));
 	}
+	std::string ServiceOrder::avg_ordered()
+	{
+		return dataContext.Query_return("SELECT AVG(fullprice) FROM [Ordered]; ");
+	}
+	// automatiser pour tester touts les ids prouits
+	std::string ServiceOrder::panier_HT()
+	{
+		return dataContext.Query_return("SELECT sum(price_excl_taxes * S.amount) from [Item] I INNER JOIN [Stock] S on S.id_stock = I.id_item ");
+	}
+	std::string ServiceOrder::panier_TTC()
+	{
+	return dataContext.Query_return("SELECT sum((vat + price_excl_taxes) * S.amount) from [Item] I INNER JOIN [Stock] S on S.id_stock = I.id_item");
+	}
+
+	std::string ServiceOrder::reaprovisionnement()
+	{
+		return dataContext.Query_return("select id_stock From [Stock] where amount < reorder_threshold; ");
+	}
+
+	std::string ServiceOrder::vente_mois(int mois)
+	{
+		return dataContext.Query_return("SELECT SUM(fullprice) FROM [Ordered] where month(datesettlement) = 09;");
+	}
 }

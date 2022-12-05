@@ -16,5 +16,12 @@ namespace BB8Manager_Core_Services {
 		DataSet^ GetSearchDataSet(std::string value);
 		Order Add(Order order);
 		void Remove(int id);
+
+		std::string avg_ordered();
+		std::string ServiceOrder::panier_HT();
+		std::string ServiceOrder::panier_TTC();
+		std::string ServiceOrder::reaprovisionnement();
+		std::string ServiceOrder::vente_mois(int mois);
+
 	};
 }

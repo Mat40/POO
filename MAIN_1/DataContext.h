@@ -30,15 +30,17 @@ namespace BB8Manager_Core_Data {
 		void Query(std::string queryString);
 		int QueryInt(std::string queryString);
 		std::string ToUnmanagedString(String^ value);
+
+		std::string Query_return(std::string queryString);
+
 	private:
 		String^ connectionString =
-			"Data Source=DESKTOP-S57J1OI\\MSSQL_MAT;" +
-			"Initial Catalog = project_poo_db;" +
+			"Data Source=LAPTOP-HUGO\\MSQL_SERVER;" +
+			"Initial Catalog = main_db;" +
 			"Persist Security Info = True;" +
 			"User ID = sa;" +
 			"Password = main_db33";
 		SqlConnection^ connection;
-
 		DataTableMapping^ Mapper(Tables tableName);
 	};
 }
