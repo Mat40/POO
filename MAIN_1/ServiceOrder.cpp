@@ -149,7 +149,7 @@ namespace BB8Manager_Core_Services {
 			return "no value for this month";
 		}
 		else {
-			return var_return;
+			return var_return + " €";
 		}
 		//return "value:" + std::to_string(mois) + "<<<<<<<";
 
@@ -165,7 +165,7 @@ namespace BB8Manager_Core_Services {
 			return "no value for this user";
 		}
 		else {
-			return var_return;
+			return var_return + " €";
 		}
 	}
 
