@@ -141,15 +141,17 @@ namespace BB8Manager_Core_Services {
 
 	std::string ServiceOrder::GetTotalSalesPriceMonth(int mois)
 	{
+		
 		std::string var_return;
 		var_return = dataContext.QueryReturn("SELECT SUM(fullprice) FROM [Ordered] where month(datesettlement) = '" + std::to_string(mois) + "'");
-
-		if (var_return == "") {
+		
+		if (var_return == "" || var_return == "0" || var_return == " ") {
 			return "pas de valeur ce mois si";
 		}
 		else {
 			return var_return;
 		}
+		//return "value:" + std::to_string(mois) + "<<<<<<<";
 
 	}
 
