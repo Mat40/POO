@@ -146,7 +146,7 @@ namespace BB8Manager_Core_Services {
 		var_return = dataContext.QueryReturn("SELECT SUM(fullprice) FROM [Ordered] where month(datesettlement) = '" + std::to_string(mois) + "'");
 		
 		if (var_return == "" || var_return == "0" || var_return == " ") {
-			return "pas de valeur ce mois si";
+			return "no value for this month";
 		}
 		else {
 			return var_return;
@@ -162,7 +162,7 @@ namespace BB8Manager_Core_Services {
 
 
 		if (var_return == "") {
-			return "pas de valeur pour cette utilisateur";
+			return "no value for this user";
 		}
 		else {
 			return var_return;
