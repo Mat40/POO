@@ -6,6 +6,8 @@
 #include "ServiceCustomer.h"
 #include <iostream>
 #include <ctime>
+#include <regex>
+#include "ErrorForm.h"
 
 namespace MAIN1 {
 
@@ -30,6 +32,7 @@ namespace MAIN1 {
 		};
 
 		Listener^ listener;
+		ErrorForm^ errorForm;
 
 		AddOrderForm(Listener^ listener)
 		{
@@ -378,6 +381,7 @@ namespace MAIN1 {
 		this->Close();
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
+		
 		// Inssuance date (Current date)
 		char date1[80];
 		char date2[80];
@@ -448,6 +452,11 @@ namespace MAIN1 {
 			this->listener->onApplyClicked();
 
 			this->Close();
+		}
+		else {
+			this->errorForm = gcnew ErrorForm("You forgot to add items");
+			this->errorForm->Show();
+			return;
 		}
 	}
 };

@@ -34,6 +34,7 @@ namespace MAIN1 {
 
 		Listener^ listener;
 		String^ OrderRef;
+		ErrorForm^ errorForm;
 
 		UpdateOrderForm(Listener^ listener, Order order)
 		{
@@ -424,7 +425,7 @@ namespace MAIN1 {
 
 		std::string price = marshal_as<std::string>(this->textboxprice->Text->ToString());
 
-		if (totalorderprice > 0 && std::regex_match(price, std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && std::regex_match(price, std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && totalorderprice >= std::stoi(price)) {
+		if (totalorderprice > 0 && std::regex_match(price, std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && totalorderprice >= std::stoi(price)) {
 			Order order = ServiceOrder().Get(marshal_as<std::string>(this->OrderRef->ToString()));
 
 			float balance = totalorderprice - std::stof(price);
@@ -464,6 +465,11 @@ namespace MAIN1 {
 			this->listener->onApplyClicked();
 
 			this->Close();
+		}
+		else {
+			this->errorForm = gcnew ErrorForm("An error occur on payment amount please be sure that it's the good value.");
+			this->errorForm->Show();
+			return;
 		}
 	}
 	};

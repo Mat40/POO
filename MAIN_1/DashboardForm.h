@@ -177,7 +177,7 @@ namespace MAIN1 {
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->label1->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->label1->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
-			this->label1->ForeColor = System::Drawing::Color::Black;
+			this->label1->ForeColor = System::Drawing::Color::DimGray;
 			this->label1->Location = System::Drawing::Point(46, -33);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(287, 128);
@@ -191,7 +191,7 @@ namespace MAIN1 {
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->label2->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->label2->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
-			this->label2->ForeColor = System::Drawing::Color::Black;
+			this->label2->ForeColor = System::Drawing::Color::DimGray;
 			this->label2->Location = System::Drawing::Point(47, 0);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(287, 56);
@@ -205,7 +205,7 @@ namespace MAIN1 {
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->label3->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->label3->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
-			this->label3->ForeColor = System::Drawing::Color::Black;
+			this->label3->ForeColor = System::Drawing::Color::DimGray;
 			this->label3->Location = System::Drawing::Point(47, 3);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(287, 56);
@@ -281,7 +281,7 @@ namespace MAIN1 {
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->label9->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->label9->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
-			this->label9->ForeColor = System::Drawing::Color::Black;
+			this->label9->ForeColor = System::Drawing::Color::DimGray;
 			this->label9->Location = System::Drawing::Point(47, 0);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(287, 65);
@@ -636,7 +636,7 @@ namespace MAIN1 {
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->label10->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->label10->Font = (gcnew System::Drawing::Font(L"MS Reference Sans Serif", 10, System::Drawing::FontStyle::Bold));
-			this->label10->ForeColor = System::Drawing::Color::Black;
+			this->label10->ForeColor = System::Drawing::Color::DimGray;
 			this->label10->Location = System::Drawing::Point(47, 0);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(288, 49);
@@ -705,8 +705,7 @@ namespace MAIN1 {
 		}
 #pragma endregion
 	private: System::Void btnapply1_Click(System::Object^ sender, System::EventArgs^ e) {
-		int var_tampon;
-		var_tampon = std::stoi(marshal_as <std::string>(safe_cast<ComboboxItem^>(comboBox1->SelectedItem)->Value->ToString()));
+		int var_tampon = std::stoi(marshal_as <std::string>(safe_cast<ComboboxItem^>(comboBox1->SelectedItem)->Value->ToString()));
 		this->label8->Text = gcnew String(ServiceOrder().GetTotalSalesPriceMonth(var_tampon).c_str());
 		//this->label8->Text = gcnew String(var_tampon);
 	}

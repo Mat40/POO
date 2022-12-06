@@ -338,9 +338,9 @@ namespace MAIN1 {
 			int cellValue = std::stoi(marshal_as<std::string>(selectedRow->Cells["ID"]->Value->ToString()));
 			Customer customer;
 			customer = ServiceCustomer().Get(cellValue);
+			ServiceCustomer().Remove(cellValue);
 			ServiceAdress().Remove(customer.GetIdBillingAdress());
 			ServiceAdress().Remove(customer.GetIdDeliveryAdress());
-			ServiceCustomer().Remove(cellValue);
 			refresh_dataGridView();
 		}
 	}

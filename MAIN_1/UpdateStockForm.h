@@ -4,6 +4,7 @@
 #include "ServiceItem.h"
 #include "ServiceStock.h"
 #include "ErrorForm.h"
+#include <regex>
 
 namespace MAIN1 {
 
@@ -69,6 +70,7 @@ namespace MAIN1 {
 		};
 
 		Listener^ listener;
+		ErrorForm^ errorForm;
 		int itemID;
 		int stockID;
 
@@ -491,12 +493,25 @@ namespace MAIN1 {
 		this->Close();
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (String::IsNullOrWhiteSpace(this->textboxname->Text) || String::IsNullOrWhiteSpace(this->textboxlot->Text) || String::IsNullOrWhiteSpace(this->textBoxprice->Text) || String::IsNullOrWhiteSpace(this->textBoxstock->Text) || String::IsNullOrWhiteSpace(this->textBoxreorder->Text)) {
+			this->errorForm = gcnew ErrorForm("You forgot to specify some mandatory data");
+			this->errorForm->Show();
+			return;
+		}
 		if (this->textboxname->Text != "Name" && this->textboxlot->Text != "Lot" && this->textBoxprice->Text != "Price (exclude taxes)" && this->textBoxstock->Text != "Stock" && this->textBoxreorder->Text != "Reorder Threshold" && this->comboBoxvat->Text->ToString() != "Vat" && this->comboBoxreduction->Text->ToString() != "Discount") {
 			Item item;
 			item.SetId(itemID);
 			item.SetName(marshal_as<std::string>(this->textboxname->Text));
-			item.SetAmount(std::stoi(marshal_as<std::string>(this->textboxlot->Text)));
-			item.SetPriceExclTaxes(std::stof(marshal_as<std::string>(this->textBoxprice->Text)));
+			
+			if (std::regex_match(marshal_as<std::string>(this->textboxlot->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && std::regex_match(marshal_as<std::string>(this->textBoxprice->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?")))) {
+				item.SetAmount(std::stoi(marshal_as<std::string>(this->textboxlot->Text)));
+				item.SetPriceExclTaxes(std::stof(marshal_as<std::string>(this->textBoxprice->Text)));
+			}
+			else {
+				this->errorForm = gcnew ErrorForm("Lot or Price (exclude taxes) contain letters");
+				this->errorForm->Show();
+				return;
+			}
 
 			item.SetVat(std::stof(marshal_as<std::string>((safe_cast<ComboboxItem^>(comboBoxvat->SelectedItem))->Value->ToString())));
 			item.SetReduction(std::stof(marshal_as<std::string>((safe_cast<ComboboxItem^>(comboBoxreduction->SelectedItem))->Value->ToString())));
@@ -504,12 +519,26 @@ namespace MAIN1 {
 
 			Stock stock;
 			stock.SetId(stockID);
-			stock.SetAmount(std::stoi(marshal_as<std::string>(this->textBoxstock->Text)));
-			stock.SetReorderThreshold(std::stoi(marshal_as<std::string>(this->textBoxreorder->Text)));
+			
+			if (std::regex_match(marshal_as<std::string>(this->textBoxstock->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && std::regex_match(marshal_as<std::string>(this->textBoxreorder->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?")))) {
+				stock.SetAmount(std::stoi(marshal_as<std::string>(this->textBoxstock->Text)));
+				stock.SetReorderThreshold(std::stoi(marshal_as<std::string>(this->textBoxreorder->Text)));
+			}
+			else {
+				this->errorForm = gcnew ErrorForm("Stock or Reorder Threshold contain letters");
+				this->errorForm->Show();
+				return;
+			}
+
 			ServiceStock().Update(stock);
 
 			this->listener->onApplyClicked();
 			this->Close();
+		}
+		else {
+			this->errorForm = gcnew ErrorForm("You forgot to specify some mandatory data");
+			this->errorForm->Show();
+			return;
 		}
 	}
 	};

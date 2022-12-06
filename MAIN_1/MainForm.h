@@ -142,7 +142,7 @@ namespace MAIN1 {
 			this->panelside->Controls->Add(this->panellogo);
 			this->panelside->Dock = System::Windows::Forms::DockStyle::Left;
 			this->panelside->Location = System::Drawing::Point(0, 34);
-			this->panelside->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panelside->Margin = System::Windows::Forms::Padding(4);
 			this->panelside->MaximumSize = System::Drawing::Size(251, 720);
 			this->panelside->MinimumSize = System::Drawing::Size(53, 720);
 			this->panelside->Name = L"panelside";
@@ -204,7 +204,7 @@ namespace MAIN1 {
 			this->btnsettings->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnsettings.Image")));
 			this->btnsettings->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->btnsettings->Location = System::Drawing::Point(-3, 357);
-			this->btnsettings->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnsettings->Margin = System::Windows::Forms::Padding(4);
 			this->btnsettings->Name = L"btnsettings";
 			this->btnsettings->Size = System::Drawing::Size(253, 37);
 			this->btnsettings->TabIndex = 5;
@@ -223,7 +223,7 @@ namespace MAIN1 {
 			this->btnstock->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnstock.Image")));
 			this->btnstock->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->btnstock->Location = System::Drawing::Point(-3, 274);
-			this->btnstock->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnstock->Margin = System::Windows::Forms::Padding(4);
 			this->btnstock->Name = L"btnstock";
 			this->btnstock->Size = System::Drawing::Size(253, 37);
 			this->btnstock->TabIndex = 4;
@@ -243,7 +243,7 @@ namespace MAIN1 {
 			this->btnemployee->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnemployee.Image")));
 			this->btnemployee->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->btnemployee->Location = System::Drawing::Point(-3, 185);
-			this->btnemployee->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnemployee->Margin = System::Windows::Forms::Padding(4);
 			this->btnemployee->Name = L"btnemployee";
 			this->btnemployee->Size = System::Drawing::Size(253, 37);
 			this->btnemployee->TabIndex = 2;
@@ -263,7 +263,7 @@ namespace MAIN1 {
 			this->btndashboard->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btndashboard.Image")));
 			this->btndashboard->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->btndashboard->Location = System::Drawing::Point(-3, 94);
-			this->btndashboard->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btndashboard->Margin = System::Windows::Forms::Padding(4);
 			this->btndashboard->Name = L"btndashboard";
 			this->btndashboard->Size = System::Drawing::Size(253, 37);
 			this->btndashboard->TabIndex = 0;
@@ -283,7 +283,7 @@ namespace MAIN1 {
 			this->btncustomer->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btncustomer.Image")));
 			this->btncustomer->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->btncustomer->Location = System::Drawing::Point(-3, 139);
-			this->btncustomer->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btncustomer->Margin = System::Windows::Forms::Padding(4);
 			this->btncustomer->Name = L"btncustomer";
 			this->btncustomer->Size = System::Drawing::Size(253, 37);
 			this->btncustomer->TabIndex = 1;
@@ -303,7 +303,7 @@ namespace MAIN1 {
 			this->btnorder->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnorder.Image")));
 			this->btnorder->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->btnorder->Location = System::Drawing::Point(-3, 229);
-			this->btnorder->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnorder->Margin = System::Windows::Forms::Padding(4);
 			this->btnorder->Name = L"btnorder";
 			this->btnorder->Size = System::Drawing::Size(253, 37);
 			this->btnorder->TabIndex = 3;
@@ -339,7 +339,7 @@ namespace MAIN1 {
 			this->panelheader->Controls->Add(this->btnclose);
 			this->panelheader->Dock = System::Windows::Forms::DockStyle::Top;
 			this->panelheader->Location = System::Drawing::Point(0, 0);
-			this->panelheader->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panelheader->Margin = System::Windows::Forms::Padding(4);
 			this->panelheader->Name = L"panelheader";
 			this->panelheader->Size = System::Drawing::Size(1280, 34);
 			this->panelheader->TabIndex = 1;
@@ -358,7 +358,7 @@ namespace MAIN1 {
 			this->btnminimized->ForeColor = System::Drawing::Color::White;
 			this->btnminimized->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnminimized.Image")));
 			this->btnminimized->Location = System::Drawing::Point(1168, 0);
-			this->btnminimized->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnminimized->Margin = System::Windows::Forms::Padding(4);
 			this->btnminimized->Name = L"btnminimized";
 			this->btnminimized->Size = System::Drawing::Size(37, 34);
 			this->btnminimized->TabIndex = 7;
@@ -375,7 +375,7 @@ namespace MAIN1 {
 				static_cast<System::Byte>(0)));
 			this->btnmaximized->ForeColor = System::Drawing::Color::White;
 			this->btnmaximized->Location = System::Drawing::Point(1205, 0);
-			this->btnmaximized->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnmaximized->Margin = System::Windows::Forms::Padding(4);
 			this->btnmaximized->Name = L"btnmaximized";
 			this->btnmaximized->Size = System::Drawing::Size(37, 34);
 			this->btnmaximized->TabIndex = 6;
@@ -392,7 +392,7 @@ namespace MAIN1 {
 			this->btnclose->ForeColor = System::Drawing::Color::White;
 			this->btnclose->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnclose.Image")));
 			this->btnclose->Location = System::Drawing::Point(1243, 0);
-			this->btnclose->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnclose->Margin = System::Windows::Forms::Padding(4);
 			this->btnclose->Name = L"btnclose";
 			this->btnclose->Size = System::Drawing::Size(37, 34);
 			this->btnclose->TabIndex = 5;
@@ -404,7 +404,7 @@ namespace MAIN1 {
 			this->mainpanel->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->mainpanel->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->mainpanel->Location = System::Drawing::Point(53, 34);
-			this->mainpanel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->mainpanel->Margin = System::Windows::Forms::Padding(4);
 			this->mainpanel->Name = L"mainpanel";
 			this->mainpanel->Size = System::Drawing::Size(1227, 686);
 			this->mainpanel->TabIndex = 2;
@@ -425,7 +425,7 @@ namespace MAIN1 {
 			this->Controls->Add(this->panelheader);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"MainForm";
 			this->Text = L"Main";
 			this->Load += gcnew System::EventHandler(this, &MainForm::Main_Load);

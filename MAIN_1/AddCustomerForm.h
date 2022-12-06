@@ -1,6 +1,8 @@
 #pragma once
 #include "ServiceAdress.h"
 #include "ServiceCustomer.h"
+#include <regex>
+#include "ErrorForm.h"
 
 namespace MAIN1 {
 
@@ -25,6 +27,7 @@ namespace MAIN1 {
 		};
 
 		Listener^ listener;
+		ErrorForm^ errorForm;
 
 		AddCustomerForm(Listener^ listener)
 		{
@@ -763,6 +766,12 @@ namespace MAIN1 {
 		if (this->checkBoxadress->Checked == true) {
 			if (this->textboxpostalcode->Text != "Postal Code" && this->textboxcity->Text != "City" && this->textBoxstreetname->Text != "Street Name" && this->textBoxstreetnumber->Text != "Street Number" && this->textBoxfirstname->Text != "Firstname" && this->textBoxlastname->Text != "Lastname") {
 
+				if (String::IsNullOrWhiteSpace(this->textBoxfirstname->Text) || String::IsNullOrWhiteSpace(this->textBoxlastname->Text) || String::IsNullOrWhiteSpace(this->textboxpostalcode->Text) || String::IsNullOrWhiteSpace(this->textboxcity->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetname->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetnumber->Text)) {
+					this->errorForm = gcnew ErrorForm("You forgot to specify some mandatory data");
+					this->errorForm->Show();
+					return;
+				}
+
 				Adress adress;
 				adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
 				adress.SetCity(marshal_as<std::string>(this->textboxcity->Text));
@@ -811,63 +820,69 @@ namespace MAIN1 {
 		else {
 			if ((this->textboxpostalcode->Text && this->textBoxpostalcode2->Text != "Postal Code") && (this->textboxcity->Text && this->textBoxcity2->Text != "City") && (this->textBoxstreetname->Text && this->textBoxstreetname2->Text != "Street Name") && (this->textBoxstreetnumber->Text && this->textBoxstreetnumber2->Text != "Street Number") && (this->textBoxfirstname->Text != "Firstname") && (this->textBoxlastname->Text != "Lastname")) {
 
-				Adress delivery;
-				delivery.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
-				delivery.SetCity(marshal_as<std::string>(this->textboxcity->Text));
-				delivery.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-				delivery.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
-
-				if (this->textBoxresidence->Text != "Residence Name") {
-					delivery.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
+				if (String::IsNullOrWhiteSpace(this->textBoxpostalcode2->Text) || String::IsNullOrWhiteSpace(this->textBoxcity2->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetname2->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetnumber2->Text) || this->textBoxpostalcode2->Text->ToString() == "Postal Code" || this->textBoxcity2->Text->ToString() == "City" || this->textBoxstreetname2->Text->ToString() == "Street Name" || this->textBoxstreetnumber2->Text->ToString() == "Street Number") {
+					this->errorForm = gcnew ErrorForm("You forgot to specify some mandatory data");
+					this->errorForm->Show();
+					return;
 				}
-				else {
-					delivery.SetResidencename("");
-				}
-
-				if (this->textBoxbuilding->Text != "Building Name") {
-					delivery.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
-				}
-				else {
-					delivery.SetBuildingname("");
-				}
-
-				if (this->textBoxfloor->Text != "Floor Number") {
-					delivery.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
-				}
-				else {
-					delivery.SetFloornumber("");
-				}
-
-				delivery = ServiceAdress().Add(delivery);
 
 				Adress billing;
-				billing.SetPostalcode(marshal_as<std::string>(this->textBoxpostalcode2->Text));
-				billing.SetCity(marshal_as<std::string>(this->textBoxcity2->Text));
-				billing.SetStreetname(marshal_as<std::string>(this->textBoxstreetname2->Text));
-				billing.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber2->Text));
+				billing.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
+				billing.SetCity(marshal_as<std::string>(this->textboxcity->Text));
+				billing.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
+				billing.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
 
-				if (this->textBoxresidence2->Text != "Residence Name") {
-					billing.SetResidencename(marshal_as<std::string>(this->textBoxresidence2->Text));
+				if (this->textBoxresidence->Text != "Residence Name") {
+					billing.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
 				}
 				else {
 					billing.SetResidencename("");
 				}
 
-				if (this->textBoxbuilding2->Text != "Building Name") {
-					billing.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding2->Text));
+				if (this->textBoxbuilding->Text != "Building Name") {
+					billing.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
 				}
 				else {
 					billing.SetBuildingname("");
 				}
 
-				if (this->textBoxfloor2->Text != "Floor Number") {
-					billing.SetFloornumber(marshal_as<std::string>(this->textBoxfloor2->Text));
+				if (this->textBoxfloor->Text != "Floor Number") {
+					billing.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
 				}
 				else {
 					billing.SetFloornumber("");
 				}
 
 				billing = ServiceAdress().Add(billing);
+
+				Adress delivery;
+				delivery.SetPostalcode(marshal_as<std::string>(this->textBoxpostalcode2->Text));
+				delivery.SetCity(marshal_as<std::string>(this->textBoxcity2->Text));
+				delivery.SetStreetname(marshal_as<std::string>(this->textBoxstreetname2->Text));
+				delivery.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber2->Text));
+
+				if (this->textBoxresidence2->Text != "Residence Name") {
+					delivery.SetResidencename(marshal_as<std::string>(this->textBoxresidence2->Text));
+				}
+				else {
+					delivery.SetResidencename("");
+				}
+
+				if (this->textBoxbuilding2->Text != "Building Name") {
+					delivery.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding2->Text));
+				}
+				else {
+					delivery.SetBuildingname("");
+				}
+
+				if (this->textBoxfloor2->Text != "Floor Number") {
+					delivery.SetFloornumber(marshal_as<std::string>(this->textBoxfloor2->Text));
+				}
+				else {
+					delivery.SetFloornumber("");
+				}
+
+				delivery = ServiceAdress().Add(delivery);
 
 				Customer customer;
 

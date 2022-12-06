@@ -1,6 +1,8 @@
 #pragma once
 #include "ServiceAdress.h"
 #include "ServiceEmployee.h"
+#include <regex>
+#include "ErrorForm.h"
 
 namespace MAIN1 {
 
@@ -25,26 +27,14 @@ namespace MAIN1 {
 		};
 
 		Listener^ listener;
+		ErrorForm^ errorForm;
 
 		AddEmployeeForm(Listener^ listener)
 		{
 			InitializeComponent();
 			this->listener = listener;
 		}
-	/*public:
 
-		AddEmployeeForm(void)
-		{
-			InitializeComponent();
-		}*/
-
-		/*MAIN1::EmployeeForm^ frm;
-
-		AddEmployeeForm(MAIN1::EmployeeForm^ frm)
-		{
-			InitializeComponent();
-			this->frm = frm;
-		}*/
 
 	protected:
 		/// <summary>
@@ -69,7 +59,6 @@ namespace MAIN1 {
 
 	private: bool dragging;
 	private: Point offset;
-
 
 	private: System::Windows::Forms::TextBox^ textBoxstreetnumber;
 	private: System::Windows::Forms::TextBox^ textBoxfloor;
@@ -555,10 +544,18 @@ private: System::Void btncancel_Click(System::Object^ sender, System::EventArgs^
 private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (this->textboxpostalcode->Text != "Postal Code" && this->textboxcity->Text != "City" && this->textBoxstreetname->Text != "Street Name" && this->textBoxstreetnumber->Text != "Street Number" && this->textBoxfirstname->Text != "Firstname" && this->textBoxlastname->Text != "Lastname") {
 		Adress adress;
-		adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
+		if (std::regex_match(marshal_as<std::string>(this->textboxpostalcode->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && std::regex_match(marshal_as<std::string>(this->textBoxstreetnumber->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?")))) {
+			adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
+			adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
+		}
+		else {
+			this->errorForm = gcnew ErrorForm("Postal Code or Street Number contain letters");
+			this->errorForm->Show();
+			return;
+		}
 		adress.SetCity(marshal_as<std::string>(this->textboxcity->Text));
 		adress.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-		adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
+		
 
 		if (this->textBoxresidence->Text != "Residence Name") {
 			adress.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));

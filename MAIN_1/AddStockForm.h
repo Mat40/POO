@@ -2,6 +2,8 @@
 #include "ServiceAdress.h"
 #include "ServiceItem.h"
 #include "ServiceStock.h"
+#include "ErrorForm.h"
+#include <regex>
 
 namespace MAIN1 {
 
@@ -65,6 +67,7 @@ namespace MAIN1 {
 		};
 
 		Listener^ listener;
+		ErrorForm^ errorForm;
 
 		AddStockForm(Listener^ listener)
 		{
@@ -457,24 +460,46 @@ namespace MAIN1 {
 	}
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (this->textboxname->Text != "Name" && this->textboxlot->Text != "Lot" && this->textBoxprice->Text != "Price (exclude taxes)" && this->textBoxstock->Text != "Stock" && this->textBoxreorder->Text != "Reorder Threshold" && this->comboBoxvat->Text->ToString() != "Vat" && this->comboBoxreduction->Text->ToString() != "Discount") {
+			
 			Item item;
 			item.SetReference(std::string("PR_A") + std::to_string(ServiceItem().GetMaxId()));
 			item.SetName(marshal_as<std::string>(this->textboxname->Text));
-			item.SetAmount(std::stoi(marshal_as<std::string>(this->textboxlot->Text)));
-			item.SetPriceExclTaxes(std::stof(marshal_as<std::string>(this->textBoxprice->Text)));
-
 			item.SetVat(std::stof(marshal_as<std::string>((safe_cast<ComboboxItem^>(comboBoxvat->SelectedItem))->Value->ToString())));
 			item.SetReduction(std::stof(marshal_as<std::string>((safe_cast<ComboboxItem^>(comboBoxreduction->SelectedItem))->Value->ToString())));
+
+			if (std::regex_match(marshal_as<std::string>(this->textboxlot->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && std::regex_match(marshal_as<std::string>(this->textBoxprice->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?")))) {
+				item.SetAmount(std::stoi(marshal_as<std::string>(this->textboxlot->Text)));
+				item.SetPriceExclTaxes(std::stof(marshal_as<std::string>(this->textBoxprice->Text)));
+			}
+			else {
+				this->errorForm = gcnew ErrorForm("Lot or Price (exclude taxes) contain letters");
+				this->errorForm->Show();
+				return;
+			}
+
 			item = ServiceItem().Add(item);
 
 			Stock stock;
 			stock.SetIdItem(item.GetId());
-			stock.SetAmount(std::stoi(marshal_as<std::string>(this->textBoxstock->Text)));
-			stock.SetReorderThreshold(std::stoi(marshal_as<std::string>(this->textBoxreorder->Text)));
+
+			if (std::regex_match(marshal_as<std::string>(this->textBoxstock->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && std::regex_match(marshal_as<std::string>(this->textBoxreorder->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?")))) {
+				stock.SetAmount(std::stoi(marshal_as<std::string>(this->textBoxstock->Text)));
+				stock.SetReorderThreshold(std::stoi(marshal_as<std::string>(this->textBoxreorder->Text)));
+			}
+			else {
+				this->errorForm = gcnew ErrorForm("Stock or Reorder Threshold contain letters");
+				this->errorForm->Show();
+				return;
+			}
+			
 			stock = ServiceStock().Add(stock);
 
 			this->listener->onApplyClicked();
 			this->Close();
+		}
+		else {
+			this->errorForm = gcnew ErrorForm("You forgot to specify some mandatory data");
+			this->errorForm->Show();
 		}
 	}
 };

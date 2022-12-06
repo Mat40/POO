@@ -30,8 +30,8 @@ namespace BB8Manager_Core_Data {
 		std::string ToUnmanagedString(String^ value);
 	private:
 		String^ connectionString =
-			"Data Source=LAPTOP-HUGO\\MSQL_SERVER;" +
-			"Initial Catalog = main_db;" +
+			"Data Source=DESKTOP-S57J1OI\\MSSQL_MAT;" +
+			"Initial Catalog = project_poo_db;" +
 			"Persist Security Info = True;" +
 			"User ID = sa;" +
 			"Password = main_db33";
@@ -44,11 +44,12 @@ namespace BB8Manager_Core_Data {
 
 /*
 
-			String^ connectionString =
-			"Data Source=DESKTOP-S57J1OI\\MSSQL_MAT;" +
-			"Initial Catalog = project_poo_db;" +
+String^ connectionString =
+			"Data Source=LAPTOP-HUGO\\MSQL_SERVER;" +
+			"Initial Catalog = main_db;" +
 			"Persist Security Info = True;" +
 			"User ID = sa;" +
 			"Password = main_db33";
+			
 */
 

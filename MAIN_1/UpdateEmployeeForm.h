@@ -2,6 +2,7 @@
 #include "ServiceEmployee.h"
 #include "ServiceAdress.h"
 #include "ErrorForm.h"
+#include <regex>
 
 namespace MAIN1 {
 
@@ -463,10 +464,18 @@ namespace MAIN1 {
 
 			Adress adress;
 			adress.SetId(adressID);
-			adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
 			adress.SetCity(marshal_as<std::string>(this->textboxcity->Text));
 			adress.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-			adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
+
+			if (std::regex_match(marshal_as<std::string>(this->textboxpostalcode->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && std::regex_match(marshal_as<std::string>(this->textBoxstreetnumber->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?")))) {
+				adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
+				adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
+			}
+			else {
+				this->errorForm = gcnew ErrorForm("Postal Code or Street Number contain letters");
+				this->errorForm->Show();
+				return;
+			}
 
 			if (this->textBoxresidence->Text != "") {
 				adress.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));

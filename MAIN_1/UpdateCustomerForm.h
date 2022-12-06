@@ -28,8 +28,8 @@ namespace MAIN1 {
 		Listener^ listener;
 		ErrorForm^ errorForm;
 		int customerID;
-		int deliveryID;
-		int billingID;
+		int deliveryID = 0;
+		int billingID = 0;
 
 		UpdateCustomerForm(Listener^ listener, Customer customer, Adress delivery, Adress billing)
 		{
@@ -592,122 +592,123 @@ namespace MAIN1 {
 	private: System::Void btncancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
+	
 	private: System::Void btnapply_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (String::IsNullOrWhiteSpace(this->textBoxfirstname->Text) || String::IsNullOrWhiteSpace(this->textBoxlastname->Text) || String::IsNullOrWhiteSpace(this->textboxpostalcode->Text) || String::IsNullOrWhiteSpace(this->textboxcity->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetname->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetnumber->Text)) {
 			this->errorForm = gcnew ErrorForm("You forgot to specify some mandatory data");
 			this->errorForm->Show();
+			return;
+		}
+		//MessageBox::Show(gcnew String(("Billing : " + std::to_string(billingID)).c_str()));
+		//MessageBox::Show(gcnew String(("Delivery : " + std::to_string(deliveryID)).c_str()));
+
+		Customer customer;
+
+		customer.SetId(customerID);
+		customer.SetFirstname(marshal_as<std::string>(this->textBoxfirstname->Text));
+		customer.SetLastname(marshal_as<std::string>(this->textBoxlastname->Text));
+		customer.SetBirthdate(marshal_as<std::string>(this->dateTimePickerhiringdate->Text));
+
+		Adress billing;
+		billing.SetId(billingID);
+		billing.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
+		billing.SetCity(marshal_as<std::string>(this->textboxcity->Text));
+		billing.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
+		billing.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
+
+		if (this->textBoxresidence->Text != "") {
+			billing.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
 		}
 		else {
-			Customer customer;
+			billing.SetResidencename("");
+		}
 
-			customer.SetId(customerID);
-			customer.SetFirstname(marshal_as<std::string>(this->textBoxfirstname->Text));
-			customer.SetLastname(marshal_as<std::string>(this->textBoxlastname->Text));
-			customer.SetBirthdate(marshal_as<std::string>(this->dateTimePickerhiringdate->Text));
+		if (this->textBoxbuilding->Text != "") {
+			billing.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
+		}
+		else {
+			billing.SetBuildingname("");
+		}
+
+		if (this->textBoxfloor->Text != "") {
+			billing.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
+		}
+		else {
+			billing.SetFloornumber("");
+		}
+
+		if (this->checkBoxadress->Checked == true) {
+
+			if (deliveryID == 0) {
+				ServiceAdress().Update(billing);
+			}
+			else {
+				ServiceAdress().Update(billing);
+				ServiceAdress().Remove(deliveryID);
+			}			
+			customer.SetIdBillingAdress(billing.GetId());
+			customer.SetIdDeliveryAdress(billing.GetId());
 
 			ServiceCustomer().Update(customer);
 
-			if (this->checkBoxadress->Checked == true) {
+			this->listener->onApplyClicked();
+			this->Close();
+		}
+		else {
+			if (String::IsNullOrWhiteSpace(this->textBoxpostalcode2->Text) || String::IsNullOrWhiteSpace(this->textBoxcity2->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetname2->Text) || String::IsNullOrWhiteSpace(this->textBoxstreetnumber2->Text) || this->textBoxpostalcode2->Text->ToString() == "Postal Code" || this->textBoxcity2->Text->ToString() == "City" || this->textBoxstreetname2->Text->ToString() == "Street Name" || this->textBoxstreetnumber2->Text->ToString() == "Street Number") {
+				this->errorForm = gcnew ErrorForm("You forgot to specify some mandatory data");
+				this->errorForm->Show();
+				return;
+			}
+			
+			Adress delivery;
+			delivery.SetId(deliveryID);
+			delivery.SetPostalcode(marshal_as<std::string>(this->textBoxpostalcode2->Text));
+			delivery.SetCity(marshal_as<std::string>(this->textBoxcity2->Text));
+			delivery.SetStreetname(marshal_as<std::string>(this->textBoxstreetname2->Text));
+			delivery.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber2->Text));
 
-				Adress adress;
-				adress.SetId(billingID);
-				adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
-				adress.SetCity(marshal_as<std::string>(this->textboxcity->Text));
-				adress.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-				adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
-
-				if (this->textBoxresidence->Text != "") {
-					adress.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
-				}
-				else {
-					adress.SetResidencename("");
-				}
-
-				if (this->textBoxbuilding->Text != "") {
-					adress.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
-				}
-				else {
-					adress.SetBuildingname("");
-				}
-
-				if (this->textBoxfloor->Text != "") {
-					adress.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
-				}
-				else {
-					adress.SetFloornumber("");
-				}
-
-				ServiceAdress().Update(adress);
-
-				this->listener->onApplyClicked();
-
-				this->Close();
+			if (this->textBoxresidence2->Text != "Residence Name") {
+				delivery.SetResidencename(marshal_as<std::string>(this->textBoxresidence2->Text));
 			}
 			else {
-				Adress billing;
-				billing.SetId(billingID);
-				billing.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
-				billing.SetCity(marshal_as<std::string>(this->textboxcity->Text));
-				billing.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-				billing.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
-
-				if (this->textBoxresidence->Text != "") {
-					billing.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
-				}
-				else {
-					billing.SetResidencename("");
-				}
-
-				if (this->textBoxbuilding->Text != "") {
-					billing.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding->Text));
-				}
-				else {
-					billing.SetBuildingname("");
-				}
-
-				if (this->textBoxfloor->Text != "") {
-					billing.SetFloornumber(marshal_as<std::string>(this->textBoxfloor->Text));
-				}
-				else {
-					billing.SetFloornumber("");
-				}
-
-				ServiceAdress().Update(billing);
-
-				Adress delivery;
-				delivery.SetId(deliveryID);
-				delivery.SetPostalcode(marshal_as<std::string>(this->textBoxpostalcode2->Text));
-				delivery.SetCity(marshal_as<std::string>(this->textBoxcity2->Text));
-				delivery.SetStreetname(marshal_as<std::string>(this->textBoxstreetname2->Text));
-				delivery.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber2->Text));
-
-				if (this->textBoxresidence2->Text != "") {
-					delivery.SetResidencename(marshal_as<std::string>(this->textBoxresidence2->Text));
-				}
-				else {
-					delivery.SetResidencename("");
-				}
-
-				if (this->textBoxbuilding2->Text != "") {
-					delivery.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding2->Text));
-				}
-				else {
-					delivery.SetBuildingname("");
-				}
-
-				if (this->textBoxfloor2->Text != "") {
-					delivery.SetFloornumber(marshal_as<std::string>(this->textBoxfloor2->Text));
-				}
-				else {
-					delivery.SetFloornumber("");
-				}
-
-				ServiceAdress().Update(delivery);
-
-				this->listener->onApplyClicked();
-
-				this->Close();
+				delivery.SetResidencename("");
 			}
+
+			if (this->textBoxbuilding2->Text != "Building Name") {
+				delivery.SetBuildingname(marshal_as<std::string>(this->textBoxbuilding2->Text));
+			}
+			else {
+				delivery.SetBuildingname("");
+			}
+
+			if (this->textBoxfloor2->Text != "Floor Number") {
+				delivery.SetFloornumber(marshal_as<std::string>(this->textBoxfloor2->Text));
+			}
+			else {
+				delivery.SetFloornumber("");
+			}
+
+			if (deliveryID == 0) {
+				ServiceAdress().Update(billing);
+				delivery = ServiceAdress().Add(delivery);
+			}
+			else {
+				ServiceAdress().Update(billing);
+				ServiceAdress().Update(delivery);
+			}
+
+			MessageBox::Show(gcnew String(("Billing : " + std::to_string(billing.GetId())).c_str()));
+			MessageBox::Show(gcnew String(("Delivery : " + std::to_string(delivery.GetId())).c_str()));
+
+			customer.SetIdBillingAdress(billing.GetId());
+			customer.SetIdDeliveryAdress(delivery.GetId());
+
+			ServiceCustomer().Update(customer);
+
+			this->listener->onApplyClicked();
+			this->Close();
+			
 		}
 	}
 	};

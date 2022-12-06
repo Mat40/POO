@@ -58,9 +58,13 @@ namespace BB8Manager_Core_Services {
 		return customer;
 	}
 
-	void ServiceCustomer::Remove(int id) {
-		this->dataContext.Query("DELETE FROM [Customer] WHERE id_customer = " + std::to_string(id));
+	void ServiceCustomer::RemoveHas(int id) {
 		this->dataContext.Query("DELETE FROM [Has] WHERE id_customer = " + std::to_string(id));
+	}
+
+	void ServiceCustomer::Remove(int id) {
+		RemoveHas(id);
+		this->dataContext.Query("DELETE FROM [Customer] WHERE id_customer = " + std::to_string(id));
 	}
 
 	DataSet^ ServiceCustomer::GetDataSet()
@@ -83,5 +87,14 @@ namespace BB8Manager_Core_Services {
 
 	void ServiceCustomer::Update(Customer customer) {
 		this->dataContext.Query("UPDATE [Customer] SET firstname = '" + customer.GetFirstname() + "', lastname = '" + customer.GetLastname() + "', birthdate = '" + customer.GetBirthdate() + "' WHERE id_customer = '" + std::to_string(customer.GetId()) + "'");
+		if (customer.GetIdDeliveryAdress() == customer.GetIdBillingAdress()) {
+			this->dataContext.Query("DELETE FROM [Has] WHERE id_customer = '" + std::to_string(customer.GetId()) + "' AND delivery = 1 AND billing = 0 AND id_adress = '" + std::to_string(customer.GetIdDeliveryAdress()) + "'");
+			this->dataContext.Query("UPDATE[Has] SET delivery = 1, billing = 1 WHERE id_customer = '" + std::to_string(customer.GetId()) + "' AND delivery = 0 AND billing = 1");
+		}
+		else {
+			this->dataContext.Query("UPDATE[Has] SET delivery = 0, billing = 1 WHERE id_customer = '" + std::to_string(customer.GetId()) + "' AND id_adress = '" + std::to_string(customer.GetIdBillingAdress()) + "'");
+			this->dataContext.Query("DELETE FROM [Has] WHERE id_customer = '" + std::to_string(customer.GetId()) + "' AND id_adress != '" + std::to_string(customer.GetIdBillingAdress()) + "'");
+			this->dataContext.Query("INSERT INTO [Has] (id_customer, id_adress, delivery, billing) VALUES ('" + std::to_string(customer.GetId()) + "', '" + std::to_string(customer.GetIdDeliveryAdress()) + "', 1, 0)");
+		}
 	}
 }
