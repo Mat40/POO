@@ -102,6 +102,11 @@ namespace MAIN1 {
 	private: System::Windows::Forms::Label^ label10;
 	private: System::Windows::Forms::Panel^ panel4;
 	private: System::Windows::Forms::Panel^ panel5;
+	private: System::Windows::Forms::Label^ label14;
+	private: System::Windows::Forms::Label^ label15;
+	private: System::Windows::Forms::Label^ label16;
+	private: System::Windows::Forms::Label^ label17;
+	private: System::Windows::Forms::Label^ label18;
 
 
 	protected:
@@ -121,15 +126,15 @@ namespace MAIN1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle5 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle6 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle7 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle8 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle9 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle10 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle11 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle12 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle13 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle14 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle15 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle16 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle17 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle18 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -153,9 +158,14 @@ namespace MAIN1 {
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
+			this->label14 = (gcnew System::Windows::Forms::Label());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
 			this->panel5 = (gcnew System::Windows::Forms::Panel());
+			this->label15 = (gcnew System::Windows::Forms::Label());
+			this->label16 = (gcnew System::Windows::Forms::Label());
+			this->label17 = (gcnew System::Windows::Forms::Label());
+			this->label18 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bunifuDataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bunifuDataGridView2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bunifuDataGridView3))->BeginInit();
@@ -381,24 +391,24 @@ namespace MAIN1 {
 			// bunifuDataGridView1
 			// 
 			this->bunifuDataGridView1->AllowCustomTheming = true;
-			dataGridViewCellStyle1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
+			dataGridViewCellStyle10->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
 				static_cast<System::Int32>(static_cast<System::Byte>(251)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::Black;
-			this->bunifuDataGridView1->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle10->ForeColor = System::Drawing::Color::Black;
+			this->bunifuDataGridView1->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
 			this->bunifuDataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->bunifuDataGridView1->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->bunifuDataGridView1->CellBorderStyle = System::Windows::Forms::DataGridViewCellBorderStyle::SingleHorizontal;
 			this->bunifuDataGridView1->ColumnHeadersBorderStyle = System::Windows::Forms::DataGridViewHeaderBorderStyle::None;
-			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+			dataGridViewCellStyle11->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle11->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
 				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 11.75F, System::Drawing::FontStyle::Bold));
-			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+			dataGridViewCellStyle11->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 11.75F, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle11->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle11->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
 				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->bunifuDataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle11->SelectionForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle11->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->bunifuDataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
 			this->bunifuDataGridView1->ColumnHeadersHeight = 40;
 			this->bunifuDataGridView1->CurrentTheme->AlternatingRowsStyle->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
 				static_cast<System::Int32>(static_cast<System::Byte>(251)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -424,15 +434,15 @@ namespace MAIN1 {
 			this->bunifuDataGridView1->CurrentTheme->RowsStyle->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
 				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->bunifuDataGridView1->CurrentTheme->RowsStyle->SelectionForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle3->BackColor = System::Drawing::Color::White;
-			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
-			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
+			dataGridViewCellStyle12->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle12->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle12->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle12->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle12->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
 				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
-			this->bunifuDataGridView1->DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle12->SelectionForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle12->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->bunifuDataGridView1->DefaultCellStyle = dataGridViewCellStyle12;
 			this->bunifuDataGridView1->EnableHeadersVisualStyles = false;
 			this->bunifuDataGridView1->GridColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(221)),
 				static_cast<System::Int32>(static_cast<System::Byte>(238)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -452,24 +462,24 @@ namespace MAIN1 {
 			// bunifuDataGridView2
 			// 
 			this->bunifuDataGridView2->AllowCustomTheming = true;
-			dataGridViewCellStyle4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
+			dataGridViewCellStyle13->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
 				static_cast<System::Int32>(static_cast<System::Byte>(251)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			dataGridViewCellStyle4->ForeColor = System::Drawing::Color::Black;
-			this->bunifuDataGridView2->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle13->ForeColor = System::Drawing::Color::Black;
+			this->bunifuDataGridView2->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
 			this->bunifuDataGridView2->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->bunifuDataGridView2->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->bunifuDataGridView2->CellBorderStyle = System::Windows::Forms::DataGridViewCellBorderStyle::SingleHorizontal;
 			this->bunifuDataGridView2->ColumnHeadersBorderStyle = System::Windows::Forms::DataGridViewHeaderBorderStyle::None;
-			dataGridViewCellStyle5->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle5->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+			dataGridViewCellStyle14->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle14->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
 				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			dataGridViewCellStyle5->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 11.75F, System::Drawing::FontStyle::Bold));
-			dataGridViewCellStyle5->ForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle5->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+			dataGridViewCellStyle14->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 11.75F, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle14->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle14->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
 				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			dataGridViewCellStyle5->SelectionForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle5->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->bunifuDataGridView2->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle14->SelectionForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle14->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->bunifuDataGridView2->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
 			this->bunifuDataGridView2->ColumnHeadersHeight = 40;
 			this->bunifuDataGridView2->CurrentTheme->AlternatingRowsStyle->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
 				static_cast<System::Int32>(static_cast<System::Byte>(251)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -495,15 +505,15 @@ namespace MAIN1 {
 			this->bunifuDataGridView2->CurrentTheme->RowsStyle->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
 				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->bunifuDataGridView2->CurrentTheme->RowsStyle->SelectionForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle6->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle6->BackColor = System::Drawing::Color::White;
-			dataGridViewCellStyle6->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
-			dataGridViewCellStyle6->ForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle6->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
+			dataGridViewCellStyle15->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle15->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle15->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle15->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle15->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
 				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			dataGridViewCellStyle6->SelectionForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle6->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
-			this->bunifuDataGridView2->DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle15->SelectionForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle15->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->bunifuDataGridView2->DefaultCellStyle = dataGridViewCellStyle15;
 			this->bunifuDataGridView2->EnableHeadersVisualStyles = false;
 			this->bunifuDataGridView2->GridColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(222)),
 				static_cast<System::Int32>(static_cast<System::Byte>(238)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -523,24 +533,24 @@ namespace MAIN1 {
 			// bunifuDataGridView3
 			// 
 			this->bunifuDataGridView3->AllowCustomTheming = true;
-			dataGridViewCellStyle7->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
+			dataGridViewCellStyle16->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
 				static_cast<System::Int32>(static_cast<System::Byte>(251)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			dataGridViewCellStyle7->ForeColor = System::Drawing::Color::Black;
-			this->bunifuDataGridView3->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle16->ForeColor = System::Drawing::Color::Black;
+			this->bunifuDataGridView3->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
 			this->bunifuDataGridView3->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->bunifuDataGridView3->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->bunifuDataGridView3->CellBorderStyle = System::Windows::Forms::DataGridViewCellBorderStyle::SingleHorizontal;
 			this->bunifuDataGridView3->ColumnHeadersBorderStyle = System::Windows::Forms::DataGridViewHeaderBorderStyle::None;
-			dataGridViewCellStyle8->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle8->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+			dataGridViewCellStyle17->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle17->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
 				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			dataGridViewCellStyle8->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 11.75F, System::Drawing::FontStyle::Bold));
-			dataGridViewCellStyle8->ForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle8->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
+			dataGridViewCellStyle17->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 11.75F, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle17->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle17->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)),
 				static_cast<System::Int32>(static_cast<System::Byte>(199)), static_cast<System::Int32>(static_cast<System::Byte>(85)));
-			dataGridViewCellStyle8->SelectionForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle8->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->bunifuDataGridView3->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle17->SelectionForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle17->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->bunifuDataGridView3->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
 			this->bunifuDataGridView3->ColumnHeadersHeight = 40;
 			this->bunifuDataGridView3->CurrentTheme->AlternatingRowsStyle->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)),
 				static_cast<System::Int32>(static_cast<System::Byte>(251)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -566,15 +576,15 @@ namespace MAIN1 {
 			this->bunifuDataGridView3->CurrentTheme->RowsStyle->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
 				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->bunifuDataGridView3->CurrentTheme->RowsStyle->SelectionForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle9->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle9->BackColor = System::Drawing::Color::White;
-			dataGridViewCellStyle9->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
-			dataGridViewCellStyle9->ForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle9->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
+			dataGridViewCellStyle18->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle18->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle18->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 9.75F, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle18->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle18->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)),
 				static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			dataGridViewCellStyle9->SelectionForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle9->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
-			this->bunifuDataGridView3->DefaultCellStyle = dataGridViewCellStyle9;
+			dataGridViewCellStyle18->SelectionForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle18->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->bunifuDataGridView3->DefaultCellStyle = dataGridViewCellStyle18;
 			this->bunifuDataGridView3->EnableHeadersVisualStyles = false;
 			this->bunifuDataGridView3->GridColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(221)),
 				static_cast<System::Int32>(static_cast<System::Byte>(238)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -600,6 +610,7 @@ namespace MAIN1 {
 			// 
 			// panel1
 			// 
+			this->panel1->Controls->Add(this->label16);
 			this->panel1->Controls->Add(this->label1);
 			this->panel1->Controls->Add(this->label4);
 			this->panel1->Location = System::Drawing::Point(323, 117);
@@ -609,6 +620,7 @@ namespace MAIN1 {
 			// 
 			// panel2
 			// 
+			this->panel2->Controls->Add(this->label15);
 			this->panel2->Controls->Add(this->label3);
 			this->panel2->Controls->Add(this->label6);
 			this->panel2->Location = System::Drawing::Point(322, 62);
@@ -618,12 +630,24 @@ namespace MAIN1 {
 			// 
 			// panel3
 			// 
+			this->panel3->Controls->Add(this->label14);
 			this->panel3->Controls->Add(this->label2);
 			this->panel3->Controls->Add(this->label5);
 			this->panel3->Location = System::Drawing::Point(322, 9);
 			this->panel3->Name = L"panel3";
 			this->panel3->Size = System::Drawing::Size(586, 56);
 			this->panel3->TabIndex = 0;
+			// 
+			// label14
+			// 
+			this->label14->AutoSize = true;
+			this->label14->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+				static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->label14->Location = System::Drawing::Point(542, 25);
+			this->label14->Name = L"label14";
+			this->label14->Size = System::Drawing::Size(13, 13);
+			this->label14->TabIndex = 6;
+			this->label14->Text = L"€";
 			// 
 			// label10
 			// 
@@ -641,6 +665,7 @@ namespace MAIN1 {
 			// 
 			// panel4
 			// 
+			this->panel4->Controls->Add(this->label17);
 			this->panel4->Controls->Add(this->label10);
 			this->panel4->Controls->Add(this->comboBox1);
 			this->panel4->Controls->Add(this->button1);
@@ -652,6 +677,7 @@ namespace MAIN1 {
 			// 
 			// panel5
 			// 
+			this->panel5->Controls->Add(this->label18);
 			this->panel5->Controls->Add(this->label9);
 			this->panel5->Controls->Add(this->comboBox2);
 			this->panel5->Controls->Add(this->button2);
@@ -660,6 +686,51 @@ namespace MAIN1 {
 			this->panel5->Name = L"panel5";
 			this->panel5->Size = System::Drawing::Size(586, 65);
 			this->panel5->TabIndex = 26;
+			// 
+			// label15
+			// 
+			this->label15->AutoSize = true;
+			this->label15->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+				static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->label15->Location = System::Drawing::Point(542, 25);
+			this->label15->Name = L"label15";
+			this->label15->Size = System::Drawing::Size(13, 13);
+			this->label15->TabIndex = 7;
+			this->label15->Text = L"€";
+			this->label15->Click += gcnew System::EventHandler(this, &DashboardForm::label15_Click);
+			// 
+			// label16
+			// 
+			this->label16->AutoSize = true;
+			this->label16->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+				static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->label16->Location = System::Drawing::Point(541, 25);
+			this->label16->Name = L"label16";
+			this->label16->Size = System::Drawing::Size(13, 13);
+			this->label16->TabIndex = 8;
+			this->label16->Text = L"€";
+			// 
+			// label17
+			// 
+			this->label17->AutoSize = true;
+			this->label17->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+				static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->label17->Location = System::Drawing::Point(570, 33);
+			this->label17->Name = L"label17";
+			this->label17->Size = System::Drawing::Size(13, 13);
+			this->label17->TabIndex = 9;
+			this->label17->Text = L"€";
+			// 
+			// label18
+			// 
+			this->label18->AutoSize = true;
+			this->label18->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(250)), static_cast<System::Int32>(static_cast<System::Byte>(199)),
+				static_cast<System::Int32>(static_cast<System::Byte>(85)));
+			this->label18->Location = System::Drawing::Point(570, 37);
+			this->label18->Name = L"label18";
+			this->label18->Size = System::Drawing::Size(13, 13);
+			this->label18->TabIndex = 18;
+			this->label18->Text = L"€";
 			// 
 			// DashboardForm
 			// 
@@ -722,5 +793,7 @@ namespace MAIN1 {
 	private: System::Void btnapply2_OnMouseLeave(System::Object^ sender, System::EventArgs^ e) {
 		this->button2->ForeColor = System::Drawing::Color::DimGray;
 	}
+private: System::Void label15_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
