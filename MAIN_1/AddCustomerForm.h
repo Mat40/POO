@@ -773,10 +773,21 @@ namespace MAIN1 {
 				}
 
 				Adress adress;
-				adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
+				
 				adress.SetCity(marshal_as<std::string>(this->textboxcity->Text));
 				adress.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-				adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
+				
+
+				if (std::regex_match(marshal_as<std::string>(this->textboxpostalcode->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && std::regex_match(marshal_as<std::string>(this->textBoxstreetnumber->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?")))) {
+					adress.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
+					adress.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
+				}
+				else {
+					this->errorForm = gcnew ErrorForm("Postal Code or Street Number contain letters");
+					this->errorForm->Show();
+					return;
+				}
+
 
 				if (this->textBoxresidence->Text != "Residence Name") {
 					adress.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
@@ -827,10 +838,20 @@ namespace MAIN1 {
 				}
 
 				Adress billing;
-				billing.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
+				
 				billing.SetCity(marshal_as<std::string>(this->textboxcity->Text));
 				billing.SetStreetname(marshal_as<std::string>(this->textBoxstreetname->Text));
-				billing.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
+				
+
+				if (std::regex_match(marshal_as<std::string>(this->textboxpostalcode->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && std::regex_match(marshal_as<std::string>(this->textBoxstreetnumber->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?")))) {
+					billing.SetPostalcode(marshal_as<std::string>(this->textboxpostalcode->Text));
+					billing.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber->Text));
+				}
+				else {
+					this->errorForm = gcnew ErrorForm("Postal Code or Street Number contain letters");
+					this->errorForm->Show();
+					return;
+				}
 
 				if (this->textBoxresidence->Text != "Residence Name") {
 					billing.SetResidencename(marshal_as<std::string>(this->textBoxresidence->Text));
@@ -856,10 +877,18 @@ namespace MAIN1 {
 				billing = ServiceAdress().Add(billing);
 
 				Adress delivery;
-				delivery.SetPostalcode(marshal_as<std::string>(this->textBoxpostalcode2->Text));
 				delivery.SetCity(marshal_as<std::string>(this->textBoxcity2->Text));
 				delivery.SetStreetname(marshal_as<std::string>(this->textBoxstreetname2->Text));
-				delivery.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber2->Text));
+
+				if (std::regex_match(marshal_as<std::string>(this->textBoxpostalcode2->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?"))) && std::regex_match(marshal_as<std::string>(this->textBoxstreetnumber2->Text), std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?")))) {
+					delivery.SetPostalcode(marshal_as<std::string>(this->textBoxpostalcode2->Text));
+					delivery.SetStreetnumber(marshal_as<std::string>(this->textBoxstreetnumber2->Text));
+				}
+				else {
+					this->errorForm = gcnew ErrorForm("Postal Code or Street Number contain letters");
+					this->errorForm->Show();
+					return;
+				}
 
 				if (this->textBoxresidence2->Text != "Residence Name") {
 					delivery.SetResidencename(marshal_as<std::string>(this->textBoxresidence2->Text));

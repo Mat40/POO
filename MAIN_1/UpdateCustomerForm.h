@@ -698,8 +698,8 @@ namespace MAIN1 {
 				ServiceAdress().Update(delivery);
 			}
 
-			MessageBox::Show(gcnew String(("Billing : " + std::to_string(billing.GetId())).c_str()));
-			MessageBox::Show(gcnew String(("Delivery : " + std::to_string(delivery.GetId())).c_str()));
+			/*MessageBox::Show(gcnew String(("Billing : " + std::to_string(billing.GetId())).c_str()));
+			MessageBox::Show(gcnew String(("Delivery : " + std::to_string(delivery.GetId())).c_str()));*/
 
 			customer.SetIdBillingAdress(billing.GetId());
 			customer.SetIdDeliveryAdress(delivery.GetId());

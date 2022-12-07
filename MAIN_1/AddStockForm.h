@@ -472,7 +472,7 @@ namespace MAIN1 {
 				item.SetPriceExclTaxes(std::stof(marshal_as<std::string>(this->textBoxprice->Text)));
 			}
 			else {
-				this->errorForm = gcnew ErrorForm("Lot or Price (exclude taxes) contain letters");
+				this->errorForm = gcnew ErrorForm("Lot or Price (exclude taxes) contain letters");	
 				this->errorForm->Show();
 				return;
 			}
